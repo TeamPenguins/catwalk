@@ -19,6 +19,16 @@ Catwalk
 
 > Some usage instructions
 
+To create a production build:
+```sh
+npm build-prod
+```
+
+To run hot module reloading mode:
+```sh
+npm start
+```
+
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
@@ -27,6 +37,19 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - etc
 
 ## Development
+
+From within the root directory:
+
+To create a development build:
+```sh
+npm build-prod
+```
+
+To run test scripts
+```sh
+npm start:test
+```
+
 
 ### Installing Dependencies
 
