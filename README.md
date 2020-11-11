@@ -67,7 +67,7 @@ git push -u origin new-feature
 ```
 1. Push the feature to the central repository when finished:
 ```sh
-git push --set-upstream new-feature
+git push --set-upstream origin new-feature
 ```
 1. Submit a pull request for this feature branch
 1. A teammate will review your PR. If changes need to be made, repeat steps 6, 7, & 8
