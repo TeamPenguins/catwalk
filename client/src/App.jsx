@@ -1,7 +1,9 @@
 
 import React, { Component } from 'react';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews';
+import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList';
 import { Products } from './dummyData.js';
+
 
 class App extends React.Component {
   constructor (props) {
@@ -17,7 +19,7 @@ class App extends React.Component {
       <div>
         <div>YourComponentHere</div>
         <div>YourComponentHere</div>
-        <div>YourComponentHere</div>
+        <div><RelatedItemsComparisonList products={this.state.products}/></div>
         <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
       </div>
     );
