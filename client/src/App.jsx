@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews';
+import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList';
 import { Products } from './dummyData.js';
 
