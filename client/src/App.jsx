@@ -1,15 +1,16 @@
-import React from 'react';
+
+import React, { Component } from 'react';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews';
+import { Products } from './dummyData.js';
 
 class App extends React.Component {
-  constructor () {
-    super();
-
+  constructor (props) {
+    super(props);
     this.state = {
-      selectedProdId: null,
+      products: Products,
+      selectedProduct: Products[0],
     };
   }
-
-
 
   render () {
     return (
@@ -17,7 +18,7 @@ class App extends React.Component {
         <div>YourComponentHere</div>
         <div>YourComponentHere</div>
         <div>YourComponentHere</div>
-        <div>YourComponentHere</div>
+        <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
       </div>
     );
   }
