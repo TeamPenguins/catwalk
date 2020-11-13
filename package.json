@@ -4,13 +4,14 @@
   "description": "",
   "author": "",
   "license": "",
+  "main": "index.js",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
-    "start": "webpack serve --hot --mode development",
+    "start": "webpack serve",
     "start:test": "jest"
   },
   "dependencies": {
@@ -18,9 +19,7 @@
     "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "style-loader": "^2.0.0",
-    "webpack-dev-server": "^3.11.0"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -30,8 +29,10 @@
     "css-loader": "^5.0.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^26.6.3",
+    "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

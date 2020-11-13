@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import RelatedProductCard from './RelatedProductCard';
+import RelatedProductCard from './RelatedProductCard.jsx';
 
 const RelatedItemsAndComparisonList = ({products}) => {
   return (

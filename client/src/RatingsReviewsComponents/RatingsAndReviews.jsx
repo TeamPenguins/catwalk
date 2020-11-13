@@ -12,13 +12,10 @@ class RatingsAndReviews extends Component {
   render() {
     return (
       <div>
-        <div>
-          <ProductBreakdown />
-        </div>
-        <div>
-          <Reviews />
-        </div>
+        <h1>HELLO!</h1>
       </div>
     );
   }
 }
+
+export default RatingsAndReviews;
