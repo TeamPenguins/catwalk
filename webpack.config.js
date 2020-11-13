@@ -45,6 +45,6 @@ const config = {
   devServer: {
     contentBase: './client/dist'
   }
-}
+};
 
 module.exports = config;
