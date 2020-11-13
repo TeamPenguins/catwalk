@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews';
 import { Products } from './dummyData.js';
