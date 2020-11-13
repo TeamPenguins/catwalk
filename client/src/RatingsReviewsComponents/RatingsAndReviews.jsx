@@ -22,3 +22,5 @@ class RatingsAndReviews extends Component {
     );
   }
 }
+
+export default RatingsAndReviews;
