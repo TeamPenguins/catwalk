@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuestionList = () => {
+const QuestionList = ({selectedProd}) => {
 
 
 
