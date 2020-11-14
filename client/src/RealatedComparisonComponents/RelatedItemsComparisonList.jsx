@@ -6,10 +6,10 @@ const RelatedItemsAndComparisonList = ({products}) => {
     <div>
       <h6>Related Products</h6>
       <ul className="relatedItemslist">
-        <RelatedProductCard product={products[1]} />
-        <RelatedProductCard product={products[2]} />
-        <RelatedProductCard product={products[3]} />
-        <RelatedProductCard product={products[4]} />
+        <li>Related product one</li>
+        <li>Related product two</li>
+        <li>Related product three</li>
+        <li>Related product four</li>
       </ul>
       <h6>Your Outfit</h6>
       <ul className="outfitList">
