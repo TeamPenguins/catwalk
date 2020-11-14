@@ -1,9 +1,21 @@
 import React from 'react';
+/*
+So maybe something like, onClick={() => methodFromApp}
+*/
 
-const RelatedProductCard = ({product}) => {
+const RelatedProductCard = ({productChangeMethod, selectedProduct}) => {
   return (
-    <div>{product.name}</div>
+    <div calssName="productCardCOntainer"
+      onClick={productChangeMethod()}
+    >
+
+    </div>
   );
 };
 
 export default RelatedProductCard;
+
+/*
+ *
+ *
+ */

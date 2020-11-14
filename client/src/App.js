@@ -7,21 +7,25 @@ import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionL
 
 
 class App extends React.Component {
-  constructor (props) {
-    super(props);
+  constructor () {
+    super();
     this.state = {
       products: Products,
       selectedProduct: Products[0],
     };
+    this.handleProductChange = this.handleProductChange.bind(this);
   }
-
+  //find the ratings of item method.
+  handleProductChange(productID) {
+    this.setState({selectedProduct: productID});
+  }
   render () {
     return (
       <div>
         <div>YourComponentHere</div>
-        <div><RelatedItemsComparisonList products={this.state.products}/></div>
+        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
-        <div><QuestionsAnswersComponents/></div>
+        <div><QuestionsAnswersComponents selectedProd = {this.state.selectedProduct}/></div>
       </div>
     );
   }
