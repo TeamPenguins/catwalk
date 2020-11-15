@@ -31,7 +31,7 @@ class RelatedProductCard extends React.Component {
       <div
         calssname="productCardContainer"
         onClick={() => this.props.productChangeMethod(this.state.productInfo)}>
-        {this.state.productInfo.id}
+        Product {this.state.productInfo.id}
       </div>
     );
   }
