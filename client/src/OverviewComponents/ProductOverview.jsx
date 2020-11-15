@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 class ProductOverview extends React.Component {
   constructor() {
@@ -61,12 +62,10 @@ class ProductOverview extends React.Component {
                   </select>
                 </div>
                 <div class="row my-3">
-                  <select class="col-8 mr-3 form-control">
-                    <option>ADD TO BAG</option>
-                  </select>
-                  <button type="button" class="btn btn-secondary">
+                  <Button variant="outline-secondary mr-3">Add To Cart</Button>{' '}
+                  <Button variant="secondary">
                     <i class="fas fa-star"></i>
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
