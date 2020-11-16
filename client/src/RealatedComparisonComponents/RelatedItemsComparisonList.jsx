@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import axios from 'axios';
 
+
+
 class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
     super(props);
@@ -52,5 +54,6 @@ class RelatedItemsAndComparisonList extends React.Component {
     );
   }
 }
+
 
 export default RelatedItemsAndComparisonList;

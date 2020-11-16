@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
+import NavBar from './NavBar.jsx';
+import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
 import { Products } from './dummyData.js';
-import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionList.jsx';
+import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 
 
 class App extends React.Component {
@@ -22,7 +24,8 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div>YourComponentHere</div>
+        <NavBar />
+        <ProductOverview />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
         <div><QuestionsAnswersComponents selectedProd = {this.state.selectedProduct}/></div>
