@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import Gallery from './Gallery.jsx';
 
 class ProductOverview extends React.Component {
   constructor() {
@@ -10,10 +11,11 @@ class ProductOverview extends React.Component {
     return (
       <Container>
         <Row>
-          <Col sm={8} className="my-5">
-            <img className="rounded-sm" src="https://via.placeholder.com/620"/>
-          </Col>
+          {/* break into gallery component */}
+          <Gallery />
+          {/* break into product details component */}
           <Col sm={4} className="my-5">
+            {/* pull in the star rating component and link to ratings section below */}
             <div>
               <div className="my-1">
                 <i className="fas fa-star"></i>
@@ -25,9 +27,10 @@ class ProductOverview extends React.Component {
               <div className="my-1" >CATEGORY</div>
               <h1>Expanded Product Name</h1>
               <p>$369</p>
-              <p>STYLE | SELECTED STYLE</p>
             </div>
             <div>
+              {/* break up into styles component */}
+              <h3>STYLE | SELECTED STYLE</h3>
               <Row className="my-2">
                 <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
                 <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
@@ -59,7 +62,7 @@ class ProductOverview extends React.Component {
             </form>
           </Col>
         </Row>
-
+        {/* break up into product info component */}
         <Row className="my-4">
           <Col sm={8} className="border-right border-dark product-overview">
             <h3>Product Slogan, Pithy Description Or Catchphrase</h3>
