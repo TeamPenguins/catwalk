@@ -2,16 +2,11 @@
 
 > Project description
 
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
 
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [Module-Diagrams](#Module-Diagrams)
 1. [Requirements](#requirements)
 1. [git-workflow](#git-workflow)
 1. [Development](#development)
@@ -19,17 +14,23 @@
 
 ## Usage
 
-> Some usage instructions
+> Clone down the pre-production branch, open that branch in code and do the following:
 
-To create a production build:
+To create a development build:
 ```sh
-npm build-prod
+npm run build-prod
 ```
 
-To run hot module reloading mode:
+To run in your browser:
 ```sh
 npm start
 ```
+
+## Module Diagrams
+
+> High-level diagrams that breakdown each module
+
+
 
 ## Requirements
 
@@ -41,38 +42,38 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ## git-workflow
 
 1. In your terminal, navigate to the root directory of your project
-1. Switch to the master branch:
+2. Switch to the master branch:
 ```sh
 git checkout master
 ```
-1. Pull most recent commits:
+3. Pull most recent commits:
 ```sh
 git fetch origin
 ```
-1. Reset the repo’s local copy of master to match the latest version:
+4. Reset the repo’s local copy of master to match the latest version:
 ```sh
 git reset --hard origin/master
 ```
-1. Create a new branch with a name that is descriptive of the task/ticket you are completing:
+5. Create a new branch with a name that is descriptive of the task/ticket you are completing:
 ```sh
 git checkout -b new-feature
 ```
-1. Use the usual commands to check, stage, and make commits:
+6. Use the usual commands to check, stage, and make commits:
 ```sh
 git status git add git commit
 ```
-1. Push your commits to a remote tracking branch to have a backup:
+7. Push your commits to a remote tracking branch to have a backup:
 ```sh
 git push -u origin new-feature
 ```
-1. Push the feature to the central repository when finished:
+8. Push the feature to the central repository when finished:
 ```sh
 git push --set-upstream origin new-feature
 ```
-1. Submit a pull request for this feature branch
-1. A teammate will review your PR. If changes need to be made, repeat steps 6, 7, & 8
-1. Teammate will then approve your PR and merge the changes to master
-1. SUCCESS!
+9. Submit a pull request for this feature branch
+10. A teammate will review your PR. If changes need to be made, repeat steps 6, 7, & 8
+11. Teammate will then approve your PR and merge the changes to master
+12. SUCCESS!
 
 ## Development
 
