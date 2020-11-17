@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Answers from './answers.jsx';
-import { Card } from 'react-bootstrap';
+import { Card, Container, Row, Col } from 'react-bootstrap';
 
 class Question extends Component {
   constructor(props) {
@@ -34,16 +34,32 @@ class Question extends Component {
 
   render() {
     return (
-      <div>
-        <div>{this.state.questions.map((singleQuestion) => {
-          return (
-            <div>Q: {singleQuestion.question_body}
-              <Answers questionId = {singleQuestion.question_id}/>
-            </div>
-          );
-        })}</div>
 
+      <div>{this.state.questions.map((singleQuestion) => {
+        return (
+          <div>
+            <Row>
+              <Col md={4}>
+                <p><strong>Q: {singleQuestion.question_body}</strong></p>
+              </Col>
+              <Col md={{span: 4, offset: 4}}>
+                <small>Helpful?</small>
+                <small><Card.Link>Yes</Card.Link>({singleQuestion.question_helpfulness}) |</small>
+                <small><Card.Link>AddAnswer</Card.Link></small>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p><Answers questionId = {singleQuestion.question_id}/></p>
+              </Col>
+            </Row>
+          </div>
+
+        );
+      })}
       </div>
+
+
     );
   }
 }

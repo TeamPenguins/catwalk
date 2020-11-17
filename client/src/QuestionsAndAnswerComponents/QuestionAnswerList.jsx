@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { questionsList, answerList } from '../dummyData.js';
 import Question from './question.jsx';
 import Answers from './answers.jsx';
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 
 
 class QuestionAnswerList extends Component {
@@ -18,14 +18,16 @@ class QuestionAnswerList extends Component {
   render() {
 
     return (
-      <Card>
-        <Card.Body>
-          <Card.Title >Questions and Answers</Card.Title>
-          <Card.Text>
+      <Container>
+        <Card>
+          <Card.Body>
+            <Card.Title >Questions and Answers</Card.Title>
+
             <Question productId = {this.state.productId}/>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+
+          </Card.Body>
+        </Card>
+      </Container>
     );
 
   }

@@ -35,7 +35,13 @@ class Answers extends Component {
       <div> {this.state.answerList.map((singleAnswer) => {
         return (
           <div>
-            A: {singleAnswer.body}
+            <p><strong>A:</strong> <small>{singleAnswer.body}</small> </p>
+            <p>
+              <small>
+                by User{singleAnswer.answer_id} - {singleAnswer.answerer_name}, {singleAnswer.date.slice(0, 10)} |
+                Helpful? <Card.Link>Yes({singleAnswer.helpfulness})</Card.Link>
+              </small>
+            </p>
           </div>
         );
       })}</div>
