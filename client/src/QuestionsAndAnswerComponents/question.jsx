@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Answers from './answers.jsx';
+import { Card } from 'react-bootstrap';
 
 class Question extends Component {
   constructor(props) {
