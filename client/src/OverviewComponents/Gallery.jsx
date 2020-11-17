@@ -10,7 +10,7 @@ class Gallery extends React.Component {
   render() {
     return (
       <Col sm={8} className="my-5">
-        <img className="rounded-sm" src={this.props.styles.results[0].photos[0].url}/>
+        <img className="rounded-sm" src={this.props.styles.results[0].photos[0].url} style={{ height: 500 }} alt={this.props.styles.results[0].name}/>
       </Col>
     );
   }
