@@ -13,7 +13,7 @@ class ProductOverview extends React.Component {
     return (
       <Container>
         <Row>
-          <Gallery />
+          <Gallery styles={this.props.styles}/>
           <ProductDetails selectedProduct={this.props.selectedProduct} />
         </Row>
         <ProductInfo selectedProduct={this.props.selectedProduct} />

@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <ProductOverview selectedProduct={this.state.selectedProduct} />
+        <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><RatingsAndReviews selectedProduct={this.state.selectedProduct} /></div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
