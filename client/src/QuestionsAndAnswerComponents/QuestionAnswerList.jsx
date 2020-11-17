@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import { questionsList, answerList } from '../dummyData.js';
+import Question from './question.jsx';
+import Answers from './answers.jsx';
+
 
 class QuestionAnswerList extends Component {
   constructor({selectedProd}) {
     super({selectedProd});
     this.state = {
       productId: selectedProd.id,
-      questions: questionsList.results
     };
-  }
 
+  }
 
 
   render() {
@@ -18,10 +20,10 @@ class QuestionAnswerList extends Component {
       <div>
         <h5>Questions and Answers</h5>
         <div>
-          Q:{this.state.questions[0].question_body}
+          <Question productId = {this.state.productId}/>
         </div>
         <div>
-          A:{this.state.questions[0].answers['68'].body}
+
         </div>
       </div>
     );
