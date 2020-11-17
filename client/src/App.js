@@ -15,6 +15,7 @@ class App extends React.Component {
       products: Products,
       selectedProduct: Products[0],
       selectedPoductStyles: productStyles
+
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }

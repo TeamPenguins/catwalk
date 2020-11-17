@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Card } from 'react-bootstrap';
 
 class Answers extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Answers extends Component {
 
   fetchAnswerList(questId) {
 
-    fetch(`http://3.21.164.220/qa/questions/${questId}/answers`)
+    fetch(`http://3.21.164.220/qa/questions/${questId}/answers?count=2`)
       .then(response => response.json())
       .then((answerList) => {
         this.setState({
@@ -34,7 +35,13 @@ class Answers extends Component {
       <div> {this.state.answerList.map((singleAnswer) => {
         return (
           <div>
-            A: {singleAnswer.body}
+            <p><strong>A:</strong> <small>{singleAnswer.body}</small> </p>
+            <p>
+              <small>
+                by User{singleAnswer.answer_id} - {singleAnswer.answerer_name}, {singleAnswer.date.slice(0, 10)} |
+                Helpful? <Card.Link>Yes({singleAnswer.helpfulness})</Card.Link>
+              </small>
+            </p>
           </div>
         );
       })}</div>
