@@ -12,7 +12,7 @@ class Answers extends Component {
 
   fetchAnswerList(questId) {
 
-    fetch(`http://3.21.164.220/qa/questions/${questId}/answers`)
+    fetch(`http://3.21.164.220/qa/questions/${questId}/answers?count=2`)
       .then(response => response.json())
       .then((answerList) => {
         this.setState({

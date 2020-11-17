@@ -13,7 +13,7 @@ class App extends React.Component {
     super();
     this.state = {
       products: Products,
-      selectedProduct: Products[0],
+      selectedProduct: Products[1],
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }
