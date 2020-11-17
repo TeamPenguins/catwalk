@@ -21,7 +21,7 @@ class RelatedProductCard extends React.Component {
   }
   fetchStyleInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}/styles`)
-      .then(data => this.setState({styleInfo: data.data.results[0].photos}))
+      .then(data => this.setState({styleInfo: data.data}))
       .catch(/*console.error('error at fetch product info')*/);
   }
   fetchAllInfo(id) {
@@ -40,7 +40,7 @@ class RelatedProductCard extends React.Component {
   render() {
     return (
       <Card
-        onClick={()=>this.props.productChangeMethod(this.state.productInfo)} >
+        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)} >
         <Card.Body>
           <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
           <Card.Text class="test">{this.state.productInfo.category}</Card.Text>
