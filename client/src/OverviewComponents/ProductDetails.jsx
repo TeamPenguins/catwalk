@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 
 class ProductDetails extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -18,9 +18,9 @@ class ProductDetails extends React.Component {
             <i className="fas fa-star"></i>
             <i className="fas fa-star"></i>
           </div>
-          <div className="my-1" >CATEGORY</div>
-          <h1>Expanded Product Name</h1>
-          <p>$369</p>
+          <div className="my-1" >{this.props.selectedProduct.category}</div>
+          <h1>{this.props.selectedProduct.name}</h1>
+          <p>${this.props.selectedProduct.default_price}</p>
         </div>
         <div>
           {/* break up into styles component */}

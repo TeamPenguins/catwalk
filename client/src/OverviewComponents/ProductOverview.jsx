@@ -5,8 +5,8 @@ import ProductDetails from './ProductDetails.jsx';
 import ProductInfo from './ProductInfo.jsx';
 
 class ProductOverview extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -14,9 +14,9 @@ class ProductOverview extends React.Component {
       <Container>
         <Row>
           <Gallery />
-          <ProductDetails />
+          <ProductDetails selectedProduct={this.props.selectedProduct} />
         </Row>
-        <ProductInfo />
+        <ProductInfo selectedProduct={this.props.selectedProduct} />
       </Container>
     );
   }
