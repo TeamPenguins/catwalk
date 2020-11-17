@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Star } from 'react-bootstrap-icons';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class ProductDetails extends React.Component {
         {/* pull in the star rating component and link to ratings section below */}
         <div>
           <div className="my-1">
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
+            <Star />
+            <Star />
+            <Star />
+            <Star />
+            <Star />
           </div>
           <div className="my-1" >{this.props.selectedProduct.category}</div>
           <h1>{this.props.selectedProduct.name}</h1>
@@ -50,7 +51,7 @@ class ProductDetails extends React.Component {
           <Row>
             <Button variant="outline-secondary mr-3">Add To Cart</Button>{' '}
             <Button variant="secondary">
-              <i className="fas fa-star"></i>
+              <Star />
             </Button>
           </Row>
         </form>
