@@ -4,7 +4,7 @@ import NavBar from './NavBar.jsx';
 import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
-import { Products } from './dummyData.js';
+import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 
 
@@ -14,12 +14,14 @@ class App extends React.Component {
     this.state = {
       products: Products,
       selectedProduct: Products[0],
+      selectedPoductStyles: productStyles
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }
   //find the ratings of item method.
-  handleProductChange(productID) {
-    this.setState({selectedProduct: productID});
+  handleProductChange(productInfo, stylesInfo) {
+    this.setState({selectedProduct: productInfo});
+    this.setState({selectedPoductStyles: stylesInfo});
   }
   render () {
     return (
@@ -27,8 +29,8 @@ class App extends React.Component {
         <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
-        <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
-        <div><QuestionsAnswersComponents selectedProd = {this.state.selectedProduct}/></div>
+        <div><RatingsAndReviews selectedProduct={this.state.selectedProduct} /></div>
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
       </div>
     );
   }
