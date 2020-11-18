@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
+
 
 class Answers extends Component {
   constructor(props) {
@@ -39,10 +40,21 @@ class Answers extends Component {
 
   render() {
     return (
-      <div> {this.state.answerList.map((singleAnswer) => {
+      <div><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
         return (
           <div>
-            <p><strong>A:</strong> <small>{singleAnswer.body}</small> </p>
+            <p>
+              <small>{singleAnswer.body}</small>
+            </p>
+            <Row>
+              {singleAnswer.photos.map((currPhoto) => {
+                return (
+                  <Col md={2}>
+                    <img src={currPhoto.url} style ={{height: 100, weidth: 100}}/>
+                  </Col>
+                );
+              })}
+            </Row>
             <p>
               <small>
                 by User{singleAnswer.answer_id} - {singleAnswer.answerer_name}, {singleAnswer.date.slice(0, 10)} |
