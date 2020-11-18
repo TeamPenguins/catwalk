@@ -14,7 +14,7 @@ class ProductOverview extends React.Component {
       <Container>
         <Row>
           <Gallery styles={this.props.styles}/>
-          <ProductDetails selectedProduct={this.props.selectedProduct} />
+          <ProductDetails selectedProduct={this.props.selectedProduct} styles={this.props.styles} />
         </Row>
         <ProductInfo selectedProduct={this.props.selectedProduct} />
       </Container>

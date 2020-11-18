@@ -5,6 +5,7 @@ import { Star } from 'react-bootstrap-icons';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { selectedStyle: {} };
   }
 
   render() {
@@ -25,7 +26,8 @@ class ProductDetails extends React.Component {
         </div>
         <div>
           {/* break up into styles component */}
-          <h3>STYLE | SELECTED STYLE</h3>
+          <h3>STYLE | {this.props.styles.results[0].name}</h3>
+          {/* onClick -> updated the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
           <Row className="my-2">
             <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
             <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
