@@ -31,7 +31,7 @@ class App extends React.Component {
         <ProductOverview selectedProduct={this.state.selectedProduct} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
-        <div><RatingsAndReviews selectedProduct={this.state.selectedProduct} /></div>
+        <div><RatingsAndReviews productId={this.state.selectedProduct.id} /></div>
       </div>
     );
   }

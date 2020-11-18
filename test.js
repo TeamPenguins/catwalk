@@ -18,7 +18,7 @@ configure({ adapter: new Adapter() });
 
 describe('Ratings And Reviews component', () => {
 
-  const testRatingsAndReviews = mount(<RatingsAndReviews />);
+  const testRatingsAndReviews = mount(<RatingsAndReviews productId={2}/>);
 
   it('should exist', () => {
     expect(testRatingsAndReviews.exists()).toEqual(true);
@@ -37,14 +37,12 @@ describe('Ratings And Reviews component', () => {
 
 describe('Reviews List component', () => {
   it('should render a review tile for each review', () => {
-    axios.get('http://3.21.164.220/reviews/?product_id=5')
+    return axios.get('http://3.21.164.220/reviews/?product_id=5')
       .then(data => {
         const testReviewsList = mount(<ReviewsList reviews={data.data.results}/>);
-        expect(testReviewsList.find('ReviewTile').length).toEqual(data.data.reviews.length);
-      })
-      .catch((err) => {
-        console.log(err);
+        expect(testReviewsList.find('ReviewTile').length).toEqual(data.data.results.length);
       });
+    // .catch(err => console.log(err));
   });
 });
 
@@ -87,7 +85,16 @@ describe('Review Tile component', () => {
 
 describe('Product Overview component', () => {
 
-  const testProductOverview = mount(<ProductOverview />);
+  const product = {
+    'id': 1,
+    'name': 'Camo Onesie',
+    'slogan': 'Blend in to your crowd',
+    'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+    'category': 'Jackets',
+    'default_price': '140',
+  };
+
+  const testProductOverview = mount(<ProductOverview selectedProduct={product}/>);
 
   it('should exist', () => {
     expect(testProductOverview.exists()).toEqual(true);
@@ -113,9 +120,7 @@ describe('Product Overview component', () => {
 //     expect(testRelatedItemsComparisonList.exists()).toEqual(true);
 //   });
 // });
-//------------------------------------------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------------------------------------
 // Questions and Asnwers Test Suite
 
 // xdescribe('Questions and Answers component', () => {

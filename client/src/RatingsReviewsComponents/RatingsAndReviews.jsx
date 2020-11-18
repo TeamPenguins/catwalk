@@ -12,7 +12,7 @@ class RatingsAndReviews extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.selectedProduct.id}`)
+    axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
       .then(data => {
         this.setState({reviews: data.data.results});
       })
@@ -20,8 +20,8 @@ class RatingsAndReviews extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
-      axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.selectedProduct.id}`)
+    if (prevProps.productId !== this.props.productId ) {
+      axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
         .then(data =>
           this.setState({reviews: data.data.results})
         )
