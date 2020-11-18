@@ -12,22 +12,22 @@ class RatingsAndReviews extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h6 class="text-secondary">Ratings & Reviews</h6>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h6 className="text-secondary">Ratings & Reviews</h6>
           </div>
         </div>
-        <div class="row">
-          <div class="col-4">
-            <h1 class="text-secondary">3.5</h1>
+        <div className="row">
+          <div className="col-4">
+            <h1 className="text-secondary">3.5</h1>
           </div>
-          <div class="col-8">
+          <div className="col-8">
             <ReviewsList reviews={this.state.product} />
-            <div class="row">
-              <div class="col">
-                <button type="button" class="btn btn-outline-secondary">MORE REVIEWS</button>
-                <button type="button" class="btn btn-outline-secondary">ADD A REVIEW</button>
+            <div className="row">
+              <div className="col">
+                <button type="button" className="btn btn-outline-secondary">MORE REVIEWS</button>
+                <button type="button" className="btn btn-outline-secondary">ADD A REVIEW</button>
               </div>
             </div>
           </div>
