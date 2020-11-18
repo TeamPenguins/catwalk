@@ -5,17 +5,17 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 class Question extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       questions: [],
-      productId: this.props.productId,
     };
     this.fetchQuestionList = this.fetchQuestionList.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  fetchQuestionList(prodId) {
+  fetchQuestionList() {
 
-    fetch(`http://3.21.164.220/qa/questions/?product_id=${prodId}&count=4`)
+    fetch(`http://3.21.164.220/qa/questions/?product_id=${this.props.productId.id}&count=4`)
       .then(response => response.json())
       .then((questionList) => {
         this.setState({
@@ -27,15 +27,23 @@ class Question extends Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.productId !== this.props.productId) {
+      this.fetchQuestionList(this.props.productId);
+    }
+  }
+
   componentDidMount() {
-    this.fetchQuestionList(this.state.productId);
+    this.fetchQuestionList();
   }
 
 
   render() {
     return (
 
+
       <div>{this.state.questions.map((singleQuestion) => {
+
         return (
           <div>
             <Row>

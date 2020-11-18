@@ -6,12 +6,9 @@ import { Card, Container } from 'react-bootstrap';
 
 
 class QuestionAnswerList extends Component {
-  constructor({selectedProd}) {
-    super({selectedProd});
-    this.state = {
-      productId: selectedProd.id,
-    };
+  constructor(props) {
 
+    super(props);
   }
 
 
@@ -19,11 +16,12 @@ class QuestionAnswerList extends Component {
 
     return (
       <Container>
+
         <Card>
           <Card.Body>
             <Card.Title >Questions and Answers</Card.Title>
 
-            <Question productId = {this.state.productId}/>
+            <Question productId = {this.props.selectedProduct}/>
 
           </Card.Body>
         </Card>
