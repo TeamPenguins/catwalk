@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { ReviewsForProductFive } from '../dummyData.js';
 import ReviewsList from './components/ReviewsList.jsx';
 
@@ -6,8 +7,26 @@ class RatingsAndReviews extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: ReviewsForProductFive.results,
+      reviews: [],
     };
+  }
+
+  componentDidMount() {
+    axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
+      .then(data => {
+        this.setState({reviews: data.data.results});
+      })
+      .catch(console.log());
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.productId !== this.props.productId ) {
+      axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
+        .then(data =>
+          this.setState({reviews: data.data.results})
+        )
+        .catch(console.log());
+    }
   }
 
   render() {
@@ -23,7 +42,7 @@ class RatingsAndReviews extends Component {
             <h1 className="text-secondary">3.5</h1>
           </div>
           <div className="col-8">
-            <ReviewsList reviews={this.state.product} />
+            <ReviewsList reviews={this.state.reviews} />
             <div className="row">
               <div className="col">
                 <button type="button" className="btn btn-outline-secondary">MORE REVIEWS</button>
