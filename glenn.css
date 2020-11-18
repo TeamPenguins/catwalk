@@ -1,0 +1,28 @@
+ .test {
+  background-color: rgb(0, 255, 76);
+}
+
+.productCard {
+  max-width: 300px;
+  min-width: 300px;
+  max-height: 400px;
+  min-height: 400px
+}
+
+.productsList {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  max-height: 400px;
+  overflow: hidden
+}
+
+.add {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+/* .outfit {
+
+} */

@@ -10,7 +10,6 @@ class RelatedItemsAndComparisonList extends React.Component {
     super(props);
     this.state = {
       relatedProductIds: [],
-      firstRelatedProduct: null,
       selectedProduct: {},
       style: {}
     };
@@ -20,7 +19,6 @@ class RelatedItemsAndComparisonList extends React.Component {
   fetchRelatedProducts(id) {
     axios.get(`http://3.21.164.220/products/${id}/related`)
       .then(data => this.setState({relatedProductIds: data.data}))
-      .then(data => this.setState({firstRelatedProduct: data.data[0]}))
       .catch(/*console.error('error at fetchRelatedProducts')*/);
   }
   //updates the components after selectedProduct has changed in App
@@ -40,18 +38,14 @@ class RelatedItemsAndComparisonList extends React.Component {
           {
             this.state.relatedProductIds.map(id => {
               return (
-                <RelatedProductCard productId={id} productChangeMethod={this.props.productChangeMethod}/>
+                <RelatedProductCard
+                  key={id}
+                  productId={id}
+                  productChangeMethod={this.props.productChangeMethod}/>
               );
             })
           }
         </CardDeck>
-        <h6 className="test">Your Outfit</h6>
-        <ul className="outfitList">
-          <li>Add current item to outfit</li>
-          <li>outfit item one</li>
-          <li>outfit item two</li>
-          <li>outfit item three</li>
-        </ul>
       </Container>
     );
   }
