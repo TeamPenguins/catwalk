@@ -26,19 +26,13 @@ class ProductDetails extends React.Component {
         </div>
         <div>
           {/* break up into styles component */}
-          <h3>STYLE | {this.props.styles.results[0].name}</h3>
+          <p><span class="font-weight-bold">STYLE ></span> {this.props.styles.results[0].name}</p>
           {/* onClick -> updated the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
-          <Row className="my-2">
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-          </Row>
-          <Row className="my-2">
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
+          <Row className="my-2" style={{ maxWidth: 300 }} >
+            {/* map through the styles (results arr) and output an image tag for each */}
+            {this.props.styles.results.map((style) => {
+              return <img className="rounded-circle p-1" src={style.photos[0].url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+            })}
           </Row>
         </div>
         <form className="">
