@@ -9,6 +9,7 @@ class QuestionAnswerList extends Component {
   constructor(props) {
 
     super(props);
+
   }
 
 
@@ -20,8 +21,7 @@ class QuestionAnswerList extends Component {
         <Card>
           <Card.Body>
             <Card.Title >Questions and Answers</Card.Title>
-
-            <Question productId = {this.props.selectedProduct}/>
+            <Question productId = {this.props.selectedProduct.id}/>
 
           </Card.Body>
         </Card>
