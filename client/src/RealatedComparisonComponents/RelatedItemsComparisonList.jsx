@@ -33,15 +33,12 @@ class RelatedItemsAndComparisonList extends React.Component {
 
   render() {
     return (
-      <Container height="100px" style={{ width: '100%' }} className="relatedProductsList">
-        <CardDeck height="100px" overflow="scroll">
+      <Container >
+        <CardDeck className="related productsList">
           {
             this.state.relatedProductIds.map(id => {
               return (
-                <RelatedProductCard
-                  key={id}
-                  productId={id}
-                  productChangeMethod={this.props.productChangeMethod}/>
+                <RelatedProductCard productId={id} productChangeMethod={this.props.productChangeMethod}/>
               );
             })
           }
