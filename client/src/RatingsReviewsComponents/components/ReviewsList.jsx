@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 const ReviewsList = ({ reviews }) => (
   reviews.map(review => (
-    <div>
+    <div key={review.review_id}>
       {<ReviewTile review={review} />}
       <br />
     </div>
