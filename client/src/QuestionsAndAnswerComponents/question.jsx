@@ -40,10 +40,7 @@ class Question extends Component {
 
   render() {
     return (
-
-
       <div>{this.state.questions.map((singleQuestion) => {
-
         return (
           <div>
             <Row>
@@ -62,12 +59,9 @@ class Question extends Component {
               </Col>
             </Row>
           </div>
-
         );
       })}
       </div>
-
-
     );
   }
 }

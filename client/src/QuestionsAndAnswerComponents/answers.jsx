@@ -5,15 +5,16 @@ class Answers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionId: this.props.questionId,
       answerList: [],
     };
-
+    this.fetchAnswerList = this.fetchAnswerList.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
   }
 
-  fetchAnswerList(questId) {
+  fetchAnswerList() {
 
-    fetch(`http://3.21.164.220/qa/questions/${questId}/answers?count=2`)
+    fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=2`)
       .then(response => response.json())
       .then((answerList) => {
         this.setState({
@@ -25,10 +26,16 @@ class Answers extends Component {
       });
   }
 
-  componentDidMount() {
-    this.fetchAnswerList(this.state.questionId);
+  componentDidUpdate(prevProps) {
+    if (prevProps.questionId !== this.props.questionId) {
+      this.fetchAnswerList();
+    }
   }
 
+  componentDidMount() {
+    this.fetchAnswerList();
+
+  }
 
   render() {
     return (
