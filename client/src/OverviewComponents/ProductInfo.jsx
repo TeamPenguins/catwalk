@@ -16,10 +16,9 @@ class ProductInfo extends React.Component {
         </Col>
         <Col sm={4} className="product-features-list">
           <ul className="list-group list-group-flush">
-            <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />GMO and pesticide free</li>
-            <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />Made with 100% Genetic Modification</li>
-            <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />This is made up</li>
-            <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />It doesn't matter</li>
+            {this.props.selectedProduct.features.map((item) => {
+              return <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />{item.value} {item.feature}</li>;
+            })}
           </ul>
         </Col>
       </Row>
