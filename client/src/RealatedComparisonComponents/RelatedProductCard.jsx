@@ -40,7 +40,9 @@ class RelatedProductCard extends React.Component {
   render() {
     return (
       <Card
-        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)} >
+        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
+        className="productCard"
+      >
         <Card.Body>
           <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
           <Card.Text class="test">{this.state.productInfo.category}</Card.Text>
