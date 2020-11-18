@@ -5,6 +5,7 @@ import { Star } from 'react-bootstrap-icons';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { selectedStyle: {} };
   }
 
   render() {
@@ -19,26 +20,25 @@ class ProductDetails extends React.Component {
             <Star />
             <Star />
           </div>
-          <div className="my-1" >{this.props.selectedProduct.category}</div>
+
+          <p className="my-1" >{this.props.selectedProduct.category}</p>
           <h1>{this.props.selectedProduct.name}</h1>
           <p>${this.props.selectedProduct.default_price}</p>
         </div>
+
+        {/* break up into styles component */}
         <div>
-          {/* break up into styles component */}
-          <h3>STYLE | SELECTED STYLE</h3>
-          <Row className="my-2">
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-          </Row>
-          <Row className="my-2">
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
-            <img className="rounded-circle px-1" src="https://via.placeholder.com/70"/>
+          {/* onClick -> updated the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
+          <p><span class="font-weight-bold">STYLE > </span> {this.props.styles.results[0].name}</p>
+
+          <Row className="my-2" style={{ maxWidth: 300 }} >
+            {/* map through the styles (results arr) and output an image tag for each */}
+            {this.props.styles.results.map((style) => {
+              return <img className="rounded-circle p-1" src={style.photos[0].url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+            })}
           </Row>
         </div>
+
         <form className="">
           <Row className="my-3">
             <select className="col-6 mr-3 form-control">

@@ -4,22 +4,18 @@ import Gallery from './Gallery.jsx';
 import ProductDetails from './ProductDetails.jsx';
 import ProductInfo from './ProductInfo.jsx';
 
-class ProductOverview extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const ProductOverview = (props) => {
 
-  render() {
-    return (
-      <Container>
-        <Row>
-          <Gallery />
-          <ProductDetails selectedProduct={this.props.selectedProduct} />
-        </Row>
-        <ProductInfo selectedProduct={this.props.selectedProduct} />
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <Row>
+        <Gallery styles={props.styles}/>
+        <ProductDetails selectedProduct={props.selectedProduct} styles={props.styles} />
+      </Row>
+      <ProductInfo selectedProduct={props.selectedProduct} />
+    </Container>
+  );
+
+};
 
 export default ProductOverview;
