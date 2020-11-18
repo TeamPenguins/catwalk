@@ -14,7 +14,6 @@ configure({ adapter: new Adapter() });
 
 
 
-//------------------------------------------------------------------------------------------------------------------------------------
 // RATINGS AND REVIEWS TEST SUITE
 
 describe('Ratings And Reviews component', () => {
@@ -43,23 +42,9 @@ describe('Reviews List component', () => {
         const testReviewsList = mount(<ReviewsList reviews={data.data.results}/>);
         expect(testReviewsList.find('ReviewTile').length).toEqual(data.data.reviews.length);
       })
-      // .catch(thrownReviews => {
-      //   const testReviewsList = mount(<ReviewsList reviews={thrownReviews}/>);
-      //   return expect(testReviewsList.find('ReviewTile').length).toEqual(thrownReviews.length);
-      //   done();
-      // })
       .catch((err) => {
         console.log(err);
       });
-    // .then(data => {
-    //   throw data.data.results;
-    // })
-    // .catch(thrownReviews => {
-    //   const testReviewsList = mount(<ReviewsList reviews={thrownReviews}/>);
-    //   return expect(testReviewsList.find('ReviewTile').length).toEqual(thrownReviews.length);
-    //   done();
-    // })
-    // .catch(err => console.log(err));
   });
 });
 
@@ -97,32 +82,30 @@ describe('Review Tile component', () => {
   });
 
 });
-//------------------------------------------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------------------------------------
-// Overview Test Suite
+//Overview Test Suite
 
-// describe('Product Overview component', () => {
+describe('Product Overview component', () => {
 
-//   const testProductOverview = mount(<ProductOverview />);
+  const testProductOverview = mount(<ProductOverview />);
 
-//   it('should exist', () => {
-//     expect(testProductOverview.exists()).toEqual(true);
-//   });
-// });
-//------------------------------------------------------------------------------------------------------------------------------------
+  it('should exist', () => {
+    expect(testProductOverview.exists()).toEqual(true);
+  });
+});
 
-//------------------------------------------------------------------------------------------------------------------------------------
+
+
 // Related Items & Comparison Test Suite
 
 // describe('Related Items Comparison List component', () => {
 //   const selectedProduct = {
-//     "id": 2,
-//     "name": "Bright Future Sunglasses",
-//     "slogan": "You've got to wear shades",
-//     "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
-//     "category": "Accessories",
-//     "default_price": "69"
+//     'id': 2,
+//     'name': 'Bright Future Sunglasses',
+//     'slogan': 'You\'ve got to wear shades',
+//     'description': 'Where you\'re going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.',
+//     'category': 'Accessories',
+//     'default_price': '69'
 //   };
 //   const testRelatedItemsComparisonList = mount(<RelatedItemsAndComparisonList selectedProduct={selectedProduct}/>);
 
@@ -143,8 +126,3 @@ describe('Review Tile component', () => {
 //     expect(testQuestionsAnswers.exists()).toEqual(true);
 //   });
 // });
-//------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
