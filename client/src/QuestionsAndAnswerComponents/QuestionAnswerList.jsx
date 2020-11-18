@@ -14,7 +14,6 @@ class QuestionAnswerList extends Component {
           <Card.Body>
             <Card.Title >Questions and Answers</Card.Title>
             <Question productId = {this.props.selectedProduct.id}/>
-
           </Card.Body>
         </Card>
       </Container>

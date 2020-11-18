@@ -59,7 +59,6 @@ class Question extends Component {
               </Col>
             </Row>
           </div>
-
         );
       })}
       </div>
