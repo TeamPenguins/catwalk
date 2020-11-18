@@ -45,7 +45,7 @@ class RelatedProductCard extends React.Component {
       >
         <Card.Body>
           <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
-          <Card.Text class="test">{this.state.productInfo.category}</Card.Text>
+          <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
           <Card.Title>{this.state.productInfo.name}</Card.Title>
           <Card.Text>${this.state.productInfo.default_price}</Card.Text>
         </Card.Body>
