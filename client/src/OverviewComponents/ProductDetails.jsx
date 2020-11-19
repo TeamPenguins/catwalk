@@ -6,7 +6,7 @@ import Variants from './Variants.jsx';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStyle: '', theStyles: '' };
+    this.state = { selectedStyle: '' };
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
   }
 
