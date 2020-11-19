@@ -3,36 +3,32 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 
 
-// var skus = props.styles.results[0].skus;
-
-// var sizeArr = [];
-// var quantityArr = [];
-// for (const [key, value] of Object.entries(skus)) {
-//   console.log(`${key}: ${value}`);
-//   sizeArr.push(value.size);
-//   quantityArr.push(value.quantity);
-// }
-// console.log(sizeArr);
-// console.log(quantityArr);
-
-
-
 
 const Variants = (props) => {
+
+  const updateStylesAvail = () => {
+    var selection = props.selectedStyle || 1;
+    console.log(selection);
+
+    var stylesAvail = props.styles.results;
+    for (var i = 0; i < stylesAvail.length; i++) {
+      if (stylesAvail[i].style_id === selection) {
+        console.log(i);
+      }
+    }
+  };
+
+
   var skus = props.styles.results[0].skus;
-  console.log(skus);
 
   var sizeArr = [];
   var quantityArr = [];
   var variantArr = [];
   for (const [key, value] of Object.entries(skus)) {
-    console.log(`${key}: ${value}`);
     sizeArr.push(value.size);
     quantityArr.push(value.quantity);
     variantArr.push(value.size, value.quantity);
   }
-  console.log(sizeArr);
-  console.log(quantityArr);
 
 
   return (

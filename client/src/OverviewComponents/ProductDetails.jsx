@@ -6,33 +6,31 @@ import Variants from './Variants.jsx';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStyle: '' };
+    this.state = { selectedStyle: '', theStyles: '' };
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
+    this.updateStylesAvail = this.updateStylesAvail.bind(this);
   }
-
-  // var skus = styleData.results[0].skus;
-
-
-  // skus() {
-  //   return styleData.results[0].skus;
-  // }
-
-
-  // var sizeArr = [];
-  // var quantityArr = [];
-  // for (const [key, value] of Object.entries(skus)) {
-  //   console.log(`${key}: ${value}`);
-  //   sizeArr.push(value.size);
-  //   quantityArr.push(value.quantity);
-  // }
-  // console.log(sizeArr);
-  // console.log(quantityArr);
 
   onThumbnailClick(event) {
     this.setState({
       selectedStyle: event.target.id
     });
+    this.updateStylesAvail();
   }
+
+  updateStylesAvail() {
+    var selection = this.state.selectedStyle || 1;
+    console.log('selection' + selection);
+
+    var stylesAvail = this.props.styles.results;
+    console.log('stylesAvail: ' +  stylesAvail);
+    for (var i = 0; i < stylesAvail.length; i++) {
+      if (stylesAvail[i].style_id) {
+        return console.log('i: ' + i);
+        this.setState({ theStyles : 9 });
+      }
+    }
+  };
 
 
   render() {
