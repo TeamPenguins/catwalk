@@ -45,7 +45,9 @@ class OutfitItemList extends React.Component {
           {
             this.state.outfitListIds.map(id => {
               return (
-                <RelatedProductCard productId={id} productChangeMethod={this.addToOutfit}/>
+                <RelatedProductCard productId={id}
+                  key={`OL${id}`}
+                  productChangeMethod={this.addToOutfit}/>
               );
             })
           }
