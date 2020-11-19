@@ -18,7 +18,7 @@ configure({ adapter: new Adapter() });
 
 describe('Ratings And Reviews component', () => {
 
-  const testRatingsAndReviews = mount(<RatingsAndReviews productId={2}/>);
+  const testRatingsAndReviews = mount(<RatingsAndReviews productId={2} />);
 
   it('should exist', () => {
     expect(testRatingsAndReviews.exists()).toEqual(true);
