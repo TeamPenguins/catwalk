@@ -38,7 +38,7 @@ class ProductDetails extends React.Component {
         {/* break up into styles component */}
         <div>
           {/* onClick -> update the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
-          <p><span class="font-weight-bold">STYLE > </span> {this.props.styles.results[0].name}</p>
+          <p><span class="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[0].name}</p>
           <Row className="my-2" style={{ maxWidth: 300 }} >
             {/* map through the styles (results arr) and output an image tag for each */}
             {this.props.styles.results.map((style, index) => {
@@ -47,8 +47,8 @@ class ProductDetails extends React.Component {
           </Row>
         </div>
 
-            {/* size/quantity component */}
-            <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle}/>
+        {/* size/quantity component */}
+        <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle}/>
 
       </Col>
     );
