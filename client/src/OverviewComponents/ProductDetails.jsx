@@ -66,7 +66,7 @@ class ProductDetails extends React.Component {
         </div>
 
             {/* size/quantity component */}
-            <Variants styles={this.props.styles}/>
+            <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle}/>
 
       </Col>
     );
