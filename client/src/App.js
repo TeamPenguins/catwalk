@@ -31,7 +31,7 @@ class App extends React.Component {
         <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
-        <div><OutfitItemList/></div>
+        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/></div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
         <div><RatingsAndReviews productId={this.state.selectedProduct.id} /></div>
       </div>
