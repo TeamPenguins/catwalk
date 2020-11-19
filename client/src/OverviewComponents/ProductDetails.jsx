@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
+import Variants from './Variants.jsx';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -64,23 +65,9 @@ class ProductDetails extends React.Component {
           </Row>
         </div>
 
-        <form className="">
-          <Row className="my-3">
-            {/* map through the available sizes for the style chosen */}
-            <select className="col-6 mr-3 form-control">
-              <option>{this.props.styles.results[0].skus['1'].size}</option>
-            </select>
-            <select className="col-2 form-control">
-              <option>1</option>
-            </select>
-          </Row>
-          <Row>
-            <Button variant="outline-secondary mr-3">Add To Cart</Button>{' '}
-            <Button variant="secondary">
-              <Star />
-            </Button>
-          </Row>
-        </form>
+            {/* size/quantity component */}
+            <Variants styles={this.props.styles}/>
+
       </Col>
     );
   }
