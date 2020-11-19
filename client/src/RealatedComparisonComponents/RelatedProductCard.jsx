@@ -7,8 +7,7 @@ class RelatedProductCard extends React.Component {
     super(props);
     this.state = {
       productInfo: {},
-      styleInfo: {},
-      noImgFound: 'https://via.placeholder.com/400/700'
+      styleInfo: {}
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
@@ -16,12 +15,12 @@ class RelatedProductCard extends React.Component {
   }
   fetchProductInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}`)
-      .then(data => this.setState({productInfo: data.data}))
+      .then(productInfo => this.setState({productInfo: productInfo.data}))
       .catch(/*console.error('error at fetch product info')*/);
   }
   fetchStyleInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}/styles`)
-      .then(data => this.setState({styleInfo: data.data}))
+      .then(styleInfo => this.setState({styleInfo: styleInfo.data}))
       .catch(/*console.error('error at fetch product info')*/);
   }
   fetchAllInfo(id) {
@@ -34,16 +33,19 @@ class RelatedProductCard extends React.Component {
     }
   }
   componentDidMount() {
+
     this.fetchAllInfo(this.props.productId);
   }
 
   render() {
     return (
       <Card
-        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)} >
+        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
+        className="productCard"
+      >
         <Card.Body>
           <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
-          <Card.Text class="test">{this.state.productInfo.category}</Card.Text>
+          <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
           <Card.Title>{this.state.productInfo.name}</Card.Title>
           <Card.Text>${this.state.productInfo.default_price}</Card.Text>
         </Card.Body>
@@ -53,3 +55,4 @@ class RelatedProductCard extends React.Component {
 }
 
 export default RelatedProductCard;
+
