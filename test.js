@@ -7,6 +7,7 @@ import ReviewsList from './client/src/RatingsReviewsComponents/components/Review
 import ReviewTile from './client/src/RatingsReviewsComponents/components/ReviewTile.jsx';
 import ProductOverview from './client/src/OverviewComponents/ProductOverview.jsx';
 import RelatedItemsAndComparisonList from './client/src/RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
+import QuestionAnswerList from './client/src/QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 
 
 
@@ -83,23 +84,45 @@ describe('Review Tile component', () => {
 
 //Overview Test Suite
 
-describe('Product Overview component', () => {
+// describe('Product Overview component', () => {
 
-  const product = {
-    'id': 1,
-    'name': 'Camo Onesie',
-    'slogan': 'Blend in to your crowd',
-    'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    'category': 'Jackets',
-    'default_price': '140',
-  };
+//   const product = {
+//     'id': 1,
+//     'name': 'Camo Onesie',
+//     'slogan': 'Blend in to your crowd',
+//     'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+//     'category': 'Jackets',
+//     'default_price': '140',
+//   };
 
-  const testProductOverview = mount(<ProductOverview selectedProduct={product}/>);
+//   const testProductOverview = mount(<ProductOverview selectedProduct={product}/>);
 
-  it('should exist', () => {
-    expect(testProductOverview.exists()).toEqual(true);
-  });
-});
+//   it('should exist', () => {
+//     expect(testProductOverview.exists()).toEqual(true);
+//   });
+// });
+
+
+
+// Questions and Asnwers Test Suite
+
+// describe('Questions and Answers component', () => {
+
+//   const product = {
+//     'id': 1,
+//     'name': 'Camo Onesie',
+//     'slogan': 'Blend in to your crowd',
+//     'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+//     'category': 'Jackets',
+//     'default_price': '140',
+//   };
+
+//   const testQuestionsAnswers = mount(<QuestionAnswerList selectedProduct = {product}/>);
+
+//   it('should exist', () => {
+//     expect(testQuestionsAnswers.exists()).toEqual(true);
+//   });
+// });
 
 
 
@@ -119,7 +142,7 @@ describe('Product Overview component', () => {
 //   it('should exist', () => {
 //     expect(testRelatedItemsComparisonList.exists()).toEqual(true);
 //   });
-// });
+//});
 
 // Questions and Asnwers Test Suite
 

@@ -6,6 +6,7 @@ import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx'
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
 import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
+import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx'
 
 
 class App extends React.Component {
@@ -28,8 +29,9 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <ProductOverview selectedProduct={this.state.selectedProduct} />
+        <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
+        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/></div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
         <div><RatingsAndReviews productId={this.state.selectedProduct.id} /></div>
       </div>

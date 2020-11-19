@@ -15,7 +15,7 @@ class Question extends Component {
 
   fetchQuestionList() {
 
-    fetch(`http://3.21.164.220/qa/questions/?product_id=${this.props.productId.id}&count=4`)
+    fetch(`http://3.21.164.220/qa/questions/?product_id=${this.props.productId}&count=4`)
       .then(response => response.json())
       .then((questionList) => {
         this.setState({
@@ -29,7 +29,7 @@ class Question extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
-      this.fetchQuestionList(this.props.productId);
+      this.fetchQuestionList();
     }
   }
 
@@ -40,10 +40,7 @@ class Question extends Component {
 
   render() {
     return (
-
-
       <div>{this.state.questions.map((singleQuestion) => {
-
         return (
           <div>
             <Row>
@@ -62,12 +59,9 @@ class Question extends Component {
               </Col>
             </Row>
           </div>
-
         );
       })}
       </div>
-
-
     );
   }
 }
