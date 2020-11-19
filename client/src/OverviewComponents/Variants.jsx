@@ -6,21 +6,25 @@ import { Star } from 'react-bootstrap-icons';
 
 const Variants = (props) => {
 
-  const updateStylesAvail = () => {
-    var selection = props.selectedStyle || 1;
-    console.log(selection);
+  // const updateStylesAvail = () => {
+  var selection = props.selectedStyle || 1;
+  console.log('selection: ' + selection);
 
-    var stylesAvail = props.styles.results;
-    for (var i = 0; i < stylesAvail.length; i++) {
-      if (stylesAvail[i].style_id === selection) {
-        console.log(i);
-      }
+  var stylesAvail = props.styles.results;
+  var styleClicked = {};
+  console.log(stylesAvail);
+  for (var i = 0; i < stylesAvail.length; i++) {
+    if (stylesAvail[i].style_id === Number(selection)) {
+      console.log(stylesAvail[i]);
+      styleClicked = stylesAvail[i];
     }
-  };
+  }
+  console.log('styleClicked: ' + styleClicked);
+  // };
 
 
   var skus = props.styles.results[0].skus;
-
+  // creates arrays for the size and quantities from the selected style skus
   var sizeArr = [];
   var quantityArr = [];
   var variantArr = [];
@@ -34,13 +38,13 @@ const Variants = (props) => {
   return (
     <form className="">
       <Row className="my-3">
-        {/* map through the available sizes for the style chosen */}
+        {/* map through the available sizes array for the style chosen */}
         <select className="col-6 mr-3 form-control">
           {sizeArr.map((size) => {
             return <option>{size}</option>;
           })}
         </select>
-        {/* map through the available quantities for the style chosen */}
+        {/* map through the available quantities array for the style chosen */}
         <select className="col-3 form-control">
           {quantityArr.map((quantity) => {
             return <option>{quantity}</option>;
