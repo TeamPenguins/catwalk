@@ -6,13 +6,14 @@ import Variants from './Variants.jsx';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStyle: '' };
+    this.state = { selectedStyle: '', selectedStyleImages: [] };
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
   }
 
   onThumbnailClick(event) {
     this.setState({
-      selectedStyle: event.target.id
+      selectedStyle: event.target.id,
+      selectedStyleImages: event.target.value
     });
   }
 
@@ -38,11 +39,11 @@ class ProductDetails extends React.Component {
         {/* break up into styles component */}
         <div>
           {/* onClick -> update the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
-          <p><span class="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[0].name}</p>
+          <p><span className="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[0].name}</p>
           <Row className="my-2" style={{ maxWidth: 300 }} >
             {/* map through the styles (results arr) and output an image tag for each */}
             {this.props.styles.results.map((style, index) => {
-              return <img onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+              return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} value={style.photos} src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
             })}
           </Row>
         </div>

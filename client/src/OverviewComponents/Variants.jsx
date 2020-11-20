@@ -40,14 +40,14 @@ const Variants = (props) => {
       <Row className="my-3">
         {/* map through the available sizes array for the style chosen */}
         <select className="col-6 mr-3 form-control">
-          {sizeArr.map((size) => {
-            return <option>{size}</option>;
+          {sizeArr.map((size, index) => {
+            return <option key={index}>{size}</option>;
           })}
         </select>
         {/* map through the available quantities array for the style chosen */}
         <select className="col-3 form-control">
-          {quantityArr.map((quantity) => {
-            return <option>{quantity}</option>;
+          {quantityArr.map((quantity, index) => {
+            return <option key={index} >{quantity}</option>;
           })}
         </select>
       </Row>

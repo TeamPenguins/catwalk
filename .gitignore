@@ -7,6 +7,7 @@ npm-debug.log
 node_modules/
 package-lock.json
 
+
 pids
 *.pid
 logs
@@ -24,6 +25,7 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 client/dist/bundle.js
+client/dist/bundle.js.map
 
 
 notes.js
