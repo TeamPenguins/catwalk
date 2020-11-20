@@ -1,18 +1,21 @@
 import React from 'react';
 import axios from 'axios';
-import {Card, Column} from 'react-bootstrap';
+import {Card, Column, Container} from 'react-bootstrap';
+import ComparisonModal from './ComparisonModal.jsx';
+import ActionButton from './ActionButton.jsx';
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productInfo: {},
-      styleInfo: {}
+      styleInfo: {},
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
     this.fetchAllInfo = this.fetchAllInfo.bind(this);
   }
+
   fetchProductInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}`)
       .then(productInfo => this.setState({productInfo: productInfo.data}))
@@ -32,6 +35,7 @@ class RelatedProductCard extends React.Component {
       this.fetchAllInfo(this.props.productId);
     }
   }
+
   componentDidMount() {
 
     this.fetchAllInfo(this.props.productId);
@@ -39,17 +43,20 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <Card
-        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
-        className="productCard"
-      >
-        <Card.Body>
-          <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
-          <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
-          <Card.Title>{this.state.productInfo.name}</Card.Title>
-          <Card.Text>${this.state.productInfo.default_price}</Card.Text>
-        </Card.Body>
-      </Card>
+      <Container>
+        <ActionButton actionButtonMethod={this.props.actionButtonMethod} />
+        <Card
+          onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
+          className="productCard"
+        >
+          <Card.Body>
+            <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
+            <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
+            <Card.Title>{this.state.productInfo.name}</Card.Title>
+            <Card.Text>${this.state.productInfo.default_price}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 }

@@ -13,19 +13,16 @@ class OutfitItemList extends React.Component {
       selectedProduct: {},
       outfitListIds: []
     };
-
-
     this.addToOutfit = this.addToOutfit.bind(this);
   }
   addToOutfit(id) {
-    if (!this.state.outfitListIds.includes(id)) {
+    //if outfitListIds does not have the new oriduct id, add it to the front of the list.
+    if (!this.state.outfitListIds.includes(id)) {  //specifiy  that it sis product id
       var newOutfitList = this.state.outfitListIds.slice();
       newOutfitList.unshift(id);
       this.setState({outfitListIds: newOutfitList });
     }
   }
-
-  //updates the components after selectedProduct has changed in App
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
       this.setState({selectedProduct: this.props.selectedProduct});
@@ -43,10 +40,11 @@ class OutfitItemList extends React.Component {
             <PlusCircle className='add' onClick={()=> this.addToOutfit(this.state.selectedProduct.id)}/>
           </Card>
           {
+            // //specify witch id
             this.state.outfitListIds.map(id => {
               return (
                 <RelatedProductCard productId={id}
-                  key={`OL${id}`}
+                  key={`${id}`}
                   productChangeMethod={this.addToOutfit}/>
               );
             })
