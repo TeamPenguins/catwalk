@@ -6,7 +6,7 @@ import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx'
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
 import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
-import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx'
+import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
 
 
 class App extends React.Component {
