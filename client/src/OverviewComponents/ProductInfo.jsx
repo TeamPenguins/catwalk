@@ -14,9 +14,9 @@ const ProductInfo = (props) => {
 
       <Col sm={4} className="product-features-list">
         <ul className="list-group list-group-flush">
-          {props.selectedProduct.features.map((currentFeature) => {
+          {props.selectedProduct.features.map((currentFeature, index) => {
             return (
-              <li className="list-group-item border-0 mb-n3">
+              <li key={index} className="list-group-item border-0 mb-n3">
                 <Check className="pr-1" size={32} />{currentFeature.value} {currentFeature.feature}
               </li>
             );
