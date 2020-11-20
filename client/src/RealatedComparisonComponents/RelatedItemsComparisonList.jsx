@@ -12,7 +12,7 @@ class RelatedItemsAndComparisonList extends React.Component {
     this.state = {
       relatedProductIds: [],
       selectedProduct: {},
-      style: {},
+      selectedProductStyles: {},
       showModal: false,
       comparedProductInfo: {},
       comparedProductStyleInfo: {},
@@ -21,7 +21,14 @@ class RelatedItemsAndComparisonList extends React.Component {
     this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.toggleModalView = this.toggleModalView.bind(this);
     this.updateComparedProductInfo = this.updateComparedProductInfo.bind(this);
+    this.updateSelectedProductState = this.updateSelectedProductState.bind(this);
 
+  }
+  updateSelectedProductState () {
+    this.setState({
+      selectedProductStyles: this.props.styles,
+      selectedProduct: this.props.selectedProduct,
+    });
   }
   toggleModalView () {
     this.setState({showModal: !this.state.showModal});
@@ -41,18 +48,22 @@ class RelatedItemsAndComparisonList extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
       this.fetchRelatedProducts(this.props.selectedProduct.id);
+      this.updateSelectedProductState();
     }
   }
   componentDidMount() {
     this.fetchRelatedProducts(this.props.selectedProduct.id);
+    this.updateSelectedProductState();
   }
 
   render() {
     return (
       <Container>
         <ComparisonModal
-          modalViewState={this.state.showModal}
           comparedProductInfo={this.state.comparedProductInfo}
+          comparedProductStyleInfo={this.state.comparedProductStyleInfo}
+          selectedProductInfo={this.state.selectedProduct}
+          modalViewState={this.state.showModal}
           actionButtonMethod={this.toggleModalView}
         />
         <CardDeck className="related productsList">
