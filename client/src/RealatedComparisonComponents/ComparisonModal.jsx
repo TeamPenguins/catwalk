@@ -27,7 +27,7 @@ class ComparisonModal extends React.Component {
       <Modal
         show={this.state.modalViewState}
         onHide={() => this.setState(this.props.actionButtonMethod())}>
-        <div>modal</div>
+
       </Modal>
     );
   }

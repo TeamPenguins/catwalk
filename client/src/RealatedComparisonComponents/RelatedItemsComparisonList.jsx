@@ -15,17 +15,22 @@ class RelatedItemsAndComparisonList extends React.Component {
       style: {},
       showModal: false,
       comparedProductInfo: {},
+      comparedProductStyleInfo: {},
     };
 
     this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.toggleModalView = this.toggleModalView.bind(this);
+    this.updateComparedProductInfo = this.updateComparedProductInfo.bind(this);
 
   }
   toggleModalView () {
     this.setState({showModal: !this.state.showModal});
   }
-  updateComparedProductInfo (newComparedProductInfo) {
-    this.setState({comparedProductInfo: newComparedProductInfo});
+  updateComparedProductInfo (comparedProductInfo, comparedProductStyleInfo) {
+    this.setState({
+      comparedProductInfo: comparedProductInfo,
+      comparedProductStyleInfo: comparedProductStyleInfo
+    });
   }
   fetchRelatedProducts(id) {
     axios.get(`http://3.21.164.220/products/${id}/related`)
@@ -57,7 +62,8 @@ class RelatedItemsAndComparisonList extends React.Component {
                 <RelatedProductCard productId={id}
                   productChangeMethod={this.props.productChangeMethod}
                   actionButtonMethod={this.toggleModalView}
-                  modalViewState={this.state.showModal}/>
+                  modalViewState={this.state.showModal}
+                  updateComparedProductMethod={this.updateComparedProductInfo}/>
               );
             })
           }

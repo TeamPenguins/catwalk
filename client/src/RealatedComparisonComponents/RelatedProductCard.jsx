@@ -35,16 +35,18 @@ class RelatedProductCard extends React.Component {
       this.fetchAllInfo(this.props.productId);
     }
   }
-
   componentDidMount() {
-
     this.fetchAllInfo(this.props.productId);
   }
 
   render() {
     return (
       <Container>
-        <ActionButton actionButtonMethod={this.props.actionButtonMethod} />
+        <ActionButton
+          actionButtonMethod={this.props.actionButtonMethod}
+          styleInfo={this.state.styleInfo}
+          productInfo={this.state.productInfo}
+          updateComparedProductMethod={this.props.updateComparedProductMethod}/>
         <Card
           onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
           className="productCard"

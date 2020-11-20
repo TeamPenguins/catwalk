@@ -4,9 +4,14 @@ import React from 'react';
 //exicutes that method on click
 
 // upper most parent components (card lists) will dictate which methods get called
-const ActionButton = ({actionButtonMethod}) => {
+const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
   return (
-    <div onClick={()=> actionButtonMethod()}>action</div>
+    <div onClick={() => {
+
+      updateComparedProductMethod(productInfo, styleInfo);
+      actionButtonMethod();
+    }
+    }>action</div>
   );
 };
 
