@@ -2,7 +2,10 @@
 
 
 /* ------------ PRODUCT OVERVIEW -----------*/
-
+.container {
+  max-height: 900px;
+  overflow: scroll;
+}
 
 
 

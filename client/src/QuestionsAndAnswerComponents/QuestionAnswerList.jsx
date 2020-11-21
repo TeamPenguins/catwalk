@@ -30,7 +30,7 @@ class QuestionAnswerList extends Component {
 
   render() {
     return (
-      <Container>
+      <Container >
         <Card>
           <Card.Body>
             <p>QUESTIONS {'&'} ANSWERS</p>
@@ -40,9 +40,9 @@ class QuestionAnswerList extends Component {
               </Form.Group>
             </Form>
             <Question productId = {this.props.selectedProduct.id} moreQuestions ={this.state.moreQuestions} key={this.props.selectedProduct.id}/>
-            <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
-            <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
           </Card.Body>
+          <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
+          <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
         </Card>
       </Container>
     );

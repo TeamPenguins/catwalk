@@ -42,7 +42,7 @@ class Answers extends Component {
     return (
       <p><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
         return (
-          <div>
+          <p>
             <p>
               <small>{singleAnswer.body}</small>
             </p>
@@ -61,7 +61,7 @@ class Answers extends Component {
                 Helpful? <Card.Link>Yes({singleAnswer.helpfulness})</Card.Link>
               </small>
             </p>
-          </div>
+          </p>
         );
       })}</p>
     );
