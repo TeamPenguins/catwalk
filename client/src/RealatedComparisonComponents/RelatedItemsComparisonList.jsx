@@ -10,10 +10,10 @@ class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      relatedProductIds: [],
+      relatedProductsIds: [],
       selectedProduct: {},
       selectedProductStyles: {},
-      showModal: false,
+      modalView: false,
       comparedProductInfo: {},
       comparedProductStyleInfo: {},
     };
@@ -24,14 +24,15 @@ class RelatedItemsAndComparisonList extends React.Component {
     this.updateSelectedProductState = this.updateSelectedProductState.bind(this);
 
   }
+  //this method shows/hides the product comparison modal
+  toggleModalView () {
+    this.setState({modalView: !this.state.modalView});
+  }
   updateSelectedProductState () {
     this.setState({
       selectedProductStyles: this.props.styles,
       selectedProduct: this.props.selectedProduct,
     });
-  }
-  toggleModalView () {
-    this.setState({showModal: !this.state.showModal});
   }
   updateComparedProductInfo (comparedProductInfo, comparedProductStyleInfo) {
     this.setState({
@@ -41,7 +42,7 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   fetchRelatedProducts(id) {
     axios.get(`http://3.21.164.220/products/${id}/related`)
-      .then(data => this.setState({relatedProductIds: data.data}))
+      .then(data => this.setState({relatedProductsIds: data.data}))
       .catch(/*console.error('error at fetchRelatedProducts')*/);
   }
   //updates the components after selectedProduct has changed in App
@@ -63,17 +64,18 @@ class RelatedItemsAndComparisonList extends React.Component {
           comparedProductInfo={this.state.comparedProductInfo}
           comparedProductStyleInfo={this.state.comparedProductStyleInfo}
           selectedProductInfo={this.state.selectedProduct}
-          modalViewState={this.state.showModal}
+          selectedProductStyles={this.state.selectedProductStyles}
+          modalViewState={this.state.modalView}
           actionButtonMethod={this.toggleModalView}
         />
         <CardDeck className="related productsList">
           {
-            this.state.relatedProductIds.map(id => {
+            this.state.relatedProductsIds.map(id => {
               return (
                 <RelatedProductCard productId={id}
                   productChangeMethod={this.props.productChangeMethod}
                   actionButtonMethod={this.toggleModalView}
-                  modalViewState={this.state.showModal}
+                  modalViewState={this.state.modalView}
                   updateComparedProductMethod={this.updateComparedProductInfo}/>
               );
             })

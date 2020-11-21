@@ -20,7 +20,7 @@ class App extends React.Component {
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }
-  //find the ratings of item method.
+  //updates currently selected product when a RelatedProductCard is clicked
   handleProductChange(productInfo, stylesInfo) {
     this.setState({selectedProduct: productInfo});
     this.setState({selectedPoductStyles: stylesInfo});
