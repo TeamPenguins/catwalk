@@ -18,8 +18,13 @@ const Variants = (props) => {
     if (stylesAvail[i].style_id === Number(selection)) {
       console.log(stylesAvail[i]);
       styleClicked = stylesAvail[i];
+      props.updateStyleOptions(styleClicked);
     }
   }
+
+
+
+
 
   // skus are the nested objects that contain the size and quantity available for the selected style
   var skus = styleClicked.skus;
