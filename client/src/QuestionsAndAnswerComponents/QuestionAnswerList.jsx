@@ -30,10 +30,10 @@ class QuestionAnswerList extends Component {
 
   render() {
     return (
-      <Container >
+      <Container>
         <Card>
-          <Card.Body>
-            <p>QUESTIONS {'&'} ANSWERS</p>
+          <Card.Body >
+            <div>QUESTIONS {'&'} ANSWERS</div>
             <Form>
               <Form.Group>
                 <Form.Control type='text' placeholder = 'HAVE A QUESTION? SEARCH FOR AN ANSWER...'/>

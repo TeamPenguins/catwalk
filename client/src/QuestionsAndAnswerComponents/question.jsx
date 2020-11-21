@@ -51,7 +51,7 @@ class Question extends Component {
           <div>
             <Row>
               <Col md={4}>
-                <p><strong>Q: {singleQuestion.question_body}</strong></p>
+                <div><strong>Q: {singleQuestion.question_body}</strong></div>
               </Col>
               <Col md={{span: 4, offset: 4}}>
                 <small>Helpful?</small>
@@ -61,8 +61,8 @@ class Question extends Component {
             </Row>
             <Row>
               <Col>
-                <p><Answers questionId = {singleQuestion.question_id}/></p>
-                <p><Card.Link><small>LOAD MORE ANSWERS</small></Card.Link></p>
+                <div><Answers questionId = {singleQuestion.question_id}/></div>
+                <div><Card.Link><small>LOAD MORE ANSWERS</small></Card.Link></div>
               </Col>
             </Row>
           </div>
