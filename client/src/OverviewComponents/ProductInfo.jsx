@@ -14,8 +14,12 @@ const ProductInfo = (props) => {
 
       <Col sm={4} className="product-features-list">
         <ul className="list-group list-group-flush">
-          {props.selectedProduct.features.map((item) => {
-            return <li className="list-group-item border-0 mb-n3"><Check className="pr-1" size={32} />{item.value} {item.feature}</li>;
+          {props.selectedProduct.features.map((currentFeature, index) => {
+            return (
+              <li key={index} className="list-group-item border-0 mb-n3">
+                <Check className="pr-1" size={32} />{currentFeature.value} {currentFeature.feature}
+              </li>
+            );
           })}
         </ul>
       </Col>

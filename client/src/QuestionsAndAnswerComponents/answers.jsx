@@ -40,7 +40,7 @@ class Answers extends Component {
 
   render() {
     return (
-      <div><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
+      <p><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
         return (
           <div>
             <p>
@@ -63,7 +63,7 @@ class Answers extends Component {
             </p>
           </div>
         );
-      })}</div>
+      })}</p>
     );
   }
 }
