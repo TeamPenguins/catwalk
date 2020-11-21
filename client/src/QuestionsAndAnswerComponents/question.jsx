@@ -1,23 +1,29 @@
 import React, {Component} from 'react';
 import Answers from './answers.jsx';
 import { Card, Container, Row, Col } from 'react-bootstrap';
+import QuestionAnswerList from './QuestionAnswerList.jsx';
 
 class Question extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      hasMoreQuestions: true,
       questions: [],
     };
     this.fetchQuestionList = this.fetchQuestionList.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   fetchQuestionList() {
 
-    fetch(`http://3.21.164.220/qa/questions/?product_id=${this.props.productId}&count=4`)
+    fetch(`http://3.21.164.220/qa/questions/?product_id=${this.props.productId}&count=20`)
       .then(response => response.json())
       .then((questionList) => {
+        if (questionList.results.length < 20) {
+          this.setState({
+            hasMoreQuestions: false,
+          });
+        }
         this.setState({
           questions: questionList.results,
         });
@@ -40,7 +46,7 @@ class Question extends Component {
 
   render() {
     return (
-      <div>{this.state.questions.map((singleQuestion) => {
+      <div>{this.state.questions.slice(0, this.props.moreQuestions).map((singleQuestion) => {
         return (
           <div>
             <Row>
@@ -56,6 +62,7 @@ class Question extends Component {
             <Row>
               <Col>
                 <p><Answers questionId = {singleQuestion.question_id}/></p>
+                <p><Card.Link><small>LOAD MORE ANSWERS</small></Card.Link></p>
               </Col>
             </Row>
           </div>
