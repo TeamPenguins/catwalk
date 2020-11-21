@@ -22,10 +22,6 @@ const Variants = (props) => {
     }
   }
 
-
-
-
-
   // skus are the nested objects that contain the size and quantity available for the selected style
   var skus = styleClicked.skus;
 
@@ -41,7 +37,7 @@ const Variants = (props) => {
 
 
   return (
-    <form className="">
+    <form>
       <Row className="my-3">
         {/* map through the available sizes array for the style chosen */}
         <select className="col-6 mr-3 form-control">
