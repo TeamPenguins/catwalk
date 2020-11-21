@@ -1,16 +1,17 @@
 
 import React, { Component } from 'react';
 import NavBar from './NavBar.jsx';
+import axios from 'axios';
 import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
 import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
-import { GetReviewMetaData, GetReviews } from '..Utilities/axiosHelpers.js';
+import { GetReviews, GetReviewMetaData, } from './Utilities/axiosHelpers';
 
 
-class App extends React.Component {
+class App extends Component {
   constructor () {
     super();
     this.state = {
@@ -18,35 +19,40 @@ class App extends React.Component {
       selectedProduct: Products[0],
       selectedPoductStyles: productStyles,
       reviews: [],
-      reviewsMetaData: {},
+      reviewMetaData: {
+        'product_id': '1',
+        'ratings': {
+          '1': 1,
+          '2': 2,
+          '3': 22,
+          '4': 7,
+          '5': 7
+        },
+        'recommended': {
+          '0': 14,
+          '1': 24,
+          'null': 1
+        },
+        'characteristics': {
+          'Fit': {
+            'id': 1,
+            'value': '2.2069'
+          },
+          'Length': {
+            'id': 2,
+            'value': '2.2500'
+          },
+          'Comfort': {
+            'id': 3,
+            'value': '2.4500'
+          },
+          'Quality': {
+            'id': 4,
+            'value': '2.4000'
+          }
+        }},
     };
     this.handleProductChange = this.handleProductChange.bind(this);
-  }
-
-  componentDidMount() {
-    Promise.all([
-      GetReviews(this.state.selectedProduct.id),
-      GetReviewMetaData(this.state.selectedProduct.id)
-    ])
-      .then((reviewData) => this.setState({
-        reviews: reviewData[0].data.results,
-        reviewsMetaData: reviewData[1].data.results,
-      }))
-      .catch(console.log());
-  }
-
-  componentDidUpdate(prevState) {
-    if (prevState.selectedProduct.id !== this.state.selectedProduct.id ) {
-      Promise.all([
-        GetReviews(this.state.selectedProduct.id),
-        GetReviewMetaData(this.state.selectedProduct.id)
-      ])
-        .then((reviewData) => this.setState({
-          reviews: reviewData[0].data.results,
-          reviewsMetaData: reviewData[1].data.results,
-        }))
-        .catch(console.log());
-    }
   }
 
   // find the ratings of item method.
@@ -57,12 +63,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        {/* <NavBar />
+        <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><OutfitItemList selectedProduct={this.state.selectedProduct}/></div>
-        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div> */}
-        <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewsMetaData={this.state.reviewsMetaData}/></div>
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
+        <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewMetaData={this.state.reviewMetaData}/></div>
       </div>
     );
   }

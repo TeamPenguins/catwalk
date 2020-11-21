@@ -1,5 +1,6 @@
 // Returns a rating as a string rounded to the nearest 0.25
 const CalculateRating = (ratings) => {
+  console.log(ratings);
   return (
     Math.round(
       // iterate over the keys of ratings and multiply

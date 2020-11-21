@@ -1,34 +1,31 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import StarRating from '../Utilities/StarRating.jsx';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import StarRating from '../../Utilities/StarRating.jsx';
+import PercentRecommended from './Recommended.jsx';
+import RatingBreakdown from './RatingBreakdown.jsx';
 
-class ProductBreakdown extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   reviews: [],
-    //   productId: null,
-    //   reviewsMetaData: {},
-    // };
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate(prevProps) {
-
-  }
-
-  render() {
-    return (
-      <div className="row">
-        <div className="col-4">
-          <StarRating ratings={this.props.reviewMetaData.ratings} />
-        </div>
-      </div>
-    );
-  }
-}
+// recieves reviewsMetaData as props
+const ProductBreakdown = (props) => {
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <StarRating ratings={props.reviewMetaData.ratings} includeNumber={1}/>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <PercentRecommended recommended={props.reviewMetaData.recommended} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <RatingBreakdown ratings={props.reviewMetaData.ratings} />
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default ProductBreakdown;
+
