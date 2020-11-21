@@ -7,7 +7,7 @@ import Gallery from './Gallery.jsx';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStyle: '', selectedStyleImages: [] };
+    this.state = { selectedStyle: '' };
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
     this.updateStyleOptions = this.updateStyleOptions.bind(this);
     this.selectedImages = [];
@@ -28,7 +28,7 @@ class ProductDetails extends React.Component {
     return (
       <Row>
         <Gallery styles={this.props.styles} images={this.selectedImages}/>
-        <Col sm={4} className="my-5" id={this.selectedImages}>
+        <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
             <div className="my-1">
