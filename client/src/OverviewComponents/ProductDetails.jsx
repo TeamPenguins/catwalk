@@ -27,7 +27,7 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <Row>
-        <Gallery styles={this.props.styles}/>
+        <Gallery styles={this.props.styles} images={this.selectedImages}/>
         <Col sm={4} className="my-5" id={this.selectedImages}>
           {/* pull in the star rating component and link to ratings section below */}
           <div>
