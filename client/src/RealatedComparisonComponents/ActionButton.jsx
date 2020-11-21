@@ -6,12 +6,12 @@ import React from 'react';
 // upper most parent components (card lists) will dictate which methods get called
 const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
   return (
-    <div onClick={() => {
+    <button onClick={() => {
 
       updateComparedProductMethod(productInfo, styleInfo);
       actionButtonMethod();
     }
-    }>action</div>
+    }>action</button>
   );
 };
 
