@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-// import { Star } from 'react-bootstrap-icons';
-import MetaProductThree from '../dummyData.js';
 import CalculateRating from './calculateRating.js';
 import StarList from './StarList.jsx';
 
@@ -14,24 +13,18 @@ class StarRating extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://3.21.164.220/reviews/meta/?product_id=${this.props.productId}`)
-      .then(metaData =>
-        this.setState({starRating: CalculateRating(metaData.data.ratings)})
-      )
-      .catch(console.log());
+    this.setState({starRating: CalculateRating(metaData.data.ratings)});
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.starRating !== this.props.starRating) {
-      this.setState({starRating: this.props.starRating});
+    if (prevProps.productId !== this.props.productId) {
+      this.setState({starRating: CalculateRating(this.props.ratings)});
     }
   }
 
   render() {
     return (
-      <div>
-        <StarList rating={this.state.starRating.toString()} />
-      </div>
+      <StarList rating={this.state.starRating} />
     );
   }
 }

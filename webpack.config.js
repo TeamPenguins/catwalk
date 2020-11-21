@@ -15,8 +15,12 @@ module.exports = {
     publicPath: '/client/dist/',
     open: true,
     clientLogLevel: 'silent',
-    port: 9000
+    port: 9000,
+    watchOptions: {
+      poll: true
+    }
   },
+  watch: true,
   module: {
     rules: [
       {

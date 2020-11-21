@@ -3,39 +3,65 @@ import axios from 'axios';
 import { ReviewsForProductFive } from '../dummyData.js';
 import ReviewsList from './components/ReviewsList.jsx';
 import StarRating from '../Utilities/StarRating.jsx';
+import { GetReviewMetaData, GetReviews } from '..Utilities/axiosHelpers.js';
 
 class RatingsAndReviews extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      reviews: [],
-      numberRating: 0,
-    };
-    this.ratingChange = this.ratingChange.bind(this);
+    // this.state = {
+
+    // };
   }
 
-  componentDidMount() {
-    // Move axios request outside of componentDidMount for readibility
-    axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
-      .then(data => { // Going from data to reviewsList to be more descriptive about what we are getting back from the get request
-        this.setState({reviews: data.data.results});
-      })
-      .catch(console.log());
-  }
+  // componentDidMount() {
+  //   Promise.all([
+  //     GetReviews(this.props.productId),
+  //     GetReviewMetaData(this.props.productId)
+  //   ])
+  //     .then((reviewData) => this.setState({
+  //       reviews: reviewData[0].data.results,
+  //       reviewsMetaData: reviewData[1].data.results,
+  //       productId: this.props.productId
+  //     }))
+  //     .catch(console.log());
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.productId !== this.props.productId ) {
-      axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
-        .then(data =>
-          this.setState({reviews: data.data.results})
-        )
-        .catch(console.log());
-    }
-  }
+  // // Move axios request outside of componentDidMount for readibility
+  // axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
+  //   .then(reviews => { // Going from data to reviewsList to be more descriptive about what we are getting back from the get request
+  //     this.setState({
+  //       reviews: reviews.data.results,
+  //       productId: this.props.productId
+  //     });
+  //   })
+  //   .catch(console.log());
 
-  ratingChange(rating) {
-    this.setState({rating: rating});
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.productId !== this.props.productId ) {
+
+  //   }
+  //   //   Promise.all([
+  //   //     GetReviews(this.props.productId),
+  //   //     GetReviewMetaData(this.props.productId)
+  //   //   ])
+  //   //     .then((reviewData) => this.setState({
+  //   //       reviews: reviewData[0].data.results,
+  //   //       reviewsMetaData: reviewData[1].data.results,
+  //   //       productId: this.props.productId
+  //   //     }))
+  //   //     .catch(console.log());
+  //   // }
+
+  //   // if (prevProps.productId !== this.props.productId ) {
+  //   //   axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
+  //   //     .then(data =>
+  //   //       this.setState({
+  //   //         reviews: data.data.results,
+  //   //         productId: this.props.productId
+  //   //       })
+  //   //     )
+  //   //     .catch(console.log());
+  //   // }
+  // }
 
   render() {
     return (
@@ -47,10 +73,10 @@ class RatingsAndReviews extends Component {
         </div>
         <div className="row">
           <div className="col-4">
-            <StarRating productId={this.props.productId} />
+            <ProductBreakdown reviewsMetaData={this.props.reviewsMetaData} />
           </div>
           <div className="col-8">
-            <ReviewsList reviews={this.state.reviews} />
+            <ReviewsList reviews={this.props.reviews} />
             <div className="row">
               <div className="col">
                 {this.state.reviews.length > 0 ? (

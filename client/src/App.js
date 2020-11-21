@@ -7,6 +7,7 @@ import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedIt
 import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
+import { GetReviewMetaData, GetReviews } from '..Utilities/axiosHelpers.js';
 
 
 class App extends React.Component {
@@ -15,12 +16,40 @@ class App extends React.Component {
     this.state = {
       products: Products,
       selectedProduct: Products[0],
-      selectedPoductStyles: productStyles
-
+      selectedPoductStyles: productStyles,
+      reviews: [],
+      reviewsMetaData: {},
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }
-  //find the ratings of item method.
+
+  componentDidMount() {
+    Promise.all([
+      GetReviews(this.state.selectedProduct.id),
+      GetReviewMetaData(this.state.selectedProduct.id)
+    ])
+      .then((reviewData) => this.setState({
+        reviews: reviewData[0].data.results,
+        reviewsMetaData: reviewData[1].data.results,
+      }))
+      .catch(console.log());
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.selectedProduct.id !== this.state.selectedProduct.id ) {
+      Promise.all([
+        GetReviews(this.state.selectedProduct.id),
+        GetReviewMetaData(this.state.selectedProduct.id)
+      ])
+        .then((reviewData) => this.setState({
+          reviews: reviewData[0].data.results,
+          reviewsMetaData: reviewData[1].data.results,
+        }))
+        .catch(console.log());
+    }
+  }
+
+  // find the ratings of item method.
   handleProductChange(productInfo, stylesInfo) {
     this.setState({selectedProduct: productInfo});
     this.setState({selectedPoductStyles: stylesInfo});
@@ -28,12 +57,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <NavBar />
+        {/* <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
         <div><OutfitItemList selectedProduct={this.state.selectedProduct}/></div>
-        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
-        <div><RatingsAndReviews productId={this.state.selectedProduct.id} /></div>
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div> */}
+        <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewsMetaData={this.state.reviewsMetaData}/></div>
       </div>
     );
   }
