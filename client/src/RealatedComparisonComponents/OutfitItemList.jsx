@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import axios from 'axios';
-import {Container, Card, CardDeck} from 'react-bootstrap';
+import {Container, Card, CardDeck, Row} from 'react-bootstrap';
 import {PlusCircle} from 'react-bootstrap-icons';
 
 //onslide if index is at max, turn off the button.
@@ -44,24 +44,27 @@ class OutfitItemList extends React.Component {
 
   render() {
     return (
-      <Container >
-        <CardDeck className="outfit productsList">
-          <Card className="productCard">
-            <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
-          </Card>
-          {
-            // map through the id list of user selected products
-            this.state.outfitListIds.map(id => {
-              return (
-                <RelatedProductCard
-                  productId={id}
-                  key={`${id}`}
-                  productChangeMethod={()=> null}
-                  actionButtonMethod={this.removeFromOutfitList}/>
-              );
-            })
-          }
-        </CardDeck>
+      <Container>
+        <h6>YOUR OUTFIT</h6>
+        <Row >
+          <CardDeck className="outfit productsList">
+            <Card className="productCard">
+              <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
+            </Card>
+            {
+              // map through the id list of user selected products
+              this.state.outfitListIds.map(id => {
+                return (
+                  <RelatedProductCard
+                    productId={id}
+                    key={`${id}`}
+                    productChangeMethod={()=> null}
+                    actionButtonMethod={this.removeFromOutfitList}/>
+                );
+              })
+            }
+          </CardDeck>
+        </Row>
       </Container>
     );
   }

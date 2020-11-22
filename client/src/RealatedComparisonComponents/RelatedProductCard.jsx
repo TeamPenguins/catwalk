@@ -14,6 +14,12 @@ class RelatedProductCard extends React.Component {
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
     this.fetchAllInfo = this.fetchAllInfo.bind(this);
+    this.grabPreviewImage = this.grabPreviewImage.bind(this);
+  }
+  grabPreviewImage () {
+    var src = this.state.styleInfo.results;
+    var photo = src ? src[0].photos[0].url : 'https://via.placeholder.com/150';
+    return photo === null ? 'https://via.placeholder.com/150' : photo;
   }
 
   fetchProductInfo(id) {
@@ -51,8 +57,11 @@ class RelatedProductCard extends React.Component {
           onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
           className="productCard"
         >
+
           <Card.Body>
-            <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
+            <Card.Img className="card-img"
+              varient="top"
+              src={this.grabPreviewImage()}/>
             <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
             <Card.Title>{this.state.productInfo.name}</Card.Title>
             <Card.Text>${this.state.productInfo.default_price}</Card.Text>

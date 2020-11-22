@@ -6,7 +6,7 @@ import React from 'react';
 // upper most parent components (card lists) will dictate which methods get called
 const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
   return (
-    <button onClick={() => {
+    <button className="action" onClick={() => {
       if (updateComparedProductMethod) {
         updateComparedProductMethod(productInfo, styleInfo);
       }
