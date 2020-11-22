@@ -31,19 +31,19 @@ class QuestionAnswerList extends Component {
   render() {
     return (
       <Container>
+        <div>QUESTIONS {'&'} ANSWERS</div>
+        <Form>
+          <Form.Group>
+            <Form.Control type='text' placeholder = 'HAVE A QUESTION? SEARCH FOR AN ANSWER...'/>
+          </Form.Group>
+        </Form>
         <Card>
           <Card.Body >
-            <div>QUESTIONS {'&'} ANSWERS</div>
-            <Form>
-              <Form.Group>
-                <Form.Control type='text' placeholder = 'HAVE A QUESTION? SEARCH FOR AN ANSWER...'/>
-              </Form.Group>
-            </Form>
             <Question productId = {this.props.selectedProduct.id} moreQuestions ={this.state.moreQuestions} key={this.props.selectedProduct.id}/>
           </Card.Body>
-          <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
-          <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
         </Card>
+        <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
+        <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
       </Container>
     );
   }
