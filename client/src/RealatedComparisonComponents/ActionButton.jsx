@@ -7,9 +7,10 @@ import React from 'react';
 const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
   return (
     <button onClick={() => {
-
-      updateComparedProductMethod(productInfo, styleInfo);
-      actionButtonMethod();
+      if (updateComparedProductMethod) {
+        updateComparedProductMethod(productInfo, styleInfo);
+      }
+      actionButtonMethod(productInfo.id);
     }
     }>action</button>
   );

@@ -15,8 +15,13 @@ class OutfitItemList extends React.Component {
     };
     this.addToOutfitList = this.addToOutfitList.bind(this);
     this.updateSelectedProduct = this.updateSelectedProduct.bind(this);
+    this.removeFromOutfitList = this.removeFromOutfitList.bind(this);
   }
-
+  removeFromOutfitList(outfitItemId) {
+    var newOutfitList = this.state.outfitListIds.slice();
+    newOutfitList.splice(newOutfitList.indexOf(outfitItemId), 1);
+    this.setState({outfitListIds: newOutfitList });
+  }
   addToOutfitList(selectedProductId) {
     //add selected product id if its not currently in the outfitlist
     if (!this.state.outfitListIds.includes(selectedProductId)) {
@@ -51,7 +56,8 @@ class OutfitItemList extends React.Component {
                 <RelatedProductCard
                   productId={id}
                   key={`${id}`}
-                  productChangeMethod={()=> null}/>
+                  productChangeMethod={()=> null}
+                  actionButtonMethod={this.removeFromOutfitList}/>
               );
             })
           }
