@@ -63,7 +63,7 @@ class ComparisonModal extends React.Component {
   }
   componentDidUpdate() {
     if (this.props.modalViewState !== this.state.modalViewState) {
-      debugger;
+
       this.updateProductInfoInState();
       this.updateFeaturesInState(this.props.selectedProductInfo.features, this.props.comparedProductInfo.features);
       this.toggleModalViewState();
@@ -76,24 +76,34 @@ class ComparisonModal extends React.Component {
         show={this.state.modalViewState}
         onHide={() => this.setState(this.props.actionButtonMethod())}>
         <Modal.Body>
-          <h6>COMPARING</h6>
+          <h6 className="align-center">COMPARING</h6>
           <Row>
-            <Col>product1</Col>
-            <Col>product2</Col>
-            {/*
-
-            findAllFeatureNames(selectedProduct.features, comparedProductInfo.features)
-            create a col, map through allFeatures state, create a row for each, check if current
-
-            remap product info for both products. combine their keys.
-            map through the combined keys. creating one row at a time
-
-            map through and apply checks for product 1
-            map through and display feature names,
-            map through and apply values for product 2
+            <Col className="align-left"><h6>{this.state.selectedProduct.name}</h6></Col>
+            <Col></Col>
+            <Col className="align-right"><h6>{this.state.comparedProductInfo.name}</h6></Col>
+          </Row>
+          {
+            this.state.allFeatureNames.map(feature => {
+              return (
+                <Row>
+                  <Col className="align-left">{this.state.selectedProductFeatures[feature]}</Col>
+                  <Col className="align-center">{feature}</Col>
+                  <Col className="align-right">{this.state.comparedProductFeatures[feature]}</Col>
+                </Row>
+              );
+            })
+          }
+          {/*
+              map through allFeatureNames,
+              each iteration create a row
+                inside will be three columns
+                  if the current feature name is a key in selected object features,
+                  column one will be the value or checkmark
+                second column will be the current feature name
+                  if the curent feature name is  a key in compared product featurees
+                    third column will be its value or checkmark
             */}
 
-          </Row>
           {
 
           }
