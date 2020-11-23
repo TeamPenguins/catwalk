@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Question from './question.jsx';
+import Question from './Question.jsx';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 
 class QuestionAnswerList extends Component {
@@ -31,19 +31,19 @@ class QuestionAnswerList extends Component {
   render() {
     return (
       <Container>
+        <div>QUESTIONS {'&'} ANSWERS</div>
+        <Form>
+          <Form.Group>
+            <Form.Control type='text' placeholder = 'HAVE A QUESTION? SEARCH FOR AN ANSWER...'/>
+          </Form.Group>
+        </Form>
         <Card>
-          <Card.Body>
-            <p>QUESTIONS {'&'} ANSWERS</p>
-            <Form>
-              <Form.Group>
-                <Form.Control type='text' placeholder = 'HAVE A QUESTION? SEARCH FOR AN ANSWER...'/>
-              </Form.Group>
-            </Form>
+          <Card.Body >
             <Question productId = {this.props.selectedProduct.id} moreQuestions ={this.state.moreQuestions} key={this.props.selectedProduct.id}/>
-            <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
-            <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
           </Card.Body>
         </Card>
+        <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
+        <Button variant="outline-secondary"><strong> ADD A QUESTION + </strong></Button>
       </Container>
     );
   }
