@@ -3,6 +3,7 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 import axios from 'axios';
 import {Container, Card, CardDeck, Row} from 'react-bootstrap';
 import {PlusCircle} from 'react-bootstrap-icons';
+import unique from '../Utilities/unique.js';
 
 //onslide if index is at max, turn off the button.
 
@@ -16,18 +17,32 @@ class OutfitItemList extends React.Component {
     this.addToOutfitList = this.addToOutfitList.bind(this);
     this.updateSelectedProduct = this.updateSelectedProduct.bind(this);
     this.removeFromOutfitList = this.removeFromOutfitList.bind(this);
+    this.updateOutFitList = this.updateOutFitList.bind(this);
+    this.checkForExistingOutfitList = this.checkForExistingOutfitList.bind(this);
+  }
+  checkForExistingOutfitList() {
+    var existingOutfitlist = localStorage.getItem('OutfitListIds');
+    console.log(existingOutfitlist);
+    return existingOutfitlist ? existingOutfitlist.split(',') : [];
+  }
+  updateOutFitList(newOutfitList) {
+    newOutfitList = unique(newOutfitList);
+    localStorage.setItem('OutfitListIds', newOutfitList);
+    this.setState({outfitListIds: newOutfitList});
   }
   removeFromOutfitList(outfitItemId) {
     var newOutfitList = this.state.outfitListIds.slice();
-    newOutfitList.splice(newOutfitList.indexOf(outfitItemId), 1);
-    this.setState({outfitListIds: newOutfitList });
+    //item ids are stored as strings, so I needed to convert the id
+    var itemToRemove = newOutfitList.indexOf(String(outfitItemId));
+    newOutfitList.splice(itemToRemove, 1);
+    this.updateOutFitList(newOutfitList);
   }
   addToOutfitList(selectedProductId) {
     //add selected product id if its not currently in the outfitlist
     if (!this.state.outfitListIds.includes(selectedProductId)) {
       var newOutfitList = this.state.outfitListIds.slice();
       newOutfitList.unshift(selectedProductId);
-      this.setState({outfitListIds: newOutfitList });
+      this.updateOutFitList(newOutfitList);
     }
   }
   updateSelectedProduct() {
@@ -40,6 +55,7 @@ class OutfitItemList extends React.Component {
   }
   componentDidMount() {
     this.updateSelectedProduct();
+    this.setState({outfitListIds: this.checkForExistingOutfitList()});
   }
 
   render() {

@@ -4,8 +4,6 @@ import ComparisonModal from './ComparisonModal.jsx';
 import axios from 'axios';
 import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
 
-//onslide if index is at max, turn off the button.
-
 class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
     super(props);
@@ -28,12 +26,14 @@ class RelatedItemsAndComparisonList extends React.Component {
   toggleModalView () {
     this.setState({modalView: !this.state.modalView});
   }
+  //updates state to reflect with what is displayed in overview
   updateSelectedProductState () {
     this.setState({
       selectedProductStyles: this.props.styles,
       selectedProduct: this.props.selectedProduct,
     });
   }
+  //updates state with the product features needed for the comparison modal
   updateComparedProductInfo (comparedProductInfo, comparedProductStyleInfo) {
     this.setState({
       comparedProductInfo: comparedProductInfo,
@@ -85,7 +85,6 @@ class RelatedItemsAndComparisonList extends React.Component {
           </CardDeck>
         </Row>
       </Container>
-
     );
   }
 }
