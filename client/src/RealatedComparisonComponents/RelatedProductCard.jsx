@@ -60,9 +60,9 @@ class RelatedProductCard extends React.Component {
 
           <Card.Body>
             <Card.Img className="card-img"
-              varient="top"
+
               src={this.grabPreviewImage()}/>
-            <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
+            <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Title>{this.state.productInfo.name}</Card.Title>
             <Card.Text>${this.state.productInfo.default_price}</Card.Text>
           </Card.Body>

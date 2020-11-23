@@ -64,9 +64,13 @@ class OutfitItemList extends React.Component {
         <h6>YOUR OUTFIT</h6>
         <Row >
           <CardDeck className="outfit productsList">
-            <Card className="productCard">
-              <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
-            </Card>
+            <Container>
+              <Card className="productCard">
+                <Card.Body>
+                  <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
+                </Card.Body>
+              </Card>
+            </Container>
             {
               // map through the id list of user selected products
               this.state.outfitListIds.map(id => {
