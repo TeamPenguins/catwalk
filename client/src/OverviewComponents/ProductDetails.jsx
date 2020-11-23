@@ -7,10 +7,9 @@ import Gallery from './Gallery.jsx';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStyle: '' };
+    this.state = { selectedStyle: 0, indexOfSelectedStyle: 0, selectedImages: this.props.styles.results[0].photos };
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
     this.updateStyleOptions = this.updateStyleOptions.bind(this);
-    this.selectedImages = [];
   }
 
   onThumbnailClick(event) {
@@ -19,15 +18,16 @@ class ProductDetails extends React.Component {
     });
   }
 
-  updateStyleOptions(styleClicked) {
-    this.selectedImages = styleClicked.photos;
+  updateStyleOptions(styleClicked, indOfStyleClicked) {
+    this.state.selectedImages = styleClicked.photos;
+    this.state.indexOfSelectedStyle = indOfStyleClicked;
   }
-
 
   render() {
     return (
       <Row>
-        <Gallery styles={this.props.styles} images={this.selectedImages}/>
+        {/* <Gallery styles={this.props.styles} mainImages={this.state.selectedImages}/> */}
+        <Gallery styles={this.props.styles} mainImages={this.props.styles.results[this.state.indexOfSelectedStyle].photos}/>
         <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
@@ -51,13 +51,13 @@ class ProductDetails extends React.Component {
             <Row className="my-2" style={{ maxWidth: 300 }} >
               {/* map through the styles (results arr) and output an image tag for each */}
               {this.props.styles.results.map((style, index) => {
-                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} value='MONKEY' src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
               })}
             </Row>
           </div>
 
           {/* size/quantity component */}
-          <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle} updateStyleOptions={this.updateStyleOptions} />
+          <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle} updateStyleOptions={this.updateStyleOptions} selectedProduct={this.props.selectedProduct} />
 
         </Col>
       </Row>

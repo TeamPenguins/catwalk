@@ -11,7 +11,7 @@ const Gallery = (props) => {
   };
 
   // if a style hasn't been selected, use the first set of images
-  const allStylePhotos = (props.images.length === 0) ? props.styles.results[0].photos : props.images;
+  const allStylePhotos = props.mainImages;
 
   // split the all the style's photos up into individual arrays for the main images and the thumbnails
   var thumbnailsArr = [];
