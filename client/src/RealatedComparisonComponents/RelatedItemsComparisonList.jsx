@@ -59,28 +59,31 @@ class RelatedItemsAndComparisonList extends React.Component {
 
   render() {
     return (
-      <Container>
-        <ComparisonModal
-          comparedProductInfo={this.state.comparedProductInfo}
-          comparedProductStyleInfo={this.state.comparedProductStyleInfo}
-          selectedProductInfo={this.state.selectedProduct}
-          selectedProductStyles={this.state.selectedProductStyles}
-          modalViewState={this.state.modalView}
-          actionButtonMethod={this.toggleModalView}
-        />
-        <CardDeck className="related productsList">
-          {
-            this.state.relatedProductsIds.map(id => {
-              return (
-                <RelatedProductCard productId={id}
-                  productChangeMethod={this.props.productChangeMethod}
-                  actionButtonMethod={this.toggleModalView}
-                  modalViewState={this.state.modalView}
-                  updateComparedProductMethod={this.updateComparedProductInfo}/>
-              );
-            })
-          }
-        </CardDeck>
+      <Container >
+        <h6>RELATED PRODUCTS</h6>
+        <Row>
+          <ComparisonModal
+            comparedProductInfo={this.state.comparedProductInfo}
+            comparedProductStyleInfo={this.state.comparedProductStyleInfo}
+            selectedProductInfo={this.state.selectedProduct}
+            selectedProductStyles={this.state.selectedProductStyles}
+            modalViewState={this.state.modalView}
+            actionButtonMethod={this.toggleModalView}
+          />
+          <CardDeck className="related productsList">
+            {
+              this.state.relatedProductsIds.map(id => {
+                return (
+                  <RelatedProductCard productId={id}
+                    productChangeMethod={this.props.productChangeMethod}
+                    actionButtonMethod={this.toggleModalView}
+                    modalViewState={this.state.modalView}
+                    updateComparedProductMethod={this.updateComparedProductInfo}/>
+                );
+              })
+            }
+          </CardDeck>
+        </Row>
       </Container>
 
     );
