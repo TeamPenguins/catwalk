@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import axios from 'axios';
-import {Container, Card, CardDeck} from 'react-bootstrap';
+import {Container, Card, CardDeck, Row} from 'react-bootstrap';
 import {PlusCircle} from 'react-bootstrap-icons';
 
 //onslide if index is at max, turn off the button.
@@ -13,45 +13,58 @@ class OutfitItemList extends React.Component {
       selectedProduct: {},
       outfitListIds: []
     };
-
-
-    this.addToOutfit = this.addToOutfit.bind(this);
+    this.addToOutfitList = this.addToOutfitList.bind(this);
+    this.updateSelectedProduct = this.updateSelectedProduct.bind(this);
+    this.removeFromOutfitList = this.removeFromOutfitList.bind(this);
   }
-  addToOutfit(id) {
-    if (!this.state.outfitListIds.includes(id)) {
+  removeFromOutfitList(outfitItemId) {
+    var newOutfitList = this.state.outfitListIds.slice();
+    newOutfitList.splice(newOutfitList.indexOf(outfitItemId), 1);
+    this.setState({outfitListIds: newOutfitList });
+  }
+  addToOutfitList(selectedProductId) {
+    //add selected product id if its not currently in the outfitlist
+    if (!this.state.outfitListIds.includes(selectedProductId)) {
       var newOutfitList = this.state.outfitListIds.slice();
-      newOutfitList.unshift(id);
+      newOutfitList.unshift(selectedProductId);
       this.setState({outfitListIds: newOutfitList });
     }
   }
-
-  //updates the components after selectedProduct has changed in App
+  updateSelectedProduct() {
+    this.setState({selectedProduct: this.props.selectedProduct});
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
-      this.setState({selectedProduct: this.props.selectedProduct});
+      this.updateSelectedProduct();
     }
   }
   componentDidMount() {
-    this.setState({selectedProduct: this.props.selectedProduct});
+    this.updateSelectedProduct();
   }
 
   render() {
     return (
-      <Container >
-        <CardDeck className="outfit productsList">
-          <Card className="productCard">
-            <PlusCircle className='add' onClick={()=> this.addToOutfit(this.state.selectedProduct.id)}/>
-          </Card>
-          {
-            this.state.outfitListIds.map(id => {
-              return (
-                <RelatedProductCard productId={id}
-                  key={`OL${id}`}
-                  productChangeMethod={this.addToOutfit}/>
-              );
-            })
-          }
-        </CardDeck>
+      <Container>
+        <h6>YOUR OUTFIT</h6>
+        <Row >
+          <CardDeck className="outfit productsList">
+            <Card className="productCard">
+              <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
+            </Card>
+            {
+              // map through the id list of user selected products
+              this.state.outfitListIds.map(id => {
+                return (
+                  <RelatedProductCard
+                    productId={id}
+                    key={`${id}`}
+                    productChangeMethod={()=> null}
+                    actionButtonMethod={this.removeFromOutfitList}/>
+                );
+              })
+            }
+          </CardDeck>
+        </Row>
       </Container>
     );
   }

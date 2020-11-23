@@ -37,10 +37,21 @@
   overflow: hidden
 }
 
-.add {
+.addButton {
 
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.align-right {
+  text-align: right
+}
+
+.align-left {
+  text-align: left
+}
+.align-center {
+  text-align: center;
 }
 
