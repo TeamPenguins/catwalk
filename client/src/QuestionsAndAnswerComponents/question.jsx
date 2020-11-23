@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Answers from './answers.jsx';
+import Answers from './Answers.jsx';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import QuestionAnswerList from './QuestionAnswerList.jsx';
 

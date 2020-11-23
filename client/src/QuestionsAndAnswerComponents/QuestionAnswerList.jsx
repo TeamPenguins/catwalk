@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Question from './question.jsx';
+import Question from './Question.jsx';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 
 class QuestionAnswerList extends Component {
