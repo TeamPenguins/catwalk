@@ -1,6 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import {Card, Column} from 'react-bootstrap';
+import {Card, Column, Container} from 'react-bootstrap';
+import StarRating from '../Utilities/StarRating.jsx';
+import ComparisonModal from './ComparisonModal.jsx';
+import ActionButton from './ActionButton.jsx';
+import Price from './Price.jsx';
+
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
@@ -12,7 +17,14 @@ class RelatedProductCard extends React.Component {
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
     this.fetchAllInfo = this.fetchAllInfo.bind(this);
+    this.grabPreviewImage = this.grabPreviewImage.bind(this);
   }
+  grabPreviewImage () {
+    var src = this.state.styleInfo.results;
+    var photo = src ? src[0].photos[0].url : 'https://via.placeholder.com/150';
+    return photo === null ? 'https://via.placeholder.com/150' : photo;
+  }
+
   fetchProductInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}`)
       .then(productInfo => this.setState({productInfo: productInfo.data}))
@@ -33,23 +45,32 @@ class RelatedProductCard extends React.Component {
     }
   }
   componentDidMount() {
-
     this.fetchAllInfo(this.props.productId);
   }
 
   render() {
+
     return (
-      <Card
-        onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
-        className="productCard"
-      >
-        <Card.Body>
-          <Card.Img varient="top" src="https://via.placeholder.com/400/700" />
-          <Card.Text className="test">{this.state.productInfo.category}</Card.Text>
-          <Card.Title>{this.state.productInfo.name}</Card.Title>
-          <Card.Text>${this.state.productInfo.default_price}</Card.Text>
-        </Card.Body>
-      </Card>
+      <Container>
+        <ActionButton
+          actionButtonMethod={this.props.actionButtonMethod}
+          styleInfo={this.state.styleInfo}
+          productInfo={this.state.productInfo}
+          updateComparedProductMethod={this.props.updateComparedProductMethod}/>
+        <Card
+          onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
+          className="productCard"
+        >
+          <Card.Body>
+            <Card.Img className="card-img"
+              src={this.grabPreviewImage()}/>
+            <Card.Text >{this.state.productInfo.category}</Card.Text>
+            <Card.Text>{this.state.productInfo.name}</Card.Text>
+            <Price styleInfo={this.state.styleInfo} />
+            <StarRating productId={this.state.productInfo.id}/>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 }

@@ -5,11 +5,11 @@ import axios from 'axios';
 import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
-import { Products, productStyles, ReviewsForProductFive } from './dummyData.js';
-import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
-import { GetReviews, GetReviewMetaData, } from './Utilities/axiosHelpers';
-
+import { Products, productStyles } from './dummyData.js';
+import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
+import { Nav } from 'react-bootstrap';
+import { GetReviews, GetReviewMetaData } from './Utilities/axiosHelpers';
 
 class App extends Component {
   constructor () {
@@ -72,7 +72,10 @@ class App extends Component {
   }
 
 
+
   // find the ratings of item method.
+
+  //updates currently selected product when a RelatedProductCard is clicked
   handleProductChange(productInfo, stylesInfo) {
     Promise.allSettled([
       GetReviews(productInfo.id),
@@ -93,8 +96,8 @@ class App extends Component {
       <div>
         <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
-        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
-        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/></div>
+        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange}/></div>
+        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/> </div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
         <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewMetaData={this.state.reviewMetaData}/></div>
       </div>

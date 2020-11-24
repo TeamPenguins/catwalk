@@ -43,9 +43,9 @@ class Answers extends Component {
       <div><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
         return (
           <div>
-            <p>
+            <div>
               <small>{singleAnswer.body}</small>
-            </p>
+            </div>
             <Row>
               {singleAnswer.photos.map((currPhoto) => {
                 return (
@@ -55,12 +55,12 @@ class Answers extends Component {
                 );
               })}
             </Row>
-            <p>
+            <div>
               <small>
                 by User{singleAnswer.answer_id} - {singleAnswer.answerer_name}, {singleAnswer.date.slice(0, 10)} |
                 Helpful? <Card.Link>Yes({singleAnswer.helpfulness})</Card.Link>
               </small>
-            </p>
+            </div>
           </div>
         );
       })}</div>
