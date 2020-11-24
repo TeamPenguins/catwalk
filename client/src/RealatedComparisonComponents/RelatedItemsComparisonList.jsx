@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
+import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
+import unique from '../Utilities/unique.js';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import axios from 'axios';
-import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
-
-//onslide if index is at max, turn off the button.
 
 class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
@@ -28,12 +27,14 @@ class RelatedItemsAndComparisonList extends React.Component {
   toggleModalView () {
     this.setState({modalView: !this.state.modalView});
   }
+  //updates state to reflect with what is displayed in overview
   updateSelectedProductState () {
     this.setState({
       selectedProductStyles: this.props.styles,
       selectedProduct: this.props.selectedProduct,
     });
   }
+  //updates state with the product features needed for the comparison modal
   updateComparedProductInfo (comparedProductInfo, comparedProductStyleInfo) {
     this.setState({
       comparedProductInfo: comparedProductInfo,
@@ -42,7 +43,7 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   fetchRelatedProducts(id) {
     axios.get(`http://3.21.164.220/products/${id}/related`)
-      .then(data => this.setState({relatedProductsIds: data.data}))
+      .then(data => this.setState({relatedProductsIds: unique(data.data)}))
       .catch(/*console.error('error at fetchRelatedProducts')*/);
   }
   //updates the components after selectedProduct has changed in App
@@ -85,7 +86,6 @@ class RelatedItemsAndComparisonList extends React.Component {
           </CardDeck>
         </Row>
       </Container>
-
     );
   }
 }
