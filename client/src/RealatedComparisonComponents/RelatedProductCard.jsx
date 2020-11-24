@@ -3,13 +3,15 @@ import axios from 'axios';
 import {Card, Column, Container} from 'react-bootstrap';
 import ComparisonModal from './ComparisonModal.jsx';
 import ActionButton from './ActionButton.jsx';
+import Price from './Price.jsx';
+
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productInfo: {},
-      styleInfo: {},
+      styleInfo: {}
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
@@ -46,6 +48,7 @@ class RelatedProductCard extends React.Component {
   }
 
   render() {
+
     return (
       <Container>
         <ActionButton
@@ -57,14 +60,12 @@ class RelatedProductCard extends React.Component {
           onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
           className="productCard"
         >
-
           <Card.Body>
             <Card.Img className="card-img"
-
               src={this.grabPreviewImage()}/>
             <Card.Text >{this.state.productInfo.category}</Card.Text>
-            <Card.Title>{this.state.productInfo.name}</Card.Title>
-            <Card.Text>${this.state.productInfo.default_price}</Card.Text>
+            <Card.Text>{this.state.productInfo.name}</Card.Text>
+            <Price styleInfo={this.state.styleInfo} />
           </Card.Body>
         </Card>
       </Container>

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
+import unique from '../Utilities/unique.js';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import axios from 'axios';
-import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
 
 class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
@@ -42,7 +43,7 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   fetchRelatedProducts(id) {
     axios.get(`http://3.21.164.220/products/${id}/related`)
-      .then(data => this.setState({relatedProductsIds: data.data}))
+      .then(data => this.setState({relatedProductsIds: unique(data.data)}))
       .catch(/*console.error('error at fetchRelatedProducts')*/);
   }
   //updates the components after selectedProduct has changed in App
