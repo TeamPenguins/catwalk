@@ -1,0 +1,70 @@
+
+
+
+/* ------------ PRODUCT OVERVIEW -----------*/
+
+/* selector questionList Component / limits overflow with a scroll bar*/
+#app > div > div:nth-child(5) > div > div > div{
+  max-height: 600px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+/* --------- QUESTIONS AND ANSWERS ---------*/
+
+
+
+
+/* ---------- RATINGS AND REVIEWS ----------*/
+
+
+
+
+/* ------ RELATED ITEMS AND COMPARISON -----*/
+
+.productCard {
+  max-width: 300px;
+  min-width: 300px;
+  max-height: 400px;
+  min-height: 400px;
+
+}
+
+.productsList {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  max-height: 430px;
+  overflow: hidden;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.action {
+  position: relative;
+  top: 30px;
+  right: -250px;
+  z-index: 10
+}
+.addButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.align-right {
+  text-align: right
+}
+.align-left {
+  text-align: left
+}
+.align-center {
+  text-align: center;
+}
+
+.card-img {
+height: 200px;
+object-fit: cover;
+}
+.price-cut {
+  display: inline-flex;
+  margin: 20px;
+}

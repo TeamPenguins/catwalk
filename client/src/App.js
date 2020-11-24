@@ -1,9 +1,13 @@
 
 import React, { Component } from 'react';
+import NavBar from './NavBar.jsx';
+import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
-import { Products } from './dummyData.js';
-import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionList.jsx';
+import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
+import { Products, productStyles } from './dummyData.js';
+import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
+import { Nav } from 'react-bootstrap';
 
 
 class App extends React.Component {
@@ -12,20 +16,25 @@ class App extends React.Component {
     this.state = {
       products: Products,
       selectedProduct: Products[0],
+      selectedPoductStyles: productStyles
+
     };
     this.handleProductChange = this.handleProductChange.bind(this);
   }
-  //find the ratings of item method.
-  handleProductChange(productID) {
-    this.setState({selectedProduct: productID});
+  //updates currently selected product when a RelatedProductCard is clicked
+  handleProductChange(productInfo, stylesInfo) {
+    this.setState({selectedProduct: productInfo});
+    this.setState({selectedPoductStyles: stylesInfo});
   }
   render () {
     return (
       <div>
-        <div>YourComponentHere</div>
-        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/></div>
-        <div><RatingsAndReviews product={this.state.selectedProduct} /></div>
-        <div><QuestionsAnswersComponents selectedProd = {this.state.selectedProduct}/></div>
+        <NavBar />
+        <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
+        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange}/></div>
+        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/> </div>
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
+        <div><RatingsAndReviews productId={this.state.selectedProduct.id} /></div>
       </div>
     );
   }
