@@ -3,8 +3,12 @@
 
 /* ------------ PRODUCT OVERVIEW -----------*/
 
-
-
+/* selector questionList Component / limits overflow with a scroll bar*/
+#app > div > div:nth-child(5) > div > div > div{
+  max-height: 600px;
+  overflow: auto;
+  overflow-x: hidden;
+}
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 

@@ -7,6 +7,7 @@ import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedIt
 import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
 import { Products, productStyles } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
+import { Nav } from 'react-bootstrap';
 
 
 class App extends React.Component {
