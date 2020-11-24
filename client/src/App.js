@@ -53,28 +53,40 @@ class App extends Component {
         }},
     };
     this.handleProductChange = this.handleProductChange.bind(this);
+    this.componentDidMount = this.componentDidMount(this);
   }
 
   componentDidMount() {
-    debugger;
-    Promise.all([
-      GetReviews(3),
-      GetReviewMetaData(3)
+
+    Promise.allSettled([
+      GetReviews(1),
+      GetReviewMetaData(1)
     ])
-      .then((results) => {
+      .then((...results) => {
+        console.log(results);
         this.setState({
-          reviews: results[0][0].data.results,
-          reviewMetaData: results[0][1].data.data
+          reviews: results[0][0].value.data.results,
+          reviewMetaData: results[0][1].value.data
         });
       });
   }
 
+
   // find the ratings of item method.
   handleProductChange(productInfo, stylesInfo) {
-    this.setState({
-      selectedProduct: productInfo,
-      selectedPoductStyles: stylesInfo
-    });
+    Promise.allSettled([
+      GetReviews(productInfo.id),
+      GetReviewMetaData(productInfo.id)
+    ])
+      .then((...results) => {
+        console.log(results);
+        this.setState({
+          selectedProduct: productInfo,
+          selectedPoductStyles: stylesInfo,
+          reviews: results[0][0].value.data.results,
+          reviewMetaData: results[0][1].value.data
+        });
+      });
   }
   render () {
     return (
