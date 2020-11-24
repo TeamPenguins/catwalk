@@ -7,17 +7,25 @@ const IndividualRating = (props) => {
   const percentOfTotal = PercentOfTotal(props.ratings, props.starNumber);
   return (
     <Row>
-      <Col>
-        {props.starNumber} stars
-      </Col>
+      {props.starNumber} stars
       <Col>
         <ProgressBar variant="success" now={percentOfTotal} />
       </Col>
-      <Col>
-        {'(' + (props.ratings[props.starNumber] || 0) + ')'}
-      </Col>
+      {'(' + (props.ratings[props.starNumber] || 0) + ')'}
     </Row>
   );
 };
 
 export default IndividualRating;
+
+{ /* <Row>
+<Col>
+  {props.starNumber} stars
+</Col>
+<Col>
+  <ProgressBar variant="success" now={percentOfTotal} />
+</Col>
+<Col>
+  {'(' + (props.ratings[props.starNumber] || 0) + ')'}
+</Col>
+</Row> */ }

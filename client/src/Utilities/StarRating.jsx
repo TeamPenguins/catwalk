@@ -25,14 +25,10 @@ class StarRating extends Component {
     return (
       <Container>
         <Row>
-          <Col>
-            {this.props.includeNumber === 1 ? (
-              <h1 className="text-secondary">{(this.state.starRating).slice(0, this.state.starRating.length - 1)}</h1>
-            ) : null}
-          </Col>
-          <Col>
-            <StarList rating={this.state.starRating} />
-          </Col>
+          {this.props.includeNumber === 1 ? (
+            <h1>{(this.state.starRating).slice(0, this.state.starRating.length - 1)}</h1>
+          ) : null}
+          <StarList rating={this.state.starRating} />
         </Row>
       </Container>
     );

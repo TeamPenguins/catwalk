@@ -8,7 +8,7 @@ const RatingsAndReviews = (props) => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <p className="text-secondary">Ratings & Reviews</p>
+          <p>Ratings & Reviews</p>
         </div>
       </div>
       <div className="row">

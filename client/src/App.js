@@ -5,7 +5,7 @@ import axios from 'axios';
 import ProductOverview from './OverviewComponents/ProductOverview.jsx';
 import RatingsAndReviews from './RatingsReviewsComponents/RatingsAndReviews.jsx';
 import RelatedItemsComparisonList from './RealatedComparisonComponents/RelatedItemsComparisonList.jsx';
-import { Products, productStyles } from './dummyData.js';
+import { Products, productStyles, ReviewsForProductFive } from './dummyData.js';
 import QuestionsAnswersComponents from './QuestionsAndAnswerComponents/QuestionAnswerList.jsx';
 import OutfitItemList from './RealatedComparisonComponents/OutfitItemList.jsx';
 import { GetReviews, GetReviewMetaData, } from './Utilities/axiosHelpers';
@@ -18,7 +18,7 @@ class App extends Component {
       products: Products,
       selectedProduct: Products[0],
       selectedPoductStyles: productStyles,
-      reviews: [],
+      reviews: ReviewsForProductFive.results,
       reviewMetaData: {
         'product_id': '1',
         'ratings': {
@@ -55,10 +55,26 @@ class App extends Component {
     this.handleProductChange = this.handleProductChange.bind(this);
   }
 
+  componentDidMount() {
+    debugger;
+    Promise.all([
+      GetReviews(3),
+      GetReviewMetaData(3)
+    ])
+      .then((results) => {
+        this.setState({
+          reviews: results[0][0].data.results,
+          reviewMetaData: results[0][1].data.data
+        });
+      });
+  }
+
   // find the ratings of item method.
   handleProductChange(productInfo, stylesInfo) {
-    this.setState({selectedProduct: productInfo});
-    this.setState({selectedPoductStyles: stylesInfo});
+    this.setState({
+      selectedProduct: productInfo,
+      selectedPoductStyles: stylesInfo
+    });
   }
   render () {
     return (
