@@ -7,7 +7,6 @@ import AddQuestionModal from './AddQuestionModal.jsx';
 class QuestionAnswerList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       moreQuestions: 2,
     };
@@ -31,8 +30,6 @@ class QuestionAnswerList extends Component {
   }
 
 
-
-
   render() {
     return (
       <Container>
@@ -48,7 +45,7 @@ class QuestionAnswerList extends Component {
           </Card.Body>
         </Card>
         <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
-        <AddQuestionModal/>
+        <AddQuestionModal selectedProduct ={this.props.selectedProduct}/>
       </Container>
     );
   }
