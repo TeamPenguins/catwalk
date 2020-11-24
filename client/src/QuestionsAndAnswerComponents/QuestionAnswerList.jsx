@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Question from './Question.jsx';
+import Question from './question.jsx';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import AddQuestionModal from './AddQuestionModal.jsx';
