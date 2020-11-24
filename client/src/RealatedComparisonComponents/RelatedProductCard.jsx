@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Card, Column, Container} from 'react-bootstrap';
+import StarRating from '../Utilities/StarRating.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import ActionButton from './ActionButton.jsx';
 import Price from './Price.jsx';
@@ -66,6 +67,7 @@ class RelatedProductCard extends React.Component {
             <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Text>{this.state.productInfo.name}</Card.Text>
             <Price styleInfo={this.state.styleInfo} />
+            <StarRating productId={this.state.productInfo.id}/>
           </Card.Body>
         </Card>
       </Container>

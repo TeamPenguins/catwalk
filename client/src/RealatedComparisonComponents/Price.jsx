@@ -21,7 +21,7 @@ class Price extends React.Component {
 
     if (productStyles) {
       for (currentStyle of productStyles) {
-        debugger;
+
         if (currentStyle['default?']) {
           salePrice = Number(currentStyle.sale_price);
           originalPrice = Number(currentStyle.original_price);
