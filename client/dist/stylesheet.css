@@ -6,7 +6,7 @@
 /* selector questionList Component / limits overflow with a scroll bar*/
 #app > div > div:nth-child(5) > div > div > div{
   max-height: 600px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
