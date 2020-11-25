@@ -18,7 +18,7 @@ class App extends Component {
       products: Products,
       selectedProduct: Products[0],
       selectedPoductStyles: productStyles,
-      reviews: ReviewsForProductFive.results,
+      reviews: [],
       reviewMetaData: {
         'product_id': '1',
         'ratings': {
@@ -59,8 +59,8 @@ class App extends Component {
   componentDidMount() {
 
     Promise.allSettled([
-      GetReviews(1),
-      GetReviewMetaData(1)
+      GetReviews(10),
+      GetReviewMetaData(10)
     ])
       .then((...results) => {
         console.log(results);
@@ -94,11 +94,11 @@ class App extends Component {
   render () {
     return (
       <div>
-        <NavBar />
-        <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} />
-        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange}/></div>
+        {/* <NavBar />
+        <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} ratings={this.state.reviewMetaData.ratings}/>
+        <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange} /></div>
         <div><OutfitItemList selectedProduct={this.state.selectedProduct}/> </div>
-        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div> */}
         <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewMetaData={this.state.reviewMetaData}/></div>
       </div>
     );
