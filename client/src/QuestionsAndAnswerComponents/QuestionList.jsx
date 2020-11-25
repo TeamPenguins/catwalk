@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
-import Answers from './answers.jsx';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import QuestionAnswerList from './QuestionAnswerList.jsx';
+import SingleQuestion from './SingleQuestion.jsx';
 
-class Question extends Component {
+class QuestionList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       hasMoreQuestions: true,
       questions: [],
-      wantsMoreAnswers: false,
+
     };
     this.fetchQuestionList = this.fetchQuestionList.bind(this);
-    this.loadAnswersClickHandler = this.loadAnswersClickHandler.bind(this);
   }
 
   fetchQuestionList() {
@@ -35,13 +34,6 @@ class Question extends Component {
       });
   }
 
-  loadAnswersClickHandler (e) {
-    this.setState({
-      wantsMoreAnswers: true,
-    });
-
-    e.preventDefault();
-  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
@@ -53,34 +45,12 @@ class Question extends Component {
     this.fetchQuestionList();
   }
 
-
-
   render() {
     return (
       <div>{this.state.questions.slice(0, this.props.moreQuestions).map((singleQuestion) => {
         return (
           <div>
-            <Row>
-              <Col md={4}>
-                <div><strong>Q: {singleQuestion.question_body}</strong></div>
-              </Col>
-              <Col md={{span: 4, offset: 4}}>
-                <small>Helpful?</small>
-                <small><Card.Link>Yes</Card.Link>({singleQuestion.question_helpfulness}) |</small>
-                <small><Card.Link>AddAnswer</Card.Link></small>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div>
-                  <Answers
-                    questionId = {singleQuestion.question_id}
-                    moreAnswers={this.state.wantsMoreAnswers}
-                  />
-                </div>
-                <div><Card.Link onClick={this.loadAnswersClickHandler}><small>LOAD MORE ANSWERS</small></Card.Link></div>
-              </Col>
-            </Row>
+            <SingleQuestion singleQuestion ={singleQuestion}/>
           </div>
         );
       })}
@@ -91,4 +61,4 @@ class Question extends Component {
 
 
 
-export default Question;
+export default QuestionList;

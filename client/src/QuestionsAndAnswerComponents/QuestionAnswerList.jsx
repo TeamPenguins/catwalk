@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Question from './question.jsx';
+import QuestionList from './QuestionList.jsx';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import AddQuestionModal from './AddQuestionModal.jsx';
@@ -41,7 +41,7 @@ class QuestionAnswerList extends Component {
         </Form>
         <Card>
           <Card.Body>
-            <Question productId = {this.props.selectedProduct.id} moreQuestions ={this.state.moreQuestions} key={this.props.selectedProduct.id}/>
+            <QuestionList productId = {this.props.selectedProduct.id} moreQuestions ={this.state.moreQuestions} key={this.props.selectedProduct.id}/>
           </Card.Body>
         </Card>
         <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
