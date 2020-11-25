@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
+import {ChevronDoubleLeft, ChevronDoubleRight} from 'react-bootstrap-icons';
 import unique from '../Utilities/unique.js';
+import scroll from '../Utilities/scroll.js';
+import updateNavigator from '../Utilities/updateNavigator.js';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import axios from 'axios';
@@ -11,21 +14,26 @@ class RelatedItemsAndComparisonList extends React.Component {
     this.state = {
       relatedProductsIds: [],
       selectedProduct: {},
-      selectedProductStyles: {},
-      modalView: false,
       comparedProductInfo: {},
-      comparedProductStyleInfo: {},
+      modalView: false,
+      leftNavigator: false,
+      rightNavigator: true
     };
 
     this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.toggleModalView = this.toggleModalView.bind(this);
     this.updateComparedProductInfo = this.updateComparedProductInfo.bind(this);
     this.updateSelectedProductState = this.updateSelectedProductState.bind(this);
+    this.updateCarousel = this.updateCarousel.bind(this);
 
   }
   //this method shows/hides the product comparison modal
   toggleModalView () {
     this.setState({modalView: !this.state.modalView});
+  }
+  updateCarousel(direction) {
+    var carouselPosition = scroll(direction);
+    updateNavigator(carouselPosition);
   }
   //updates state to reflect with what is displayed in overview
   updateSelectedProductState () {
@@ -51,11 +59,13 @@ class RelatedItemsAndComparisonList extends React.Component {
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
       this.fetchRelatedProducts(this.props.selectedProduct.id);
       this.updateSelectedProductState();
+      this.updateCarousel();
     }
   }
   componentDidMount() {
     this.fetchRelatedProducts(this.props.selectedProduct.id);
     this.updateSelectedProductState();
+    this.updateCarousel();
   }
 
   render() {
@@ -65,25 +75,38 @@ class RelatedItemsAndComparisonList extends React.Component {
         <Row>
           <ComparisonModal
             comparedProductInfo={this.state.comparedProductInfo}
-            comparedProductStyleInfo={this.state.comparedProductStyleInfo}
             selectedProductInfo={this.state.selectedProduct}
-            selectedProductStyles={this.state.selectedProductStyles}
             modalViewState={this.state.modalView}
             actionButtonMethod={this.toggleModalView}
           />
-          <CardDeck className="related productsList">
-            {
-              this.state.relatedProductsIds.map(id => {
-                return (
-                  <RelatedProductCard productId={id}
-                    productChangeMethod={this.props.productChangeMethod}
-                    actionButtonMethod={this.toggleModalView}
-                    modalViewState={this.state.modalView}
-                    updateComparedProductMethod={this.updateComparedProductInfo}/>
-                );
-              })
-            }
-          </CardDeck>
+          <Container id="RelatedItemsCarousel">
+            <button
+              id="left-nav"
+              className="scroll align-center"
+              onClick={() => this.updateCarousel('left')}
+              show={this.state.leftNavigator}
+            >
+              <ChevronDoubleLeft/></button>
+            <CardDeck id="related" className="productsList">
+              {
+                this.state.relatedProductsIds.map(id => {
+                  return (
+                    <RelatedProductCard productId={id}
+                      productChangeMethod={this.props.productChangeMethod}
+                      actionButtonMethod={this.toggleModalView}
+                      modalViewState={this.state.modalView}
+                      updateComparedProductMethod={this.updateComparedProductInfo}/>
+                  );
+                })
+              }
+            </CardDeck>
+            <button
+              id="right-nav"
+              className="scroll align-center"
+              onClick={() => this.updateCarousel('right')}
+            >
+              <ChevronDoubleRight/></button>
+          </Container>
         </Row>
       </Container>
     );

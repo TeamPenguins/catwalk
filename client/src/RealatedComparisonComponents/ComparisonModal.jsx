@@ -36,10 +36,6 @@ class ComparisonModal extends React.Component {
       comparedProductInfo: this.props.comparedProductInfo,
       selectedProduct: this.props.selectedProductInfo
     });
-    //this is updateing
-    console.log( 'comparedProductInfo', this.props.comparedProductInfo);
-    console.log('selectedProduct', this.props.selectedProductInfo);
-
   }
   //creates an array of all combined feature names.
   updateFeaturesInState (selectedProductFeatures, comparedProductFeatures) {

@@ -23,19 +23,20 @@
 /* ------ RELATED ITEMS AND COMPARISON -----*/
 
 .productCard {
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 250px;
+  min-width: 250px;
   max-height: 400px;
   min-height: 400px;
 
 }
 
 .productsList {
+  position: relative;
   display: inline-flex;
   flex-wrap: nowrap;
   max-width: 100%;
   max-height: 430px;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-top: 25px;
   margin-bottom: 25px;
 }
@@ -67,4 +68,17 @@ object-fit: cover;
 .price-cut {
   display: inline-flex;
   margin: 20px;
+}
+.scroll {
+  position: absolute;
+  height: 50%;
+  z-index: 10;
+}
+#RelatedItemsCarousel {
+  overflow: hidden;
+}
+
+.card-container {
+  margin: 0;
+  padding: 0;
 }

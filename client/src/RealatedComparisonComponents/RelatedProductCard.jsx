@@ -14,7 +14,7 @@ class RelatedProductCard extends React.Component {
     this.state = {
       productInfo: {},
       styleInfo: {},
-      ratings: {}
+      ratings: {},
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
@@ -46,9 +46,6 @@ class RelatedProductCard extends React.Component {
     this.fetchStyleInfo(id);
     this.fetchProductInfo(id);
     this.fetchReviewMetadata(id);
-    console.log('ratings:', this.state.ratings);
-    console.log('productInfo:', this.state.productInfo);
-    console.log('styleInfo:', this.state.styleInfo);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
@@ -62,7 +59,7 @@ class RelatedProductCard extends React.Component {
   render() {
 
     return (
-      <Container>
+      <Container className="card-container">
         <ActionButton
           actionButtonMethod={this.props.actionButtonMethod}
           styleInfo={this.state.styleInfo}
