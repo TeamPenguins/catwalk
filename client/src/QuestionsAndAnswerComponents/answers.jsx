@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { answerList } from '../dummyData';
 
 
 class Answers extends Component {
@@ -7,7 +8,9 @@ class Answers extends Component {
     super(props);
     this.state = {
       answerList: [],
+      hasMoreAnswers: true,
     };
+
     this.fetchAnswerList = this.fetchAnswerList.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
@@ -15,9 +18,14 @@ class Answers extends Component {
 
   fetchAnswerList() {
 
-    fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=2`)
+    fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=20`)
       .then(response => response.json())
       .then((answerList) => {
+        if (answerList.results.length < 20) {
+          this.setState({
+            hasMoreAnswers: false,
+          });
+        }
         this.setState({
           answerList: answerList.results,
         });
@@ -40,9 +48,10 @@ class Answers extends Component {
 
   render() {
     return (
-      <div><strong>A:</strong> {this.state.answerList.map((singleAnswer) => {
+      <div><strong>A:</strong> {this.state.answerList.slice(0, this.props.moreAnswers ? this.state.answerList.length : 2).map((singleAnswer) => {
         return (
           <div>
+            {console.log(this.state)}
             <div>
               <small>{singleAnswer.body}</small>
             </div>

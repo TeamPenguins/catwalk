@@ -10,8 +10,10 @@ class Question extends Component {
     this.state = {
       hasMoreQuestions: true,
       questions: [],
+      wantsMoreAnswers: false,
     };
     this.fetchQuestionList = this.fetchQuestionList.bind(this);
+    this.loadAnswersClickHandler = this.loadAnswersClickHandler.bind(this);
   }
 
   fetchQuestionList() {
@@ -33,6 +35,14 @@ class Question extends Component {
       });
   }
 
+  loadAnswersClickHandler (e) {
+    this.setState({
+      wantsMoreAnswers: true,
+    });
+
+    e.preventDefault();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
       this.fetchQuestionList();
@@ -42,6 +52,7 @@ class Question extends Component {
   componentDidMount() {
     this.fetchQuestionList();
   }
+
 
 
   render() {
@@ -61,8 +72,13 @@ class Question extends Component {
             </Row>
             <Row>
               <Col>
-                <div><Answers questionId = {singleQuestion.question_id}/></div>
-                <div><Card.Link><small>LOAD MORE ANSWERS</small></Card.Link></div>
+                <div>
+                  <Answers
+                    questionId = {singleQuestion.question_id}
+                    moreAnswers={this.state.wantsMoreAnswers}
+                  />
+                </div>
+                <div><Card.Link onClick={this.loadAnswersClickHandler}><small>LOAD MORE ANSWERS</small></Card.Link></div>
               </Col>
             </Row>
           </div>
