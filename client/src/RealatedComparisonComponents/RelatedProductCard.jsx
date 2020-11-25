@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {Card, Column, Container} from 'react-bootstrap';
 import StarRating from '../Utilities/StarRating.jsx';
+import {GetReviewMetaData} from '../Utilities/axiosHelpers.js';
 import ComparisonModal from './ComparisonModal.jsx';
 import ActionButton from './ActionButton.jsx';
 import Price from './Price.jsx';
@@ -12,10 +13,12 @@ class RelatedProductCard extends React.Component {
     super(props);
     this.state = {
       productInfo: {},
-      styleInfo: {}
+      styleInfo: {},
+      ratings: {}
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
+    this.fetchReviewMetadata = this.fetchReviewMetadata.bind(this);
     this.fetchAllInfo = this.fetchAllInfo.bind(this);
     this.grabPreviewImage = this.grabPreviewImage.bind(this);
   }
@@ -24,7 +27,11 @@ class RelatedProductCard extends React.Component {
     var photo = src ? src[0].photos[0].url : 'https://via.placeholder.com/150';
     return photo === null ? 'https://via.placeholder.com/150' : photo;
   }
-
+  fetchReviewMetadata(id) {
+    GetReviewMetaData(id)
+      .then(metaData => this.setState({ratings: metaData.data.ratings}))
+      .catch(/*console.error('error at fetch review meta data')*/);
+  }
   fetchProductInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}`)
       .then(productInfo => this.setState({productInfo: productInfo.data}))
@@ -33,11 +40,15 @@ class RelatedProductCard extends React.Component {
   fetchStyleInfo(id) {
     axios.get(`http://3.21.164.220/products/${id}/styles`)
       .then(styleInfo => this.setState({styleInfo: styleInfo.data}))
-      .catch(/*console.error('error at fetch product info')*/);
+      .catch(/*console.error('error at fetch style info')*/);
   }
   fetchAllInfo(id) {
     this.fetchStyleInfo(id);
     this.fetchProductInfo(id);
+    this.fetchReviewMetadata(id);
+    console.log('ratings:', this.state.ratings);
+    console.log('productInfo:', this.state.productInfo);
+    console.log('styleInfo:', this.state.styleInfo);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
@@ -67,7 +78,7 @@ class RelatedProductCard extends React.Component {
             <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Text>{this.state.productInfo.name}</Card.Text>
             <Price styleInfo={this.state.styleInfo} />
-            <StarRating productId={this.state.productInfo.id}/>
+            <StarRating ratings={this.state.ratings}/>
           </Card.Body>
         </Card>
       </Container>
