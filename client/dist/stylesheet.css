@@ -70,15 +70,23 @@ object-fit: cover;
   margin: 20px;
 }
 .scroll {
-  position: absolute;
+  position: relative;
   height: 50%;
   z-index: 10;
 }
 #RelatedItemsCarousel {
   overflow: hidden;
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+#right-nav {
+  position: relative;
+  height: 50%;
+  float: right;
 }
 
 .card-container {
+  width: 280;
   margin: 0;
   padding: 0;
 }

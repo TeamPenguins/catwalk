@@ -22,7 +22,6 @@ class OutfitItemList extends React.Component {
   }
   checkForExistingOutfitList() {
     var existingOutfitlist = localStorage.getItem('OutfitListIds');
-    console.log(existingOutfitlist);
     return existingOutfitlist ? existingOutfitlist.split(',') : [];
   }
   updateOutFitList(newOutfitList) {
@@ -64,7 +63,7 @@ class OutfitItemList extends React.Component {
         <h6>YOUR OUTFIT</h6>
         <Row >
           <CardDeck className="outfit productsList">
-            <Container>
+            <Container className="card-container">
               <Card className="productCard">
                 <Card.Body>
                   <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>

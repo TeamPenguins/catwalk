@@ -33,7 +33,7 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   updateCarousel(direction) {
     var carouselPosition = scroll(direction);
-    updateNavigator(carouselPosition);
+    updateNavigator(carouselPosition, this.state.relatedProductsIds.length);
   }
   //updates state to reflect with what is displayed in overview
   updateSelectedProductState () {
@@ -56,6 +56,9 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   //updates the components after selectedProduct has changed in App
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.relatedProductsIds.length !== this.state.relatedProductsIds.length) {
+      this.updateCarousel();
+    }
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
       this.fetchRelatedProducts(this.props.selectedProduct.id);
       this.updateSelectedProductState();
@@ -84,7 +87,6 @@ class RelatedItemsAndComparisonList extends React.Component {
               id="left-nav"
               className="scroll align-center"
               onClick={() => this.updateCarousel('left')}
-              show={this.state.leftNavigator}
             >
               <ChevronDoubleLeft/></button>
             <CardDeck id="related" className="productsList">
