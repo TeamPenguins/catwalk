@@ -1,22 +1,19 @@
-//find the element with the class 'related'
-//move it over left, for the width of a card element
-var imageOffset = 0;
+
+var scrollShift = 0;
 
 const scroll = (direction) => {
+  //if input is undefined, reset the scroll position back to zero
   if (direction === undefined) {
     document.getElementById('related').style.left = '0px';
     return 0;
   }
-  var listPosition;
+  //Find the width of the product card
+  //Scroll will shift left or right for the distance of on card's width
+  //Return the distance scrolled so far, for other methods to use.
   var cardWidth = document.querySelector(".card-container").clientWidth;
-  console.log('cardWidth', cardWidth);
-  debugger;
-  direction === 'right' ? imageOffset -= cardWidth : imageOffset += cardWidth;
-  document.getElementById('related').style.left = imageOffset + 'px';
-  listPosition = parseInt(document.getElementById('related').style.left);
-  return listPosition;
+  direction === 'right' ? scrollShift -= cardWidth : scrollShift += cardWidth;
+  document.getElementById('related').style.left = scrollShift + 'px';
+  return scrollShift;
 };
-
-//create a left offset
 
 export default scroll;

@@ -21,6 +21,7 @@ class RelatedProductCard extends React.Component {
     this.fetchReviewMetadata = this.fetchReviewMetadata.bind(this);
     this.fetchAllInfo = this.fetchAllInfo.bind(this);
     this.grabPreviewImage = this.grabPreviewImage.bind(this);
+    this.changeSelectedProduct = this. changeSelectedProduct.bind(this);
   }
   grabPreviewImage () {
     var src = this.state.styleInfo.results;
@@ -42,6 +43,9 @@ class RelatedProductCard extends React.Component {
       .then(styleInfo => this.setState({styleInfo: styleInfo.data}))
       .catch(/*console.error('error at fetch style info')*/);
   }
+  changeSelectedProduct () {
+    this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)
+  }
   fetchAllInfo(id) {
     this.fetchStyleInfo(id);
     this.fetchProductInfo(id);
@@ -61,7 +65,6 @@ class RelatedProductCard extends React.Component {
   }
 
   render() {
-
     return (
       <Container className="card-container">
         <ActionButton
@@ -69,14 +72,11 @@ class RelatedProductCard extends React.Component {
           actionButtonMethod={this.props.actionButtonMethod}
           styleInfo={this.state.styleInfo}
           productInfo={this.state.productInfo}
-          updateComparedProductMethod={this.props.updateComparedProductMethod}/>
-        <Card
-          onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
-          className={`productCard ${this.props.listType}`}
-        >
+          updateComparedProductMethod={this.props.updateComparedProductMethod}
+        />
+        <Card onClick={()=> this.changeSelectedProduct()} className={`productCard ${this.props.listType}`}>
           <Card.Body>
-            <Card.Img className="card-img"
-              src={this.grabPreviewImage()}/>
+            <Card.Img className="card-img" src={this.grabPreviewImage()}/>
             <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Text>{this.state.productInfo.name}</Card.Text>
             <Price styleInfo={this.state.styleInfo} />

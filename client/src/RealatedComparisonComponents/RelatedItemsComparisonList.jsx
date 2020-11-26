@@ -100,15 +100,13 @@ class RelatedItemsAndComparisonList extends React.Component {
                       productChangeMethod={this.props.productChangeMethod}
                       actionButtonMethod={this.toggleModalView}
                       modalViewState={this.state.modalView}
-                      updateComparedProductMethod={this.updateComparedProductInfo}/>
+                      updateComparedProductMethod={this.updateComparedProductInfo}
+                    />
                   );
                 })
               }
             </CardDeck>
-            <button
-              id="right-nav"
-              className="scroll"
-              onClick={() => this.updateCarousel('right')}
+            <button id="right-nav" className="scroll" onClick={() => this.updateCarousel('right')}
             >
               <ChevronDoubleRight/></button>
           </Container>
