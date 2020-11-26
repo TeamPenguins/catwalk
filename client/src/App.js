@@ -59,8 +59,8 @@ class App extends Component {
   componentDidMount() {
 
     Promise.allSettled([
-      GetReviews(2),
-      GetReviewMetaData(2)
+      GetReviews(3),
+      GetReviewMetaData(3)
     ])
       .then((...results) => {
         console.log(results);

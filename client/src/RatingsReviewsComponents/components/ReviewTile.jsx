@@ -3,6 +3,9 @@ import Card from 'react-bootstrap/Card';
 import StarList from '../../Utilities/StarList.jsx';
 import { Row, Col, Container } from 'react-bootstrap';
 import ReviewResponse from './ReviewResponse.jsx';
+import { Check2 } from 'react-bootstrap-icons';
+import Helpfulness from './Helpfulness.jsx';
+import ReviewPhotos from './ReviewPhotos.jsx';
 
 const ReviewTile = ({ review }) => (
   <Card border="0" key={review.review_id}>
@@ -18,15 +21,28 @@ const ReviewTile = ({ review }) => (
       <Card.Title>
         {review.summary}
       </Card.Title>
-      <Card.Text>{review.body}</Card.Text>
+      <Card.Text style={{fontSize: 'smaller'}}>{review.body}</Card.Text>
+      <Card.Text>
+        {review.photos.length > 0 ? (
+          <ReviewPhotos photos={review.photos}/>
+        ) : null}
+      </Card.Text>
+      <Card.Text>
+        {review.recommend ? (
+          <div>
+            <Check2 size={20} style={{ verticalAlign: 'middle'}}/>
+            <Card.Text style={{display: 'contents', fontSize: 'smaller'}}>
+              {'  I recommend this product'}
+            </Card.Text>
+          </div>
+        ) : null}
+      </Card.Text>
       <Card.Text>
         {review.response ? (
           <ReviewResponse response={review.response}/>
         ) : null}
       </Card.Text>
-      <Card.Text>
-        Was this review helpful?
-      </Card.Text>
+      <Helpfulness helpfulness={review.helpfulness}/>
     </Card.Body>
   </Card>
 );
