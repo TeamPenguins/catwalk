@@ -93,7 +93,10 @@ class RelatedItemsAndComparisonList extends React.Component {
               {
                 this.state.relatedProductsIds.map(id => {
                   return (
-                    <RelatedProductCard productId={id}
+                    <RelatedProductCard
+                      className="relatedProductCard"
+                      productId={id}
+                      listType={'related'}
                       productChangeMethod={this.props.productChangeMethod}
                       actionButtonMethod={this.toggleModalView}
                       modalViewState={this.state.modalView}

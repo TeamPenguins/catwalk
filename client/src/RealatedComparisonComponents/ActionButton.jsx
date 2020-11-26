@@ -1,10 +1,12 @@
 import React from 'react';
+import {Star, XCircle} from 'react-bootstrap-icons';
 
 //takes in an on click method
 //exicutes that method on click
 
 // upper most parent components (card lists) will dictate which methods get called
-const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
+const ActionButton = ({listType, actionButtonMethod, updateComparedProductMethod, productInfo, styleInfo}) => {
+  var icon = listType === 'related' ? <Star/> : <XCircle />;
   return (
     <button className="action" onClick={() => {
       if (updateComparedProductMethod) {
@@ -12,7 +14,7 @@ const ActionButton = ({actionButtonMethod, updateComparedProductMethod, productI
       }
       actionButtonMethod(productInfo.id);
     }
-    }>action</button>
+    }>{icon}</button>
   );
 };
 

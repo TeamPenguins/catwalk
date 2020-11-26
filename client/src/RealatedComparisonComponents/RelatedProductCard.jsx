@@ -65,13 +65,14 @@ class RelatedProductCard extends React.Component {
     return (
       <Container className="card-container">
         <ActionButton
+          listType={this.props.listType}
           actionButtonMethod={this.props.actionButtonMethod}
           styleInfo={this.state.styleInfo}
           productInfo={this.state.productInfo}
           updateComparedProductMethod={this.props.updateComparedProductMethod}/>
         <Card
           onClick={()=>this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)}
-          className="productCard"
+          className={`productCard ${this.props.listType}`}
         >
           <Card.Body>
             <Card.Img className="card-img"
