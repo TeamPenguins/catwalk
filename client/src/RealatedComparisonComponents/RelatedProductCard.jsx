@@ -45,15 +45,11 @@ class RelatedProductCard extends React.Component {
   fetchAllInfo(id) {
     this.fetchStyleInfo(id);
     this.fetchProductInfo(id);
-<<<<<<< HEAD
-    this.fetchReviewMetadata(id);
-=======
     GetReviewMetaData(id)
       .then(data => {
         this.setState({
           ratings: data.data.ratings});
       });
->>>>>>> origin/pre-production
   }
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
