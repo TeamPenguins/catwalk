@@ -70,7 +70,7 @@ object-fit: cover;
   margin: 20px;
 }
 .scroll {
-  position: relative;
+  position: absolute;
   height: 50%;
   z-index: 10;
 }
@@ -80,9 +80,9 @@ object-fit: cover;
   flex-wrap: nowrap;
 }
 #right-nav {
-  position: relative;
-  height: 50%;
-  float: right;
+  position: static;
+  height: 100%;
+  right: 10px;
 }
 
 .card-container {

@@ -74,18 +74,18 @@ class RelatedItemsAndComparisonList extends React.Component {
   render() {
     return (
       <Container >
+        <ComparisonModal
+          comparedProductInfo={this.state.comparedProductInfo}
+          selectedProductInfo={this.state.selectedProduct}
+          modalViewState={this.state.modalView}
+          actionButtonMethod={this.toggleModalView}
+        />
         <h6>RELATED PRODUCTS</h6>
         <Row>
-          <ComparisonModal
-            comparedProductInfo={this.state.comparedProductInfo}
-            selectedProductInfo={this.state.selectedProduct}
-            modalViewState={this.state.modalView}
-            actionButtonMethod={this.toggleModalView}
-          />
           <Container id="RelatedItemsCarousel">
             <button
               id="left-nav"
-              className="scroll align-center"
+              className="scroll"
               onClick={() => this.updateCarousel('left')}
             >
               <ChevronDoubleLeft/></button>
@@ -104,7 +104,7 @@ class RelatedItemsAndComparisonList extends React.Component {
             </CardDeck>
             <button
               id="right-nav"
-              className="scroll align-center"
+              className="scroll"
               onClick={() => this.updateCarousel('right')}
             >
               <ChevronDoubleRight/></button>
