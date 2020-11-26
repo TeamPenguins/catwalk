@@ -94,11 +94,11 @@ class App extends Component {
   render () {
     return (
       <div>
-        {/* <NavBar />
+        <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} ratings={this.state.reviewMetaData.ratings}/>
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange} /></div>
         <div><OutfitItemList selectedProduct={this.state.selectedProduct}/> </div>
-        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div> */}
+        <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
         <div><RatingsAndReviews productId={this.state.selectedProduct.id} reviews={this.state.reviews} reviewMetaData={this.state.reviewMetaData}/></div>
       </div>
     );
