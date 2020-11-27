@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 import Variants from './Variants.jsx';
 import Gallery from './Gallery.jsx';
+import StarRating from '../Utilities/StarRating.jsx';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -32,11 +33,7 @@ class ProductDetails extends React.Component {
           {/* pull in the star rating component and link to ratings section below */}
           <div>
             <div className="my-1">
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
+              <StarRating ratings={this.props.ratings} />
             </div>
 
             <p className="my-1" >{this.props.selectedProduct.category}</p>
