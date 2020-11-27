@@ -28,7 +28,7 @@ const Gallery = (props) => {
         {mainImagesArr.map((image, index) => {
           return (
             <CarouselItem key={index}>
-              <img className="d-block rounded-sm" src={image} style={{ height: 730, width: 730, objectFit: 'cover' }} alt={props.styles.results[0].name} />
+              <img className="d-block rounded-sm" src={image === null ? 'https://via.placeholder.com/650' : image} style={{ height: 730, width: 730, objectFit: 'cover' }} alt={props.styles.results[0].name} />
             </CarouselItem>
           );
         })}

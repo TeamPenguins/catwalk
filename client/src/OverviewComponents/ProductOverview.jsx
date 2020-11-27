@@ -7,7 +7,7 @@ const ProductOverview = (props) => {
 
   return (
     <Container>
-      <ProductDetails selectedProduct={props.selectedProduct} styles={props.styles} />
+      <ProductDetails selectedProduct={props.selectedProduct} styles={props.styles} ratings={props.ratings}/>
       <ProductInfo selectedProduct={props.selectedProduct} />
     </Container>
   );

@@ -5,7 +5,7 @@ import ProductBreakdown from './components/ProductBreakdown.jsx';
 
 const RatingsAndReviews = (props) => {
   return (
-    <div className="container">
+    <div className="container" id="ratings-and-reviews">
       <div className="row">
         <div className="col">
           <p>Ratings & Reviews</p>
