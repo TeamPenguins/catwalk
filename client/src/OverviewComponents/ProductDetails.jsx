@@ -48,7 +48,7 @@ class ProductDetails extends React.Component {
             <Row className="my-2" style={{ maxWidth: 300 }} >
               {/* map through the styles (results arr) and output an image tag for each */}
               {this.props.styles.results.map((style, index) => {
-                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
               })}
             </Row>
           </div>
