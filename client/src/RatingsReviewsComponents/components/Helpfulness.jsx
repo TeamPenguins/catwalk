@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Badge, Spinner } from 'react-bootstrap';
-import { UpdateHelpfulnessCount } from '../../Utilities/axiosHelpers.js';
+import { UpdateHelpfulnessCount, UpdateReviewToReported } from '../../Utilities/axiosHelpers.js';
 
 const Helpfulness = ({ helpfulness, reviewId }) => {
   const [yesCount, setCount] = useState(helpfulness);
@@ -20,6 +20,9 @@ const Helpfulness = ({ helpfulness, reviewId }) => {
 
   const handleClick = () => setLoading(true);
 
+  const ReportReview = () => UpdateReviewToReported(reviewId)
+    .then(/*disable the helpful buttons and display a messsage that the review was reported*/);
+
   return (
     <div> <span style={{fontSize: 'smaller', display: 'inline-block'}}>Helpful?</span>{'  '}
       <Button onClick={(!isLoading ? handleClick : null)}size='sm' variant='link' style={{fontSize: 'smaller', border: '0'}}>{isLoading ? <Spinner
@@ -33,9 +36,9 @@ const Helpfulness = ({ helpfulness, reviewId }) => {
       </Button>
       <Badge pill variant='secondary'>{yesCount}</Badge>
       <span className="sr-only">{`${yesCount} people found this review helpful`}</span>{' | '}
-      <Button size='sm' variant='outline-danger' style={{fontSize: 'smaller', border: '0'}} >
+      <Button onClick={() => ReportReview}size='sm' variant='outline-danger' style={{fontSize: 'smaller', border: '0'}} >
         <u>{'Report'}</u>
-        <span className="sr-only">{'0 people found this review helpful'}</span>
+        <span className="sr-only">{'report this review'}</span>
       </Button>
     </div>
   );
