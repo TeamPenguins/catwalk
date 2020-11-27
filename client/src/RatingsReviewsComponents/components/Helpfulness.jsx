@@ -22,7 +22,7 @@ const Helpfulness = ({ helpfulness, reviewId }) => {
 
   return (
     <div> <span style={{fontSize: 'smaller', display: 'inline-block'}}>Helpful?</span>{'  '}
-      <Button onClick={!isLoading ? handleClick : null}size='sm' variant='link' style={{fontSize: 'smaller', border: '0'}}>{isLoading ? <Spinner
+      <Button onClick={(!isLoading ? handleClick : null)}size='sm' variant='link' style={{fontSize: 'smaller', border: '0'}}>{isLoading ? <Spinner
         as="span"
         animation="border"
         variant="warning"
@@ -42,6 +42,8 @@ const Helpfulness = ({ helpfulness, reviewId }) => {
 };
 
 export default Helpfulness;
+
+// !isLoading ? handleClick : null
 
 /* NO button
       <Button size='sm' variant='outline-dark' style={{border: '0'}} >
