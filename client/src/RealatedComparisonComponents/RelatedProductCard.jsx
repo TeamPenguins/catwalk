@@ -23,7 +23,7 @@ class RelatedProductCard extends React.Component {
     this.grabPreviewImage = this.grabPreviewImage.bind(this);
     this.changeSelectedProduct = this. changeSelectedProduct.bind(this);
   }
-  grabPreviewImage () {
+  grabPreviewImage (infoType) {
     var src = this.state.styleInfo.results;
     var photo = src ? src[0].photos[0].url : 'https://via.placeholder.com/150';
     return photo === null ? 'https://via.placeholder.com/150' : photo;
@@ -66,7 +66,7 @@ class RelatedProductCard extends React.Component {
 
   render() {
     return (
-      <Container className="card-container">
+      <Container className="card-container" aria-label="click to visit product detail page">
         <ActionButton
           listType={this.props.listType}
           actionButtonMethod={this.props.actionButtonMethod}
@@ -76,7 +76,9 @@ class RelatedProductCard extends React.Component {
         />
         <Card onClick={()=> this.changeSelectedProduct()} className={`productCard ${this.props.listType}`}>
           <Card.Body>
-            <Card.Img className="card-img" src={this.grabPreviewImage()}/>
+            <Card.Img variant="top" className="card-img"
+              src={this.grabPreviewImage()}
+              alt={this.state.productInfo.name}/>
             <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Text>{this.state.productInfo.name}</Card.Text>
             <Price styleInfo={this.state.styleInfo} />

@@ -80,11 +80,11 @@ class RelatedItemsAndComparisonList extends React.Component {
           modalViewState={this.state.modalView}
           actionButtonMethod={this.toggleModalView}
         />
-        <h6>RELATED PRODUCTS</h6>
+        <h3>RELATED PRODUCTS</h3>
         <Row>
           <Container id="RelatedItemsCarousel">
             <button
-              id="left-nav"
+              aria-label="scroll left for more related items" id="left-nav"
               className="scroll"
               onClick={() => this.updateCarousel('left')}
             >
@@ -106,7 +106,9 @@ class RelatedItemsAndComparisonList extends React.Component {
                 })
               }
             </CardDeck>
-            <button id="right-nav" className="scroll" onClick={() => this.updateCarousel('right')}
+            <button
+              aria-label="scroll right for more related items" id="right-nav"
+              className="scroll" onClick={() => this.updateCarousel('right')}
             >
               <ChevronDoubleRight/></button>
           </Container>
