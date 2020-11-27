@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Badge } from 'react-bootstrap';
+import { Button, Badge, Spinner } from 'react-bootstrap';
+import { UpdateHelpfulnessCount } from '../../Utilities/axiosHelpers.js';
 
-const Helpfulness = ({ helpfulness }) => {
+const Helpfulness = ({ helpfulness, reviewId }) => {
   const [yesCount, setCount] = useState(helpfulness);
+
+  const [isLoading, setLoading] = useState(false);
+  // Updates yesCount in state and makes api call to update helpfullness count as well
+
+  useEffect(() => {
+    if (isLoading) {
+      UpdateHelpfulnessCount(reviewId).then(() => {
+        setLoading(false);
+        setCount(yesCount + 1);
+      });
+    }
+  }, [isLoading]);
+
+  const handleClick = () => setLoading(true);
 
   return (
     <div> <span style={{fontSize: 'smaller', display: 'inline-block'}}>Helpful?</span>{'  '}
-      <Button onClick={() => setCount(yesCount + 1)}size='sm' variant='link' style={{fontSize: 'smaller', border: '0'}}>
-        <u>{'Yes'}</u>{' '}
+      <Button onClick={!isLoading ? handleClick : null}size='sm' variant='link' style={{fontSize: 'smaller', border: '0'}}>{isLoading ? <Spinner
+        as="span"
+        animation="border"
+        variant="warning"
+        size="sm"
+        role="status"
+        aria-hidden="true"
+      /> : <u>{'Yes'}</u>}{' '}
       </Button>
       <Badge pill variant='secondary'>{yesCount}</Badge>
       <span className="sr-only">{`${yesCount} people found this review helpful`}</span>{' | '}

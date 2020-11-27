@@ -42,7 +42,7 @@ const ReviewTile = ({ review }) => (
           <ReviewResponse response={review.response}/>
         ) : null}
       </Card.Text>
-      <Helpfulness helpfulness={review.helpfulness}/>
+      <Helpfulness helpfulness={review.helpfulness} reviewId={review.review_id}/>
     </Card.Body>
   </Card>
 );

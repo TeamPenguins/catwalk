@@ -8,4 +8,8 @@ const GetReviews = (productId) => {
 const GetReviewMetaData = (productId) => {
   return axios.get(`http://3.21.164.220/reviews/meta/?product_id=${productId}`);
 };
-export { GetReviews, GetReviewMetaData };
+
+const UpdateHelpfulnessCount = (reviewId) => {
+  return axios.put(`http://3.21.164.220/reviews/${reviewId}/helpful`);
+};
+export { GetReviews, GetReviewMetaData, UpdateHelpfulnessCount };
