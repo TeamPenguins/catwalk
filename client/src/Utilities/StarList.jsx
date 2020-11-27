@@ -27,17 +27,3 @@ const StarList = ( {rating} ) => {
 };
 
 export default StarList;
-
-
-// for (var i = 0; i < 5; i++) {
-//   if (i === Number(this.state.starRating.split('.')[0])) {
-//     listOfStars.push(<Star fill={'0.' + this.state.starRating.split('.')[0]} />);
-//   } else if (i > Number(this.state.starRating.split('.')[0])) {
-//     listOfStars.push(<Star fill={'0'} />);
-//   } else {
-//     listOfStars.push(<Star fill={'1'} />);
-//   }
-// }
-// return (
-//   <div>{listOfStars}</div>
-// );

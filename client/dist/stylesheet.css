@@ -16,8 +16,13 @@
 
 
 /* ---------- RATINGS AND REVIEWS ----------*/
+svg {
+  vertical-align: unset;
+}
 
-
+.productBreakdownStars {
+  padding-top: 13px;
+}
 
 
 /* ------ RELATED ITEMS AND COMPARISON -----*/
