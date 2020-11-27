@@ -10,7 +10,7 @@ const StarRating = (props) => {
       {props.includeNumber === 1 ? (
         <h1>{(averageRating).slice(0, averageRating)}</h1>
       ) : null}
-      <Col>
+      <Col className='productBreakdownStars'>
         <StarList rating={averageRating} />
       </Col>
     </Row>
