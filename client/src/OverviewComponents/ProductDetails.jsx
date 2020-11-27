@@ -32,8 +32,8 @@ class ProductDetails extends React.Component {
         <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
-            <div className="my-1">
-              <StarRating ratings={this.props.ratings} />
+            <div className="my-1 flex-row">
+              <StarRating ratings={this.props.ratings} /> <a href="#ratings-and-reviews" style={{color: 'black', fontSize: '.75rem'}}>Read all reviews</a>
             </div>
 
             <p className="my-1" >{this.props.selectedProduct.category}</p>
