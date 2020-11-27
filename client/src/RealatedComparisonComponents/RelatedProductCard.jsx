@@ -44,7 +44,7 @@ class RelatedProductCard extends React.Component {
       .catch(/*console.error('error at fetch style info')*/);
   }
   changeSelectedProduct () {
-    this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo)
+    this.props.productChangeMethod(this.state.productInfo, this.state.styleInfo);
   }
   fetchAllInfo(id) {
     this.fetchStyleInfo(id);
