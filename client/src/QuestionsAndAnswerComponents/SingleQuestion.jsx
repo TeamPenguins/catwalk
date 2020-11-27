@@ -16,7 +16,7 @@ class SingleQuestion extends Component {
       <div>
         <Row>
           <Col md={4}>
-            <div><strong>Q: {this.props.singleQuestion.question_body}</strong></div>
+            <div className ='singleQuestion'><strong>Q: {this.props.singleQuestion.question_body}</strong></div>
           </Col>
           <Col md={{span: 4, offset: 4}}>
             <small>Helpful?</small>
