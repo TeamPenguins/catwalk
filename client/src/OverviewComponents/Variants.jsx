@@ -11,7 +11,6 @@ const Variants = (props) => {
   // selection is the style_id number of the image that is clicked on
   var selection = props.selectedStyle; // num - defaults to the first style of the camo onesie product
 
-
   // the stylesAvail are the possible style options of the selected product
   var stylesAvail = props.styles.results;
   // the styleClicked is the object of all possible skus
@@ -43,11 +42,10 @@ const Variants = (props) => {
 
   const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
 
-
   var quantities = [];
   var quantityIndex = sizeArr.indexOf(selectedSize);
   for (var i = 1; i <= quantityArr[quantityIndex]; i++) {
-    quantities.push(i);
+    if (i < 16) { quantities.push(i); }
   }
   console.log('qI: ' + quantityIndex);
 
