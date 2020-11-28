@@ -40,7 +40,7 @@ const ReviewTile = ({ review }) => (
           ) : null}
         </Card.Text>
         <Card.Text>
-          {review.response ? (
+          {review.response && review.response !== 'null' ? (
             <ReviewResponse response={review.response}/>
           ) : null}
         </Card.Text>

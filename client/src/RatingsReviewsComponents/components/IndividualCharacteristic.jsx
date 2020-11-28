@@ -6,16 +6,14 @@ import Details from '../../Utilities/characteristicDetails.js';
 // recieves reviewsMetaData as props
 const IndividualCharacteristic = (props) => {
   let initialFill = Math.round((props.value / 5) * 100) + '%';
-  console.log(initialFill);
   let remainingFill = 100 - (initialFill - 1);
   let lol = {backgroundColor: '#e9ecef', height: '5px', position: 'relative'};
   let moreStyle = {position: 'absolute', left: initialFill};
   let anotherStyle = {'text-align': 'end', 'font-size': 'small'};
-  let stile = {'font-size': 'small'};
   return (
     <Container>
       <Row>
-        <Col style={stile}>
+        <Col style={{fontSize: '15px'}}>
           {props.characteristic}
         </Col>
       </Row>
@@ -27,10 +25,10 @@ const IndividualCharacteristic = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col style={stile}>
+        <Col style={{fontSize: '11px'}}>
           {Details[props.characteristic][0]}
         </Col>
-        <Col style={anotherStyle}>
+        <Col style={{fontSize: '11px', textAlign: 'end'}}>
           {Details[props.characteristic][1]}
         </Col>
       </Row>

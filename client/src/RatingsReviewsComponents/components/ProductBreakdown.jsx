@@ -12,8 +12,10 @@ const ProductBreakdown = (props) => {
   return (
     <Container style={style}>
       <Row>
-        <Col >
-          <StarRating ratings={props.reviewMetaData.ratings} includeNumber={1}/>
+        <Col>
+          <Col>
+            <StarRating ratings={props.reviewMetaData.ratings} includeNumber={1}/>
+          </Col>
         </Col>
       </Row>
       <p></p>
@@ -24,7 +26,9 @@ const ProductBreakdown = (props) => {
       </Row>
       <p></p>
       <Row>
-        <RatingBreakdown ratings={props.reviewMetaData.ratings} />
+        <Col>
+          <RatingBreakdown ratings={props.reviewMetaData.ratings} />
+        </Col>
       </Row>
       <br />
       <Row>
