@@ -11,6 +11,7 @@ const Variants = (props) => {
   // selection is the style_id number of the image that is clicked on
   var selection = props.selectedStyle; // num - defaults to the first style of the camo onesie product
 
+
   // the stylesAvail are the possible style options of the selected product
   var stylesAvail = props.styles.results;
   // the styleClicked is the object of all possible skus

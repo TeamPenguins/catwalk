@@ -55,6 +55,11 @@ class ProductDetails extends React.Component {
 
           {/* size/quantity component */}
           <Variants styles={this.props.styles} selectedStyle={this.state.selectedStyle} updateStyleOptions={this.updateStyleOptions} selectedProduct={this.props.selectedProduct} />
+          <Row className="my-2">
+            <button><i className="fa fa-facebook-square" style={{fontSize: 32}}></i></button>
+            <button><i className="fa fa-twitter-square" style={{fontSize: 32}}></i></button>
+            <button><i className="fa fa-pinterest-square" style={{fontSize: 32}}></i></button>
+          </Row>
 
         </Col>
       </Row>
