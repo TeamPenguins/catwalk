@@ -21,7 +21,7 @@ class AnswersList extends Component {
     fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=20`)
       .then(response => response.json())
       .then((answerList) => {
-        if (answerList.results.length === 0) {
+        if (answerList.results.length <= 20) {
           this.setState({
             hasMoreAnswers: false,
           });
@@ -69,7 +69,8 @@ class AnswersList extends Component {
             <div>
 
               <SingleAnswer
-                singleAnswer ={singleAnswer}/>
+                singleAnswer ={singleAnswer}
+              />
             </div>
           );
         })}
