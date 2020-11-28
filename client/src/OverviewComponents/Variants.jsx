@@ -1,10 +1,12 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 
 
 
 const Variants = (props) => {
+
+  const [selectedSizeQuantities, setSelectedSizeQuantities] = useState([]);
 
   // selection is the style_id number of the image that is clicked on
   var selection = props.selectedStyle; // num - defaults to the first style of the camo onesie product
@@ -39,19 +41,29 @@ const Variants = (props) => {
     variantArr.push(value.size, value.quantity);
   }
 
+  const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
+
+
+  var quantities = [];
+  var quantityIndex = sizeArr.indexOf(selectedSize);
+  for (var i = 1; i <= quantityArr[quantityIndex]; i++) {
+    quantities.push(i);
+  }
+  console.log('qI: ' + quantityIndex);
+
 
   return (
     <form>
       <Row className="my-3">
         {/* map through the available sizes array for the style chosen */}
-        <select className="col-6 mr-3 form-control">
+        <select className="col-6 mr-3 form-control" onChange={e => setSelectedSize(e.target.value)}>
           {sizeArr.map((size, index) => {
             return <option key={index}>{size}</option>;
           })}
         </select>
         {/* map through the available quantities array for the style chosen */}
         <select className="col-3 form-control">
-          {quantityArr.map((quantity, index) => {
+          {quantities.map((quantity, index) => {
             return <option key={index} >{quantity}</option>;
           })}
         </select>
