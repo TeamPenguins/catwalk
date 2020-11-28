@@ -1,5 +1,8 @@
 import React from 'react';
 import {Star, XCircle} from 'react-bootstrap-icons';
+import Interactions from '../Utilities/Interactions.js';
+import RelatedItemsAndComparisonList from './RelatedItemsComparisonList.jsx';
+
 
 //takes in an on click method
 //exicutes that method on click
@@ -14,8 +17,8 @@ const ActionButton = ({listType, actionButtonMethod, updateComparedProductMethod
         updateComparedProductMethod(productInfo, styleInfo);
       }
       actionButtonMethod(productInfo.id);
-    }
-    }>{icon}</button>
+    }}
+    >{icon}</button>
   );
 };
 
