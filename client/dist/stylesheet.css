@@ -60,7 +60,7 @@ svg {
   max-height: 400px;
   min-height: 400px;
 }
-.related:hover {
+.productCard:hover {
   cursor: pointer;
 }
 .productsList {
@@ -80,19 +80,11 @@ svg {
   z-index: 10
 }
 .addButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  display: block;
+  position: relative;
+  height: 400px;
 }
-.align-right {
-  text-align: right
-}
-.align-left {
-  text-align: left
-}
-.align-center {
-  text-align: center;
-}
+
 
 .card-img {
   height: 200px;
@@ -113,7 +105,6 @@ svg {
   flex-wrap: nowrap;
 }
 #right-nav {
-
   position: static;
   height: 100%;
   right: 100px;
@@ -125,4 +116,48 @@ svg {
   margin: 0;
   padding: 0;
 }
+button {
+  border: none;
+  background-color: transparent;
+}
+/* comparison modal */
+.feature {
+  padding-bottom: 20px;
+}
+.spacer {
+  display: block;
+  height: 50px;
+}
+.align-right {
+  text-align: right;
+  white-space: nowrap
+}
+.align-left {
+  text-align: left;
+  white-space: nowrap
+}
+.align-center {
+  text-align: center;
+}
+/* .productNames {
+  display: inline-flex;
+  flex-wrap: nowrap;
+} */
+.modal {
+  min-width: 700px;
+  max-height: 200px;
 
+}
+.sticky {
+  z-index: 20;
+  background-color: white;
+  position: sticky;
+  top: 20px;
+
+}
+.comparing {
+  z-index: 20;
+  background-color: white;
+  position: sticky;
+  top: 0;
+}

@@ -6,16 +6,14 @@ import StarList from './StarList.jsx';
 const StarRating = (props) => {
   const averageRating = CalculateRating(props.ratings);
   return (
-    <Container>
-      <Row>
-        {props.includeNumber === 1 ? (
-          <h1>{(averageRating).slice(0, averageRating)}</h1>
-        ) : null}
-        <Col className='productBreakdownStars'>
-          <StarList rating={averageRating} />
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      {props.includeNumber === 1 ? (
+        <h1>{(averageRating).slice(0, averageRating)}</h1>
+      ) : null}
+      <Col className='productBreakdownStars'>
+        <StarList rating={averageRating} />
+      </Col>
+    </Row>
   );
 };
 

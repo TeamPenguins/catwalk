@@ -27,7 +27,11 @@ class ComparisonModal extends React.Component {
   remapFeaturesInfo (rawProductFeatures) {
     var mappedFeatures = {};
     rawProductFeatures.forEach((featureObj) => {
-      mappedFeatures[featureObj.feature] = featureObj.value;
+      if (featureObj.value === 'null') {
+        mappedFeatures[featureObj.feature] = '';
+      } else {
+        mappedFeatures[featureObj.feature] = featureObj.value;
+      }
     });
     return mappedFeatures;
   }
@@ -70,40 +74,29 @@ class ComparisonModal extends React.Component {
     return (
       <Modal
         show={this.state.modalViewState}
-        onHide={() => this.setState(this.props.actionButtonMethod())}>
+        onHide={() => this.setState(this.props.actionButtonMethod())}
+        dialogClassName="modal"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
         <Modal.Body>
-          <h6 className="align-center">COMPARING</h6>
-          <Row>
-            <Col className="align-left"><h6>{this.state.selectedProduct.name}</h6></Col>
-            <Col></Col>
-            <Col className="align-right"><h6>{this.state.comparedProductInfo.name}</h6></Col>
+          <Row className="comparing"><Col>COMPARING</Col></Row>
+          <Row className="sticky">
+            <Col className="align-left">{this.state.selectedProduct.name}</Col>
+            <Col/>
+            <Col className="align-right">{this.state.comparedProductInfo.name}</Col>
           </Row>
+          <Row className="spacer" />
           {
             this.state.allFeatureNames.map(feature => {
               return (
                 <Row>
-                  <Col className="align-left">{this.state.selectedProductFeatures[feature]}</Col>
-                  <Col className="align-center">{feature}</Col>
-                  <Col className="align-right">{this.state.comparedProductFeatures[feature]}</Col>
+                  <Col className="feature align-left">{this.state.selectedProductFeatures[feature]}</Col>
+                  <Col className="feature align-center">{feature}</Col>
+                  <Col className="feature align-right">{this.state.comparedProductFeatures[feature]}</Col>
                 </Row>
               );
             })
           }
-          {/*
-              map through allFeatureNames,
-              each iteration create a row
-                inside will be three columns
-                  if the current feature name is a key in selected object features,
-                  column one will be the value or checkmark
-                second column will be the current feature name
-                  if the curent feature name is  a key in compared product featurees
-                    third column will be its value or checkmark
-            */}
-
-          {
-
-          }
-
         </Modal.Body>
 
       </Modal>

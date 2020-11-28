@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 import Variants from './Variants.jsx';
 import Gallery from './Gallery.jsx';
+import StarRating from '../Utilities/StarRating.jsx';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -31,12 +32,8 @@ class ProductDetails extends React.Component {
         <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
-            <div className="my-1">
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
+            <div className="my-1 flex-row">
+              <StarRating ratings={this.props.ratings} /> <a href="#ratings-and-reviews" style={{color: 'black', fontSize: '.75rem'}}>Read all reviews</a>
             </div>
 
             <p className="my-1" >{this.props.selectedProduct.category}</p>
@@ -51,7 +48,7 @@ class ProductDetails extends React.Component {
             <Row className="my-2" style={{ maxWidth: 300 }} >
               {/* map through the styles (results arr) and output an image tag for each */}
               {this.props.styles.results.map((style, index) => {
-                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
               })}
             </Row>
           </div>
