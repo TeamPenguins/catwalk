@@ -1,9 +1,8 @@
 import {PostInteractions} from './axiosHelpers';
 
 const eventParser = ({target, timeStamp}, widgetName) => {
-  debugger;
-  var Interactions = {
 
+  var Interactions = {
     "element": target.nodeName,
     "time": JSON.stringify(timeStamp),
     "widget": widgetName
