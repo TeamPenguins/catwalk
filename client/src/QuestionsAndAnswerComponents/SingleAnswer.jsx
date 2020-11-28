@@ -13,7 +13,8 @@ class SingleAnswer extends Component {
   render() {
 
     return (
-      <div>
+      <div className='singleAnswerBody'>
+
         <div>
           <small>{this.props.singleAnswer.body}</small>
         </div>
@@ -32,6 +33,7 @@ class SingleAnswer extends Component {
             Helpful? <Card.Link>Yes({this.props.singleAnswer.helpfulness})</Card.Link>
           </small>
         </div>
+        <div className='bottomBorderHalf'></div>
       </div>
     );
   }

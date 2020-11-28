@@ -3,16 +3,42 @@
 
 /* ------------ PRODUCT OVERVIEW -----------*/
 
-/* selector questionList Component / limits overflow with a scroll bar*/
-#app > div > div:nth-child(5) > div > div > div{
-  max-height: 600px;
-  overflow: auto;
-  overflow-x: hidden;
-}
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 
+/* selector questionList Component / limits overflow with a scroll bar*/
+.questionsAnswersCard.card{
+  border-style: hidden;
+}
 
+.questionAnswerListBody{
+  border-style: hidden;
+  max-height: 500px;
+  min-height:300px;
+  overflow: scroll;
+  overflow-x: hidden
+}
+
+.questionsAnswersContainer.container{
+  padding-bottom: 20px;
+}
+
+.singleQuestion{
+  padding-bottom: 15px;
+  padding-top: 15px
+}
+
+.singleAnswerBody{
+  padding-bottom: 10px;
+}
+
+.bottomBorderHalf {
+  border-bottom: 2px inset lightgray;
+  position: absolute;
+  right: 65%;
+  left:0;
+
+}
 
 
 /* ---------- RATINGS AND REVIEWS ----------*/
