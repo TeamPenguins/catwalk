@@ -55,13 +55,13 @@ const Variants = (props) => {
     <form>
       <Row className="my-3">
         {/* map through the available sizes array for the style chosen */}
-        <select className="col-6 mr-3 form-control" onChange={e => setSelectedSize(e.target.value)}>
+        <select aria-label="select a size" className="col-6 mr-3 form-control" onChange={e => setSelectedSize(e.target.value)}>
           {sizeArr.map((size, index) => {
             return <option key={index}>{size}</option>;
           })}
         </select>
         {/* map through the available quantities array for the style chosen */}
-        <select className="col-3 form-control">
+        <select aria-label="select a quantity" className="col-3 form-control">
           {quantities.map((quantity, index) => {
             return <option key={index} >{quantity}</option>;
           })}
@@ -69,7 +69,7 @@ const Variants = (props) => {
       </Row>
       <Row>
         <Button variant="outline-secondary mr-3">Add To Cart</Button>{' '}
-        <Button variant="secondary">
+        <Button variant="secondary" aria-label="save as a favorite">
           <Star />
         </Button>
       </Row>
