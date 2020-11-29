@@ -17,6 +17,11 @@ class ProductDetails extends React.Component {
     this.setState({
       selectedStyle: event.target.id
     });
+    // remove the active class from the previous el.
+    const prevEl = document.querySelector('.active');
+    prevEl.classList.remove('active');
+    const el = document.getElementById(event.target.id);
+    el.classList.toggle('active');
   }
 
   updateStyleOptions(styleClicked, indOfStyleClicked) {
@@ -28,7 +33,7 @@ class ProductDetails extends React.Component {
     return (
       <Row>
         {/* <Gallery styles={this.props.styles} mainImages={this.state.selectedImages}/> */}
-        <Gallery styles={this.props.styles} mainImages={this.props.styles.results[this.state.indexOfSelectedStyle].photos}/>
+        <Gallery styles={this.props.styles} mainImages={this.props.styles.results[this.state.indexOfSelectedStyle].photos} selectedImages={this.state.selectedImages}/>
         <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
