@@ -34,11 +34,10 @@ const Variants = (props) => {
   // creates arrays for the size and quantities from the selected style skus
   var sizeArr = [];
   var quantityArr = [];
-  var variantArr = [];
   for (const [key, value] of Object.entries(skus)) {
     sizeArr.push(value.size);
     quantityArr.push(value.quantity);
-    variantArr.push(value.size, value.quantity);
+
   }
 
   const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
