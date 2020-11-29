@@ -47,7 +47,27 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
       setCharacteristicsValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
     }
   };
-  // const [ratingValidate, setRatingValidation] = useState(null);
+
+  const [summaryValidate, setSummaryValidate] = useState(null);
+  const validateSummary = (event) => {
+    event.target.value.length > 1 ? setSummaryValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
+  };
+  const [bodyValidate, setBodyValidate] = useState(null);
+
+  const [bodyCharacters, setBodyCharacterCount] = useState(0);
+
+  const [bodyStatus, setBodyStatus] = useState('Minimum required characters left: [50]');
+
+  const calculateRemaining = (event) => {
+    setBodyCharacterCount(event.target.value.length);
+    if (bodyCharacters > 49) {
+      setBodyStatus('Minimum reached');
+      setBodyValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+    } else {
+      setBodyStatus(`Minimum required characters left: [${50 - bodyCharacters}]`);
+    }
+  };
+  //const [ratingValidate, setRatingValidation] = useState(null);
   // const [ratingValidate, setRatingValidation] = useState(null);
   // const [ratingValidate, setRatingValidation] = useState(null);
 
@@ -115,7 +135,24 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
               <Form.Label><b>Characteristics</b>{characteristicsValidate}</Form.Label>
               <FormCharacteristics characteristics={characteristics} validateHelper={checkCharacteristicsCompletion}/>
             </Form.Group>
-            <Button type="submit">Submit form</Button>
+            <Form.Group controlId="summary">
+              <Form.Label><b>Summary</b>{summaryValidate}</Form.Label>
+              <Form.Control type="text" placeholder="Example: Best purchase ever!" onChange={validateSummary}/>
+              <Form.Control.Feedback type='valid'>Looks great!</Form.Control.Feedback>
+              <Form.Control.Feedback type='invalid'>TOO MANY WORDS</Form.Control.Feedback>
+              <Form.Text className="text-muted">
+                Write a summary! Max characters: 60
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="body">
+              <Form.Label><b>Body</b>{bodyValidate}</Form.Label>
+              <Form.Control type="textarea" placeholder="Why did you like the product or not?" onChange={calculateRemaining} required/>
+              <Form.Control.Feedback type='valid'>Thanks for the feedback!</Form.Control.Feedback>
+              <Form.Text className="text-muted">
+                {bodyStatus}
+              </Form.Text>
+            </Form.Group>
+            <Button type="submit">Submit Review</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
