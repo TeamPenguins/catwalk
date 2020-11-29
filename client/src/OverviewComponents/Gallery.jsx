@@ -4,7 +4,7 @@ import { Carousel, CarouselItem, Col } from 'react-bootstrap';
 
 const Gallery = (props) => {
 
-  const [mainIndex, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -23,7 +23,7 @@ const Gallery = (props) => {
 
   return (
     <Col sm={8} className="my-5">
-      <Carousel activeIndex={mainIndex} onSelect={handleSelect} interval={null} indicators={false}>
+      <Carousel activeIndex={index} onSelect={handleSelect} interval={null} indicators={false}>
         {/* map through the main images and output a carousel item img for each one */}
         {mainImagesArr.map((image, index) => {
           return (

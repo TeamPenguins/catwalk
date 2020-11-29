@@ -17,11 +17,12 @@ class ProductDetails extends React.Component {
     this.setState({
       selectedStyle: event.target.id
     });
-    // remove the active class from the previous el.
-    const prevEl = document.querySelector('.active');
-    prevEl.classList.remove('active');
+
+    // toggle the active class from the previous el.
+    const prevEl = document.querySelector('.activeThumb');
+    if (prevEl) { prevEl.classList.remove('activeThumb'); }
     const el = document.getElementById(event.target.id);
-    el.classList.toggle('active');
+    el.classList.toggle('activeThumb');
   }
 
   updateStyleOptions(styleClicked, indOfStyleClicked) {

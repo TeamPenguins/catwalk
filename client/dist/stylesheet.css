@@ -2,7 +2,9 @@
 
 
 /* ------------ PRODUCT OVERVIEW -----------*/
-
+.activeThumb {
+  filter: drop-shadow(0 0 0.5rem rgb(133, 131, 128));
+}
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 
