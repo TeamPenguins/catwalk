@@ -43,7 +43,7 @@ const Variants = (props) => {
   const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
 
   var quantities = [];
-  var quantityIndex = sizeArr.indexOf(selectedSize); // the size index is -1
+  var quantityIndex = sizeArr.indexOf(selectedSize);
   if (quantityIndex === -1) {
     quantityIndex = 0;
   }
