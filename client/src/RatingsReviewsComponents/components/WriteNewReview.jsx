@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import ModalStars from '../../Utilities/ModalStars.jsx';
 import { Rating } from '@material-ui/lab';
 import FormCharacteristics from './FormCharacteristics.jsx';
+import { CheckCircleFill } from 'react-bootstrap-icons';
 
 const WriteNewReview = ({ selectedProduct, characteristics}) => {
   const [show, setShow] = useState(false);
@@ -22,6 +23,34 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
     5: 'Great',
   };
 
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
+  const [ratingValidate, setRatingValidation] = useState(null);
+  const [recommendValidate, setRecommendValidate] = useState(null);
+  const [characteristicsValidate, setCharacteristicsValidate] = useState(null);
+
+  const [characteristicsCompletion, setCharacteristicsCompletion] = useState(0);
+
+  const checkCharacteristicsCompletion = () => {
+    setCharacteristicsCompletion(characteristicsCompletion + 1);
+    if (characteristicsCompletion >= Object.keys(characteristics).length - 1) {
+      setCharacteristicsValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+    }
+  };
+  // const [ratingValidate, setRatingValidation] = useState(null);
+  // const [ratingValidate, setRatingValidation] = useState(null);
+  // const [ratingValidate, setRatingValidation] = useState(null);
+
   return (
     <>
       <Button variant='outline-dark' onClick={handleShow}>ADD A REVIEW</Button>
@@ -32,9 +61,9 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group controlId="overallRating">
-              <Form.Label><b>Overall Rating</b></Form.Label>
+              <Form.Label><b>Overall Rating</b>{ratingValidate}</Form.Label>
               <Container>
                 <Row style={{width: '250px'}}>
                   <Col>
@@ -42,16 +71,21 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                       value={ratingValue}
                       size="small"
                       precision={1}
-                      onChange={(event, newValue) => { setRatingValue(newValue); }}
-                      onChangeActive={(event, newHover) => { setHoverValue(newHover); }}
+                      onChange={(event, newValue) => {
+                        setRatingValue(newValue);
+                        setRatingValidation(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+                      }}
+                      onChangeActive={(event, newHover) => {
+                        setHoverValue(newHover);
+                      }}
                     />
                   </Col>
                   {ratingValue !== null && <Col >{ratingLabels[hoverValue !== -1 ? hoverValue : ratingValue]}</Col>}
                 </Row>
               </Container>
             </Form.Group>
-            <Form.Group controlId="productRecommendation">
-              <Form.Label><b>Do you recommend this product?</b></Form.Label>
+            <Form.Group controlId="productRecommendation" required >
+              <Form.Label><b>Do you recommend this product?</b>{recommendValidate}</Form.Label>
               <Form.Row>
                 <Col>
                   <Form.Check
@@ -60,6 +94,9 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                     label="Yes"
                     name="formRecRadio"
                     id="formRecRadio1"
+                    onClick={() => {
+                      setRecommendValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+                    }}
                   />
                   <Form.Check
                     inline
@@ -67,14 +104,18 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                     label="No"
                     name="formRecRadio"
                     id="formRecRadio2"
+                    onClick={() => {
+                      setRecommendValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+                    }}
                   />
                 </Col>
               </Form.Row>
             </Form.Group>
             <Form.Group controlId="characteristics">
-              <Form.Label><b>Characteristics</b></Form.Label>
-              <FormCharacteristics characteristics={characteristics}/>
+              <Form.Label><b>Characteristics</b>{characteristicsValidate}</Form.Label>
+              <FormCharacteristics characteristics={characteristics} validateHelper={checkCharacteristicsCompletion}/>
             </Form.Group>
+            <Button type="submit">Submit form</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
