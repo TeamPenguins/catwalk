@@ -43,11 +43,15 @@ const Variants = (props) => {
   const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
 
   var quantities = [];
-  var quantityIndex = sizeArr.indexOf(selectedSize);
+  var quantityIndex = sizeArr.indexOf(selectedSize); // the size index is -1
+  if (quantityIndex === -1) {
+    quantityIndex = 0;
+  }
+  console.log('sizeInd: ' + sizeArr.indexOf(selectedSize));
   for (var i = 1; i <= quantityArr[quantityIndex]; i++) {
     if (i < 16) { quantities.push(i); }
   }
-  console.log('qI: ' + quantityIndex);
+
 
 
   return (
