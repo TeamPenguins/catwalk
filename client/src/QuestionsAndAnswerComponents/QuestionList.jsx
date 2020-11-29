@@ -54,12 +54,13 @@ class QuestionList extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.productId !== this.props.productId) {
       this.setState({
         numOfQuestions: 2
       });
       this.fetchQuestionList(this.props.productId, this.state.fetchCount);
+
     }
   }
 
@@ -69,6 +70,7 @@ class QuestionList extends Component {
 
   moreQuestionsToggle() {
     if (this.state.numOfQuestions === this.state.questions.length) {
+      this.fetchQuestionList(this.props.productId, this.state.fetchCount);
       return true;
     } else {
       return false;
