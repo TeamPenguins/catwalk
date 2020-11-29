@@ -13,7 +13,7 @@ class SingleQuestion extends Component {
 
   render() {
     return (
-      <div>
+      <div key={this.props.singleQuestion.question_id}>
         <Row>
           <Col md={4}>
             <div className ='singleQuestion'><strong>Q: {this.props.singleQuestion.question_body}</strong></div>

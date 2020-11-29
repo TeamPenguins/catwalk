@@ -20,7 +20,7 @@ class QuestionList extends Component {
     this.fetchMoreQuestionsIfAvailable = this.fetchMoreQuestionsIfAvailable.bind(this);
   }
 
-  fetchQuestionList(prodId, count) {
+  fetchQuestionList(prodId, count, numOfQuestions) {
 
     fetch(`http://3.21.164.220/qa/questions/?product_id=${prodId}&count=${count}`)
       .then(response => response.json())
@@ -56,6 +56,9 @@ class QuestionList extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
+      this.setState({
+        numOfQuestions: 2
+      });
       this.fetchQuestionList(this.props.productId, this.state.fetchCount);
     }
   }
@@ -88,9 +91,7 @@ class QuestionList extends Component {
       <div>
         <div className='questionAnswerListBody'>{this.state.questions.slice(0, this.state.numOfQuestions).map((singleQuestion) => {
           return (
-            <div>
-              <SingleQuestion singleQuestion ={singleQuestion}/>
-            </div>
+            <SingleQuestion singleQuestion ={singleQuestion}/>
           );
         })}
         </div>

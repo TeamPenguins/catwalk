@@ -14,15 +14,15 @@ class SingleAnswer extends Component {
   render() {
 
     return (
-      <div className='singleAnswerBody'>
+      <div key={this.props.singleAnswer.answer_id} className='singleAnswerBody'>
         <div>
           <small>{this.props.singleAnswer.body}</small>
         </div>
         <Row>
-          {this.props.singleAnswer.photos.map((currPhoto) => {
+          {this.props.singleAnswer.photos.map((currPhoto, index) => {
             return (
-              <Col md={2}>
-                <img src={currPhoto.url} style ={{height: 100, weidth: 100}}/>
+              <Col key={index} md={2}>
+                <img alt={'photo describing ' + this.props.singleAnswer.body}src={currPhoto.url} style ={{height: 100, weidth: 100}}/>
               </Col>
             );
           })}
