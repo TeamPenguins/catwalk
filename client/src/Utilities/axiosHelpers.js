@@ -17,4 +17,8 @@ const UpdateReviewToReported = (reviewId) => {
   return axios.put(`http://3.21.164.220/reviews/${reviewId}/report`);
 };
 
-export { GetReviews, GetReviewMetaData, UpdateHelpfulnessCount, UpdateReviewToReported };
+const PostNewReview = (formObject) => {
+  return axios.post('http://3.21.164.220/reviews', formObject);
+};
+
+export { GetReviews, GetReviewMetaData, UpdateHelpfulnessCount, UpdateReviewToReported, PostNewReview };

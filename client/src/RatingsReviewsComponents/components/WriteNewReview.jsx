@@ -5,7 +5,10 @@ import ModalStars from '../../Utilities/ModalStars.jsx';
 import { Rating } from '@material-ui/lab';
 import FormCharacteristics from './FormCharacteristics.jsx';
 import { CheckCircleFill, CameraFill } from 'react-bootstrap-icons';
-
+import { Fab } from '@material-ui/core';
+import UploadedPhotos from './UploadedPhotos.jsx';
+import IndividualPhoto from './IndividualPhoto.jsx';
+import { PostNewReview } from '../../Utilities/axiosHelpers.js';
 
 const WriteNewReview = ({ selectedProduct, characteristics}) => {
   const [show, setShow] = useState(false);
@@ -26,60 +29,129 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
 
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
-
   const [ratingValidate, setRatingValidation] = useState(null);
+
+  const [isRecommended, setIsRecommended] = useState(null);
+
   const [recommendValidate, setRecommendValidate] = useState(null);
+
+  const [theCharacteristics, setTheCharacteristics] = useState({});
+
   const [characteristicsValidate, setCharacteristicsValidate] = useState(null);
 
   const [characteristicsCompletion, setCharacteristicsCompletion] = useState(0);
 
-  const checkCharacteristicsCompletion = () => {
-    setCharacteristicsCompletion(characteristicsCompletion + 1);
-    if (characteristicsCompletion >= Object.keys(characteristics).length - 1) {
-      setCharacteristicsValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
-    }
-  };
-
   const [summaryValidate, setSummaryValidate] = useState(null);
-  const validateSummary = (event) => {
-    event.target.value.length > 1 ? setSummaryValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
-  };
+
+  const [theSummary, setTheSummary] = useState('');
+
   const [bodyValidate, setBodyValidate] = useState(null);
 
   const [bodyCharacters, setBodyCharacterCount] = useState(0);
 
   const [bodyStatus, setBodyStatus] = useState('Minimum required characters left: [50]');
 
+  const [theBody, setTheBody] = useState('');
+
+  const [photoValidate, setPhotoValidate] = useState(null);
+
+  const [photosArray, setPhotosArray] = useState([]);
+
+  const [theNickName, setTheNickName] = useState('');
+
+  const [nicknameValidate, setNicknameValidate] = useState(null);
+
+  const [theEmail, setTheEmail] = useState('');
+
+  const [emailValidate, setEmailValidate] = useState(null);
+
+  const checkCharacteristicsCompletion = (charId, userValue) => {
+    let charsCopy = theCharacteristics;
+    charsCopy[charId] = userValue;
+    setTheCharacteristics(charsCopy);
+    setCharacteristicsCompletion(characteristicsCompletion + 1);
+    if (characteristicsCompletion >= Object.keys(characteristics).length - 1) {
+      setCharacteristicsValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+    }
+  };
+
+  const validateSummary = (event) => {
+    if (event.target.value.length > 1) {
+      setSummaryValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+      setTheSummary(event.target.value);
+    }
+  };
+
   const calculateRemaining = (event) => {
     setBodyCharacterCount(event.target.value.length);
     if (bodyCharacters > 49) {
       setBodyStatus('Minimum reached');
+      setTheBody(event.target.value);
       setBodyValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
     } else {
       setBodyStatus(`Minimum required characters left: [${50 - bodyCharacters}]`);
     }
   };
-  const [photoValidate, setPhotoValidate] = useState(null);
 
-  const [nicknameValidate, setNicknameValidate] = useState(null);
-  const validateNickname = (event) => {
-    event.target.value.length > 1 ? setNickNameValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
+  const handleFile = (file) => {
+    const photo = {
+      id: file.lastModified,
+      url: URL.createObjectURL(file),
+    };
+    setPhotosArray(photosArray => [...photosArray,
+      <IndividualPhoto photo={photo}/>]);
   };
 
-  const [emailValidate, setEmailValidate] = useState(null);
+  const validateNickname = (event) => {
+    if (event.target.value.length > 1) {
+      setNicknameValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+      setTheNickName(event.target.value);
+    }
+  };
+
   const validateEmail = (event) => {
     // NEED REGEX FOR EMAIL HERE
-    event.target.value.length > 1 ? setEmailValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
+    if (event.target.value.length > 1) {
+      setEmailValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+      setTheEmail(event.target.value);
+    }
   };
+
+  const handleSubmit = (event) => {
+
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      setValidated(true);
+    } else {
+      // prevent page re-load
+      event.preventDefault();
+      //not sure what this does
+      event.stopPropagation();
+      // Need to transition to loading screen while post req
+      // is going through
+      //then transition to a Thank screen!
+      const formObject = {
+        // eslint-disable-next-line camelcase
+        product_id: selectedProduct.id,
+        rating: ratingValue,
+        summary: theSummary,
+        body: theBody,
+        recommend: isRecommended,
+        name: theNickName,
+        email: theEmail,
+        photos: [],
+        characteristics: theCharacteristics
+      };
+      PostNewReview(formObject)
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
 
   return (
     <>
@@ -126,6 +198,7 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                     id="formRecRadio1"
                     onClick={() => {
                       setRecommendValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+                      setIsRecommended(1);
                     }}
                   />
                   <Form.Check
@@ -136,6 +209,7 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                     id="formRecRadio2"
                     onClick={() => {
                       setRecommendValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>);
+                      setIsRecommended(0);
                     }}
                   />
                 </Col>
@@ -163,22 +237,24 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="photos">
-              <Button variant="outline-dark">{'Upload your photos '}{<CameraFill />}{photoValidate}</Button>
+              <Form.Label><b>{' Upload your photos '}</b></Form.Label>
+              <Form.Row >
+                <UploadedPhotos handleFile={handleFile}/>
+                {photosArray}
+              </Form.Row>
             </Form.Group>
             <Form.Group controlId="nickname">
               <Form.Label><b>What is your nickname</b>{nicknameValidate}</Form.Label>
-              <Form.Control type="text" placeholder="Example: Best purchase ever!" onChange={validateNickname}/>
+              <Form.Control type="text" onChange={validateNickname} required/>
               <Form.Control.Feedback type='valid'>Looks great!</Form.Control.Feedback>
-              <Form.Control.Feedback type='invalid'>TOO MANY WORDS</Form.Control.Feedback>
               <Form.Text className="text-muted">
                 For privacy reasons, do not use your full name or email address
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="email">
               <Form.Label><b>Your email</b>{emailValidate}</Form.Label>
-              <Form.Control type="text" placeholder="Example: Best purchase ever!" onChange={validateEmail}/>
+              <Form.Control type="text" placeholder="yourEmail@" onChange={validateEmail} required/>
               <Form.Control.Feedback type='valid'>Looks great!</Form.Control.Feedback>
-              <Form.Control.Feedback type='invalid'>TOO MANY WORDS</Form.Control.Feedback>
               <Form.Text className="text-muted">
                 For authentication reasons, you will not be emailed
               </Form.Text>
@@ -192,46 +268,3 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
 };
 
 export default WriteNewReview;
-
-
-// Size
-// A size too small
-// ½ a size too small
-// Perfect
-// ½ a size too big
-// A size too wide
-
-// Width
-// Too narrow
-// Slightly narrow
-// Perfect
-// Slightly wide
-// Too wide
-
-// Comfort
-// Uncomfortable
-// Slightly uncomfortable
-// Ok
-// Comfortable
-// Perfect
-
-// Quality
-// Poor
-// Below average
-// What I expected
-// Pretty great
-// Perfect
-
-// Length
-// Runs Short
-// Runs slightly short
-// Perfect
-// Runs slightly long
-// Runs long
-
-// Fit
-// Runs tight
-// Runs slightly tight
-// Perfect
-// Runs slightly long
-// Runs long

@@ -21,7 +21,7 @@ const FormCharacteristics = ({characteristics, validateHelper}) => {
                 key={`${characteristic}${details.id}1`}
                 aria-describedby={`${characteristic}Radio1Help`}
                 onClick={(e) => {
-                  validateHelper();
+                  validateHelper(details.id, e.currentTarget.nextSibling.innerText);
                   setChoice(Details[characteristic][e.currentTarget.nextSibling.innerText - 1]);
                 }}
               />
@@ -38,7 +38,7 @@ const FormCharacteristics = ({characteristics, validateHelper}) => {
                 id={`${characteristic}Radio2`}
                 key={`${characteristic}${details.id}2`}
                 onClick={(e) => {
-                  validateHelper();
+                  validateHelper(details.id, e.currentTarget.nextSibling.innerText);
                   setChoice(Details[characteristic][e.currentTarget.nextSibling.innerText - 1]);
                 }}
               />
@@ -52,7 +52,7 @@ const FormCharacteristics = ({characteristics, validateHelper}) => {
                 id={`${characteristic}Radio3`}
                 key={`${characteristic}${details.id}3`}
                 onClick={(e) => {
-                  validateHelper();
+                  validateHelper(details.id, e.currentTarget.nextSibling.innerText);
                   setChoice(Details[characteristic][e.currentTarget.nextSibling.innerText - 1]);
                 }}
               />
@@ -66,7 +66,7 @@ const FormCharacteristics = ({characteristics, validateHelper}) => {
                 id={`${characteristic}Radio4`}
                 key={`${characteristic}${details.id}4`}
                 onClick={(e) => {
-                  validateHelper();
+                  validateHelper(details.id, e.currentTarget.nextSibling.innerText);
                   setChoice(Details[characteristic][e.currentTarget.nextSibling.innerText - 1]);
                 }}
               />
@@ -81,7 +81,7 @@ const FormCharacteristics = ({characteristics, validateHelper}) => {
                 key={`${characteristic}${details.id}5`}
                 aria-describedby={`${characteristic}Radio5Help`}
                 onClick={(e) => {
-                  validateHelper();
+                  validateHelper(details.id, e.currentTarget.nextSibling.innerText);
                   setChoice(Details[characteristic][e.currentTarget.nextSibling.innerText - 1]);
                 }}
               />
