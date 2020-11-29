@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 import Variants from './Variants.jsx';
 import Gallery from './Gallery.jsx';
+import Price from './Price.jsx';
 import StarRating from '../Utilities/StarRating.jsx';
 
 class ProductDetails extends React.Component {
@@ -12,6 +13,16 @@ class ProductDetails extends React.Component {
     this.onThumbnailClick = this.onThumbnailClick.bind(this);
     this.updateStyleOptions = this.updateStyleOptions.bind(this);
   }
+
+  componentDidUpdate(prevState, prevProps) {
+    // console.log(this.props.selectedProduct);
+    if (prevState.selectedProduct !== this.props.selectedProduct) {
+      this.setState({ indexOfSelectedStyle: 0, selectedStyle: 0});
+      const preEl = document.querySelector('.activeThumb');
+      if (preEl) { preEl.classList.remove('activeThumb'); }
+    }
+  }
+
 
   onThumbnailClick(event) {
     this.setState({
@@ -30,11 +41,14 @@ class ProductDetails extends React.Component {
     this.state.indexOfSelectedStyle = indOfStyleClicked;
   }
 
+  // if the index of this.state.indexOfSelectedStyle does not exist in the this.props.styles.results array
+  // {this.props.styles.results.indexOf(this.state.indexOfSelectedStyle === -1 ? this.props.styles.results[this.state.indexOfSelectedStyle].photos : this.props.styles.results[this.state.indexOfSelectedStyle].photos)}
+
   render() {
     return (
       <Row>
         {/* <Gallery styles={this.props.styles} mainImages={this.state.selectedImages}/> */}
-        <Gallery styles={this.props.styles} mainImages={this.props.styles.results[this.state.indexOfSelectedStyle].photos} selectedImages={this.state.selectedImages}/>
+        <Gallery styles={this.props.styles} mainImages={this.props.styles.results} selectedImages={this.state.selectedImages} indexOfSelectedStyle={this.state.indexOfSelectedStyle} />
         <Col sm={4} className="my-5">
           {/* pull in the star rating component and link to ratings section below */}
           <div>
@@ -44,17 +58,17 @@ class ProductDetails extends React.Component {
 
             <p className="my-1" >{this.props.selectedProduct.category}</p>
             <h1>{this.props.selectedProduct.name}</h1>
-            <p>${this.props.selectedProduct.default_price}</p>
+            <Price styles={this.props.styles} indexOfSelectedStyle={this.state.indexOfSelectedStyle}/>
           </div>
 
           {/* break up into styles component */}
           <div>
             {/* onClick -> update the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
-            <p><span className="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[0].name}</p>
+            <p><span className="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[this.state.indexOfSelectedStyle].name}</p>
             <Row className="my-2" style={{ maxWidth: 350 }} >
               {/* map through the styles (results arr) and output an image tag for each */}
               {this.props.styles.results.map((style, index) => {
-                return <React.Fragment><img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/><i className="fa fa-check" style={{fontSize: 20, marginLeft: -14, color: 'white'}}></i></React.Fragment>;
+                return <React.Fragment><img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/><i className={this.state.selectedStyle === 0 && index === 0 ? 'fa fa-check activeThumb' : 'fa fa-check'} style={{fontSize: 20, marginLeft: -14, color: 'white'}}></i></React.Fragment>;
               })}
             </Row>
           </div>

@@ -11,7 +11,7 @@ const Gallery = (props) => {
   };
 
   // if a style hasn't been selected, use the first set of images
-  const allStylePhotos = props.mainImages;
+  const allStylePhotos = props.mainImages[props.indexOfSelectedStyle].photos;
 
   // split the all the style's photos up into individual arrays for the main images and the thumbnails
   var thumbnailsArr = [];
@@ -23,6 +23,13 @@ const Gallery = (props) => {
 
   return (
     <Col sm={8} className="my-5">
+      <Col className="mt-1" style={{position: 'absolute', zIndex: 1}}>
+        {thumbnailsArr.map((image, index) => {
+          return (
+            <img key={index} className="d-block m-1 thumbBorder" src={image === null ? 'https://via.placeholder.com/650' : image} style={{ height: 75, width: 75, objectFit: 'cover' }} alt={props.styles.results[0].name} />
+          );
+        })}
+      </Col>
       <Carousel activeIndex={index} onSelect={handleSelect} interval={null} indicators={false}>
         {/* map through the main images and output a carousel item img for each one */}
         {mainImagesArr.map((image, index) => {
