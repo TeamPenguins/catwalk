@@ -4,7 +4,8 @@ import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import ModalStars from '../../Utilities/ModalStars.jsx';
 import { Rating } from '@material-ui/lab';
 import FormCharacteristics from './FormCharacteristics.jsx';
-import { CheckCircleFill } from 'react-bootstrap-icons';
+import { CheckCircleFill, CameraFill } from 'react-bootstrap-icons';
+
 
 const WriteNewReview = ({ selectedProduct, characteristics}) => {
   const [show, setShow] = useState(false);
@@ -67,9 +68,18 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
       setBodyStatus(`Minimum required characters left: [${50 - bodyCharacters}]`);
     }
   };
-  //const [ratingValidate, setRatingValidation] = useState(null);
-  // const [ratingValidate, setRatingValidation] = useState(null);
-  // const [ratingValidate, setRatingValidation] = useState(null);
+  const [photoValidate, setPhotoValidate] = useState(null);
+
+  const [nicknameValidate, setNicknameValidate] = useState(null);
+  const validateNickname = (event) => {
+    event.target.value.length > 1 ? setNickNameValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
+  };
+
+  const [emailValidate, setEmailValidate] = useState(null);
+  const validateEmail = (event) => {
+    // NEED REGEX FOR EMAIL HERE
+    event.target.value.length > 1 ? setEmailValidate(<CheckCircleFill fill='green' style={{ verticalAlign: 'middle', marginLeft: '8px' }}/>) : null;
+  };
 
   return (
     <>
@@ -152,12 +162,30 @@ const WriteNewReview = ({ selectedProduct, characteristics}) => {
                 {bodyStatus}
               </Form.Text>
             </Form.Group>
+            <Form.Group controlId="photos">
+              <Button variant="outline-dark">{'Upload your photos '}{<CameraFill />}{photoValidate}</Button>
+            </Form.Group>
+            <Form.Group controlId="nickname">
+              <Form.Label><b>What is your nickname</b>{nicknameValidate}</Form.Label>
+              <Form.Control type="text" placeholder="Example: Best purchase ever!" onChange={validateNickname}/>
+              <Form.Control.Feedback type='valid'>Looks great!</Form.Control.Feedback>
+              <Form.Control.Feedback type='invalid'>TOO MANY WORDS</Form.Control.Feedback>
+              <Form.Text className="text-muted">
+                For privacy reasons, do not use your full name or email address
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label><b>Your email</b>{emailValidate}</Form.Label>
+              <Form.Control type="text" placeholder="Example: Best purchase ever!" onChange={validateEmail}/>
+              <Form.Control.Feedback type='valid'>Looks great!</Form.Control.Feedback>
+              <Form.Control.Feedback type='invalid'>TOO MANY WORDS</Form.Control.Feedback>
+              <Form.Text className="text-muted">
+                For authentication reasons, you will not be emailed
+              </Form.Text>
+            </Form.Group>
             <Button type="submit">Submit Review</Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-      I'm a FOOTER
-        </Modal.Footer>
       </Modal>
     </>
   );
