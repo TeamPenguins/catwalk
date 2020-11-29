@@ -46,9 +46,8 @@ class AddQuestionModal extends Component {
       isInValidEmail: '',
     });
   }
-
   addNewQuestion (data) {
-    axios.post('http://3.21.164.220/qa/questions', data)
+    return axios.post('http://3.21.164.220/qa/questions', data)
       .then((response) => {
         console.log(response);
       })
@@ -56,7 +55,6 @@ class AddQuestionModal extends Component {
         console.log(err);
       });
   }
-
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState({
@@ -67,7 +65,6 @@ class AddQuestionModal extends Component {
   }
 
   questionChangeHandler(e) {
-
     if (e.target.validity.patternMismatch) {
       e.target.setCustomValidity('Must begin with a character, contain a space, and end with ?');
       e.target.reportValidity();
