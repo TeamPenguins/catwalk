@@ -25,7 +25,7 @@ class AddQuestionModal extends Component {
     this.emailChangeHandler = this.emailChangeHandler.bind(this);
     this.submitQuestionClickHandler = this.submitQuestionClickHandler.bind(this);
     this.addNewQuestion = this.addNewQuestion.bind(this);
-    this.checkFormValidity = this.checkFormValidity.bind(this)
+    this.checkFormValidity = this.checkFormValidity.bind(this);
   }
 
   addQuestionsClickHandler (e) {
@@ -68,11 +68,17 @@ class AddQuestionModal extends Component {
 
   questionChangeHandler(e) {
 
+    if (e.target.validity.patternMismatch) {
+      e.target.setCustomValidity('Must begin with a character, contain a space, and end with ?');
+      e.target.reportValidity();
+    } else {
+      e.target.setCustomValidity('');
+    }
+
     this.setState ({
       userQuestion: e.target.value,
       isInValidQuestion: e.target.checkValidity()
     });
-    e.target.reportValidity();
     e.preventDefault();
   }
 
@@ -87,7 +93,6 @@ class AddQuestionModal extends Component {
   }
 
   nicknameChangeHandler(e) {
-    //e.target.setCustomValidity('must be longer then 3 and less then 16 characters');
     e.target.reportValidity();
     this.setState ({
       userNickname: e.target.value,
