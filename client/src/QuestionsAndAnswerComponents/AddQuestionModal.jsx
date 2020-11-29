@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
-const defaultUserInput = {
-  userQuestion: '',
-  userNickname: '',
-  userEmail: '',
-};
 
 class AddQuestionModal extends Component {
   constructor(props) {
@@ -18,7 +13,9 @@ class AddQuestionModal extends Component {
       userQuestion: '',
       userNickname: '',
       userEmail: '',
-      isInValid: '',
+      isInValidQuestion: '',
+      isInValidNickName: '',
+      isInValidEmail: '',
     };
 
     this.addQuestionsClickHandler = this.addQuestionsClickHandler.bind(this);
@@ -28,6 +25,7 @@ class AddQuestionModal extends Component {
     this.emailChangeHandler = this.emailChangeHandler.bind(this);
     this.submitQuestionClickHandler = this.submitQuestionClickHandler.bind(this);
     this.addNewQuestion = this.addNewQuestion.bind(this);
+    this.checkFormValidity = this.checkFormValidity.bind(this)
   }
 
   addQuestionsClickHandler (e) {
@@ -43,6 +41,9 @@ class AddQuestionModal extends Component {
       userQuestion: '',
       userNickname: '',
       userEmail: '',
+      isInValidQuestion: '',
+      isInValidNickName: '',
+      isInValidEmail: '',
     });
   }
 
@@ -66,25 +67,39 @@ class AddQuestionModal extends Component {
   }
 
   questionChangeHandler(e) {
-    e.target.reportValidity();
+
     this.setState ({
       userQuestion: e.target.value,
-      isInValid: e.target.checkValidity()
+      isInValidQuestion: e.target.checkValidity()
     });
+    e.target.reportValidity();
     e.preventDefault();
   }
+
+  checkFormValidity() {
+    let fullFormIsValid = this.state.isInValidQuestion &&
+    this.state.isInValidNickName && this.state.isInValidEmail;
+    if (fullFormIsValid) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   nicknameChangeHandler(e) {
     //e.target.setCustomValidity('must be longer then 3 and less then 16 characters');
     e.target.reportValidity();
     this.setState ({
-      userNickname: e.target.value
+      userNickname: e.target.value,
+      isInValidNickName: e.target.checkValidity()
     });
     e.preventDefault();
   }
   emailChangeHandler(e) {
     e.target.reportValidity();
     this.setState ({
-      userEmail: e.target.value
+      userEmail: e.target.value,
+      isInValidEmail: e.target.checkValidity()
     });
     e.preventDefault();
   }
@@ -97,13 +112,8 @@ class AddQuestionModal extends Component {
       'product_id': this.state.productId,
     };
     this.addNewQuestion(data);
-    this.setState = {
-      userQuestion: '',
-      userNickname: '',
-      userEmail: '',
-    };
     this.closeButton();
-
+    e.preventDefault();
   }
 
 
@@ -122,27 +132,28 @@ class AddQuestionModal extends Component {
           <Modal.Body className='questionModal'>
             <Container>
               <Form>
-                <Form.Group controlId='userQuestion' value = {this.state.userQuestion} required>
+                <Form.Group className='userQuestion' value = {this.state.userQuestion} required>
                   <Form.Label>Your Question</Form.Label>
-                  <Form.Control isValid={this.state.isInValid} minLength='4' onChange = {this.questionChangeHandler} placeholder='Ask your question here' required></Form.Control>
-                  <Form.Control.Feedback type='valid' tooltip>Looks Good</Form.Control.Feedback>
+                  <Form.Control isValid={this.state.isInValidQuestion} pattern='^[a-z]+(?:\s[a-z]+)+\?$' onChange = {this.questionChangeHandler} placeholder='Ask your question here' required></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='userNickname' value = {this.state.userNickname} >
                   <Form.Label>What is your nickname?</Form.Label>
-                  <Form.Control minLength='3' onChange={this.nicknameChangeHandler} placeholder='Your nickname here' required></Form.Control>
+                  <Form.Control isValid ={this.state.isInValidNickName} minLength='3' onChange={this.nicknameChangeHandler} placeholder='Your nickname here' required></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='userEmail' value = {this.state.userEmail} >
                   <Form.Label>Your Email</Form.Label>
-                  <Form.Control onChange ={this.emailChangeHandler} type ='email' placeholder='Your email here' required></Form.Control>
+                  <Form.Control isValid={this.state.isInValidEmail} onChange ={this.emailChangeHandler} type ='email' placeholder='Your email here' required></Form.Control>
+                  <Form.Control.Feedback type='valid' tooltip>Looks Good</Form.Control.Feedback>
                 </Form.Group>
               </Form>
             </Container>
 
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.submitQuestionClickHandler}varient='primary'>
+            <Button onClick={this.submitQuestionClickHandler}varient='primary'
+              hidden={this.checkFormValidity()}>
               Submit
             </Button>
           </Modal.Footer>
