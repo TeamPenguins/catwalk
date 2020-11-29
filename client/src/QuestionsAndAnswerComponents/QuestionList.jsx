@@ -54,24 +54,7 @@ class QuestionList extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.productId !== this.props.productId) {
-      this.setState({
-        numOfQuestions: 2
-      });
-      this.fetchQuestionList(this.props.productId, this.state.fetchCount);
-
-    }
-  }
-
-  componentDidMount() {
-    this.fetchQuestionList(this.props.productId, this.state.fetchCount);
-  }
-
   moreQuestionsToggle() {
-    if (this.state.numOfQuestions === this.state.questions.length) {
-      this.fetchQuestionList(this.props.productId, this.state.fetchCount);
-    }
     if (this.state.numOfQuestions === this.state.questions.length) {
       return true;
     } else {
@@ -87,6 +70,19 @@ class QuestionList extends Component {
       });
       this.fetchQuestionList(this.props.productId, newCount);
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.productId !== this.props.productId) {
+      this.fetchQuestionList(this.props.productId, this.state.fetchCount);
+      this.setState({
+        numOfQuestions: 2
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.fetchQuestionList(this.props.productId, this.state.fetchCount);
   }
 
   render() {
