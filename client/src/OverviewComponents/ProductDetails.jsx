@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 import Variants from './Variants.jsx';
 import Gallery from './Gallery.jsx';
+import Price from './Price.jsx';
 import StarRating from '../Utilities/StarRating.jsx';
 
 class ProductDetails extends React.Component {
@@ -57,7 +58,7 @@ class ProductDetails extends React.Component {
 
             <p className="my-1" >{this.props.selectedProduct.category}</p>
             <h1>{this.props.selectedProduct.name}</h1>
-            <p>${this.props.styles.results[this.state.indexOfSelectedStyle].original_price}</p>
+            <Price styles={this.props.styles} indexOfSelectedStyle={this.state.indexOfSelectedStyle}/>
           </div>
 
           {/* break up into styles component */}
