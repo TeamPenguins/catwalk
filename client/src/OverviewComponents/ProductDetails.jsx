@@ -21,7 +21,7 @@ class ProductDetails extends React.Component {
     // toggle the active class from the previous el.
     const prevEl = document.querySelector('.activeThumb');
     if (prevEl) { prevEl.classList.remove('activeThumb'); }
-    const el = document.getElementById(event.target.id);
+    const el = document.getElementById(event.target.id).nextSibling;
     el.classList.toggle('activeThumb');
   }
 
@@ -51,10 +51,10 @@ class ProductDetails extends React.Component {
           <div>
             {/* onClick -> update the selectedStyle id in State, change the main image to the 1st img of that style set, add a checkmark icon */}
             <p><span className="font-weight-bold">STYLE &gt; </span> {this.props.styles.results[0].name}</p>
-            <Row className="my-2" style={{ maxWidth: 300 }} >
+            <Row className="my-2" style={{ maxWidth: 350 }} >
               {/* map through the styles (results arr) and output an image tag for each */}
               {this.props.styles.results.map((style, index) => {
-                return <img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/>;
+                return <React.Fragment><img key={style.style_id} onClick={this.onThumbnailClick} className="rounded-circle p-1" id={style.style_id} src={style.photos[0].thumbnail_url === null ? 'https://via.placeholder.com/50' : style.photos[0].thumbnail_url} style={{ height: 70, width: 70, objectFit: 'cover' }} alt={style.name}/><i className="fa fa-check" style={{fontSize: 20, marginLeft: -14, color: 'white'}}></i></React.Fragment>;
               })}
             </Row>
           </div>
