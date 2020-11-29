@@ -2,7 +2,17 @@
 
 
 /* ------------ PRODUCT OVERVIEW -----------*/
+.activeThumb {
+  color: black !important;
+}
 
+.btn-link {
+  color:#1800ff !important;
+}
+
+.card-link {
+  color:#1800ff !important;
+}
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 
