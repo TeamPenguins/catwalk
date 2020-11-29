@@ -5,9 +5,6 @@ import SpecialStar from './stars.jsx';
 
 const StarList = ( {rating} ) => {
 
-  console.log(typeof rating.split('.')[0]);
-  console.log(typeof rating.split('.')[1]);
-
   let listOfStars = [];
 
   for (var i = 0; i < 5; i++) {
@@ -20,7 +17,6 @@ const StarList = ( {rating} ) => {
       listOfStars.push(<SpecialStar fill={'1'} keyLimePie={i}/>);
     }
   }
-
   return (
     listOfStars
   );
