@@ -7,6 +7,7 @@ class SingleAnswer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      noAnswer: this.props.noAnswer,
     };
   }
 
@@ -14,7 +15,6 @@ class SingleAnswer extends Component {
 
     return (
       <div className='singleAnswerBody'>
-
         <div>
           <small>{this.props.singleAnswer.body}</small>
         </div>
@@ -33,7 +33,6 @@ class SingleAnswer extends Component {
             Helpful? <Card.Link>Yes({this.props.singleAnswer.helpfulness})</Card.Link>
           </small>
         </div>
-        <div className='bottomBorderHalf'></div>
       </div>
     );
   }

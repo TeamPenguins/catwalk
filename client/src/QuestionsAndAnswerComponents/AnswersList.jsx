@@ -15,19 +15,21 @@ class AnswersList extends Component {
     this.fetchAnswerList = this.fetchAnswerList.bind(this);
     this.loadAnswersClickHandler = this.loadAnswersClickHandler.bind(this);
     this.toggleLoadAnswerLink = this.toggleLoadAnswerLink.bind(this);
+    this.testFun = this.testFun.bind(this);
   }
 
   fetchAnswerList() {
     fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=20`)
       .then(response => response.json())
       .then((answerList) => {
-        if (answerList.results.length <= 20) {
+        if (!answerList.results.length) {
           this.setState({
-            hasMoreAnswers: false,
+            noAnswers: this.testFun(answerList.results.length),
           });
         }
         this.setState({
           answerList: answerList.results,
+          noAnswer: this.testFun(answerList.results.length),
         });
       })
       .catch((err) => {
@@ -44,6 +46,14 @@ class AnswersList extends Component {
 
   toggleLoadAnswerLink () {
     if (this.state.answerList.length <= this.state.numOfAnswers) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  testFun(someLength) {
+    if (someLength) {
       return true;
     } else {
       return false;
@@ -67,9 +77,9 @@ class AnswersList extends Component {
         {this.state.answerList.slice(0, this.state.numOfAnswers).map((singleAnswer) => {
           return (
             <div>
-
               <SingleAnswer
                 singleAnswer ={singleAnswer}
+                noAnswer = {this.state.noAnswer}
               />
             </div>
           );

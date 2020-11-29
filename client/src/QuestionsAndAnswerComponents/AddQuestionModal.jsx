@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 
+const defaultUserInput = {
+  userQuestion: '',
+  userNickname: '',
+  userEmail: '',
+};
 
 class AddQuestionModal extends Component {
   constructor(props) {
@@ -9,10 +14,11 @@ class AddQuestionModal extends Component {
     this.state = {
       show: false,
       productName: props.selectedProduct.name,
+      productId: props.selectedProduct.id,
       userQuestion: '',
       userNickname: '',
       userEmail: '',
-      productId: props.selectedProduct.id,
+      isInValid: '',
     };
 
     this.addQuestionsClickHandler = this.addQuestionsClickHandler.bind(this);
@@ -34,6 +40,9 @@ class AddQuestionModal extends Component {
   closeButton () {
     this.setState({
       show: false,
+      userQuestion: '',
+      userNickname: '',
+      userEmail: '',
     });
   }
 
@@ -47,9 +56,7 @@ class AddQuestionModal extends Component {
       });
   }
 
-
   componentDidUpdate(prevProps) {
-
     if (prevProps !== this.props) {
       this.setState({
         productName: this.props.selectedProduct.name,
@@ -59,19 +66,23 @@ class AddQuestionModal extends Component {
   }
 
   questionChangeHandler(e) {
+    e.target.reportValidity();
     this.setState ({
-      userQuestion: e.target.value
+      userQuestion: e.target.value,
+      isInValid: e.target.checkValidity()
     });
     e.preventDefault();
   }
   nicknameChangeHandler(e) {
+    //e.target.setCustomValidity('must be longer then 3 and less then 16 characters');
+    e.target.reportValidity();
     this.setState ({
       userNickname: e.target.value
     });
     e.preventDefault();
   }
-
   emailChangeHandler(e) {
+    e.target.reportValidity();
     this.setState ({
       userEmail: e.target.value
     });
@@ -85,8 +96,12 @@ class AddQuestionModal extends Component {
       email: this.state.userEmail,
       'product_id': this.state.productId,
     };
-
     this.addNewQuestion(data);
+    this.setState = {
+      userQuestion: '',
+      userNickname: '',
+      userEmail: '',
+    };
     this.closeButton();
 
   }
@@ -104,22 +119,23 @@ class AddQuestionModal extends Component {
               </div>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className='questionModal'>
             <Container>
               <Form>
-                <Form.Group value = {this.state.userQuestion}>
+                <Form.Group controlId='userQuestion' value = {this.state.userQuestion} required>
                   <Form.Label>Your Question</Form.Label>
-                  <Form.Control onChange = {this.questionChangeHandler} placeholder='Ask your question here'></Form.Control>
+                  <Form.Control isValid={this.state.isInValid} minLength='4' onChange = {this.questionChangeHandler} placeholder='Ask your question here' required></Form.Control>
+                  <Form.Control.Feedback type='valid' tooltip>Looks Good</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group value = {this.state.userNickname}>
+                <Form.Group controlId='userNickname' value = {this.state.userNickname} >
                   <Form.Label>What is your nickname?</Form.Label>
-                  <Form.Control onChange={this.nicknameChangeHandler} placeholder='Your nickname here'></Form.Control>
+                  <Form.Control minLength='3' onChange={this.nicknameChangeHandler} placeholder='Your nickname here' required></Form.Control>
                 </Form.Group>
 
-                <Form.Group value = {this.state.userEmail}>
+                <Form.Group controlId='userEmail' value = {this.state.userEmail} >
                   <Form.Label>Your Email</Form.Label>
-                  <Form.Control onChange ={this.emailChangeHandler} type ='email' placeholder='Your email here'></Form.Control>
+                  <Form.Control onChange ={this.emailChangeHandler} type ='email' placeholder='Your email here' required></Form.Control>
                 </Form.Group>
               </Form>
             </Container>
