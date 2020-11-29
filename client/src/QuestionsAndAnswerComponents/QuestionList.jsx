@@ -71,6 +71,8 @@ class QuestionList extends Component {
   moreQuestionsToggle() {
     if (this.state.numOfQuestions === this.state.questions.length) {
       this.fetchQuestionList(this.props.productId, this.state.fetchCount);
+    }
+    if (this.state.numOfQuestions === this.state.questions.length) {
       return true;
     } else {
       return false;
