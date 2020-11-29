@@ -26,7 +26,7 @@ const Gallery = (props) => {
       <Col className="mt-1" style={{position: 'absolute', zIndex: 1}}>
         {thumbnailsArr.map((image, index) => {
           return (
-            <img key={index} className="d-block rounded-sm m-1 border border-white rounded-sm" src={image === null ? 'https://via.placeholder.com/650' : image} style={{ height: 75, width: 75, objectFit: 'cover' }} alt={props.styles.results[0].name} />
+            <img key={index} className="d-block m-1 thumbBorder" src={image === null ? 'https://via.placeholder.com/650' : image} style={{ height: 75, width: 75, objectFit: 'cover' }} alt={props.styles.results[0].name} />
           );
         })}
       </Col>
