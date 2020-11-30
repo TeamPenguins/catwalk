@@ -21,15 +21,17 @@
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 
-/* selector questionList Component / limits overflow with a scroll bar*/
+
 .questionsAnswersCard.card{
   border-style: hidden;
 }
-
+/* selector for the fade modal show class which auto sets overflow to hidden*/
+body > div.fade.modal.show {
+  overflow: visible;
+}
 .questionAnswerListBody{
   border-style: hidden;
-  max-height: 500px;
-  min-height:300px;
+  max-height: 550px;
   overflow: scroll;
   overflow-x: hidden
 }
@@ -39,20 +41,16 @@
 }
 
 .singleQuestion{
-  padding-bottom: 15px;
-  padding-top: 15px
+  padding-bottom: 10px;
+  padding-top: 5px
 }
 
 .singleAnswerBody{
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 10px;
 }
-
-.bottomBorderHalf {
-  border-bottom: 2px inset lightgray;
-  position: absolute;
-  right: 65%;
-  left:0;
-
+.userQuestion.form-group{
+  position: relative,
 }
 
 

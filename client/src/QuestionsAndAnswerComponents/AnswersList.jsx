@@ -15,19 +15,16 @@ class AnswersList extends Component {
     this.fetchAnswerList = this.fetchAnswerList.bind(this);
     this.loadAnswersClickHandler = this.loadAnswersClickHandler.bind(this);
     this.toggleLoadAnswerLink = this.toggleLoadAnswerLink.bind(this);
+    this.checkIfDbHasAnswers = this.checkIfDbHasAnswers.bind(this);
   }
 
   fetchAnswerList() {
     fetch(`http://3.21.164.220/qa/questions/${this.props.questionId}/answers?count=20`)
       .then(response => response.json())
       .then((answerList) => {
-        if (answerList.results.length === 0) {
-          this.setState({
-            hasMoreAnswers: false,
-          });
-        }
         this.setState({
           answerList: answerList.results,
+          noAnswer: this.checkIfDbHasAnswers(answerList.results.length),
         });
       })
       .catch((err) => {
@@ -50,6 +47,14 @@ class AnswersList extends Component {
     }
   }
 
+  checkIfDbHasAnswers(someLength) {
+    if (someLength) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   componentDidMount() {
     this.fetchAnswerList();
   }
@@ -62,15 +67,15 @@ class AnswersList extends Component {
 
   render() {
     return (
-      <div>
+      <div key={this.props.questionId}>
         <strong>A:</strong>
         {this.state.answerList.slice(0, this.state.numOfAnswers).map((singleAnswer) => {
           return (
-            <div>
-
-              <SingleAnswer
-                singleAnswer ={singleAnswer}/>
-            </div>
+            <SingleAnswer
+              key={singleAnswer.answer_id}
+              singleAnswer ={singleAnswer}
+              noAnswer = {this.state.noAnswer}
+            />
           );
         })}
         <div>
