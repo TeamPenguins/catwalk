@@ -1,10 +1,12 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { Star } from 'react-bootstrap-icons';
 
 
 
 const Variants = (props) => {
+
+  const [selectedSizeQuantities, setSelectedSizeQuantities] = useState([]);
 
   // selection is the style_id number of the image that is clicked on
   var selection = props.selectedStyle; // num - defaults to the first style of the camo onesie product
@@ -32,33 +34,45 @@ const Variants = (props) => {
   // creates arrays for the size and quantities from the selected style skus
   var sizeArr = [];
   var quantityArr = [];
-  var variantArr = [];
   for (const [key, value] of Object.entries(skus)) {
     sizeArr.push(value.size);
     quantityArr.push(value.quantity);
-    variantArr.push(value.size, value.quantity);
+
   }
+
+  const [selectedSize, setSelectedSize] = useState(sizeArr[0]);
+
+  var quantities = [];
+  var quantityIndex = sizeArr.indexOf(selectedSize);
+  if (quantityIndex === -1) {
+    quantityIndex = 0;
+  }
+  console.log('sizeInd: ' + sizeArr.indexOf(selectedSize));
+  for (var i = 1; i <= quantityArr[quantityIndex]; i++) {
+    if (i < 16) { quantities.push(i); }
+  }
+
 
 
   return (
     <form>
       <Row className="my-3">
         {/* map through the available sizes array for the style chosen */}
-        <select className="col-6 mr-3 form-control">
+        <select aria-label="select a size" className="col-6 mr-3 form-control" onChange={e => setSelectedSize(e.target.value)}>
           {sizeArr.map((size, index) => {
             return <option key={index}>{size}</option>;
           })}
         </select>
         {/* map through the available quantities array for the style chosen */}
-        <select className="col-3 form-control">
-          {quantityArr.map((quantity, index) => {
+        <select aria-label="select a quantity" className="col-3 form-control">
+          {quantities.map((quantity, index) => {
             return <option key={index} >{quantity}</option>;
           })}
         </select>
       </Row>
       <Row>
         <Button variant="outline-secondary mr-3">Add To Cart</Button>{' '}
-        <Button variant="secondary">
+        <Button variant="secondary" aria-label="save as a favorite">
           <Star />
         </Button>
       </Row>

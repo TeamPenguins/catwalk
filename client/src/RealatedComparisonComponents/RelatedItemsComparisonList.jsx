@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
-import {Carousel, Row, Container, CardDeck} from 'react-bootstrap';
+import React from 'react';
+import {Row, Container, CardDeck} from 'react-bootstrap';
+import {ChevronDoubleLeft, ChevronDoubleRight} from 'react-bootstrap-icons';
 import unique from '../Utilities/unique.js';
+import scroll from '../Utilities/scroll.js';
+import updateNavigator from '../Utilities/updateNavigator.js';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import axios from 'axios';
+import InteractionContext from '../Utilities/InteractionsContext.js';
 
 class RelatedItemsAndComparisonList extends React.Component {
   constructor (props) {
@@ -11,21 +15,26 @@ class RelatedItemsAndComparisonList extends React.Component {
     this.state = {
       relatedProductsIds: [],
       selectedProduct: {},
-      selectedProductStyles: {},
-      modalView: false,
       comparedProductInfo: {},
-      comparedProductStyleInfo: {},
+      modalView: false,
+      leftNavigator: false,
+      rightNavigator: true
     };
 
     this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.toggleModalView = this.toggleModalView.bind(this);
     this.updateComparedProductInfo = this.updateComparedProductInfo.bind(this);
     this.updateSelectedProductState = this.updateSelectedProductState.bind(this);
+    this.updateCarousel = this.updateCarousel.bind(this);
 
   }
   //this method shows/hides the product comparison modal
   toggleModalView () {
     this.setState({modalView: !this.state.modalView});
+  }
+  updateCarousel(direction) {
+    var carouselPosition = scroll(direction);
+    updateNavigator(carouselPosition, this.state.relatedProductsIds.length);
   }
   //updates state to reflect with what is displayed in overview
   updateSelectedProductState () {
@@ -48,44 +57,74 @@ class RelatedItemsAndComparisonList extends React.Component {
   }
   //updates the components after selectedProduct has changed in App
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.relatedProductsIds.length !== this.state.relatedProductsIds.length) {
+      this.updateCarousel();
+    }
     if (prevProps.selectedProduct.id !== this.props.selectedProduct.id ) {
       this.fetchRelatedProducts(this.props.selectedProduct.id);
       this.updateSelectedProductState();
+      this.updateCarousel();
     }
   }
   componentDidMount() {
     this.fetchRelatedProducts(this.props.selectedProduct.id);
     this.updateSelectedProductState();
+    this.updateCarousel();
   }
 
   render() {
     return (
-      <Container >
-        <h6>RELATED PRODUCTS</h6>
-        <Row>
-          <ComparisonModal
-            comparedProductInfo={this.state.comparedProductInfo}
-            comparedProductStyleInfo={this.state.comparedProductStyleInfo}
-            selectedProductInfo={this.state.selectedProduct}
-            selectedProductStyles={this.state.selectedProductStyles}
-            modalViewState={this.state.modalView}
-            actionButtonMethod={this.toggleModalView}
-          />
-          <CardDeck className="related productsList">
-            {
-              this.state.relatedProductsIds.map(id => {
-                return (
-                  <RelatedProductCard productId={id}
-                    productChangeMethod={this.props.productChangeMethod}
-                    actionButtonMethod={this.toggleModalView}
-                    modalViewState={this.state.modalView}
-                    updateComparedProductMethod={this.updateComparedProductInfo}/>
-                );
-              })
-            }
-          </CardDeck>
-        </Row>
-      </Container>
+      //wrap everything in this InteractionsContext.Consumer component.
+      //wrap everything inside of that with an anonomous function, with Interactions as it's argumment
+      //invoke the interactions function with the event object and the name of your component.
+      <InteractionContext.Consumer>
+        {interactions =>
+          <Container onClick={() => {
+            interactions(event, 'Related Items and Comparison');
+          }
+          } >
+            <ComparisonModal
+              comparedProductInfo={this.state.comparedProductInfo}
+              selectedProductInfo={this.state.selectedProduct}
+              modalViewState={this.state.modalView}
+              actionButtonMethod={this.toggleModalView}
+            />
+            <h3>RELATED PRODUCTS</h3>
+            <Row>
+              <Container id="RelatedItemsCarousel">
+                <button
+                  aria-label="scroll left for more related items" id="left-nav"
+                  className="scroll"
+                  onClick={() => this.updateCarousel('left')}
+                >
+                  <ChevronDoubleLeft/></button>
+                <CardDeck id="related" className="productsList">
+                  {
+                    this.state.relatedProductsIds.map(id => {
+                      return (
+                        <RelatedProductCard
+                          className="relatedProductCard"
+                          productId={id}
+                          listType={'related'}
+                          productChangeMethod={this.props.productChangeMethod}
+                          actionButtonMethod={this.toggleModalView}
+                          modalViewState={this.state.modalView}
+                          updateComparedProductMethod={this.updateComparedProductInfo}
+                        />
+                      );
+                    })
+                  }
+                </CardDeck>
+                <button
+                  aria-label="scroll right for more related items" id="right-nav"
+                  className="scroll" onClick={() => this.updateCarousel('right')}
+                >
+                  <ChevronDoubleRight/></button>
+              </Container>
+            </Row>
+          </Container>
+        }
+      </InteractionContext.Consumer>
     );
   }
 }

@@ -1,69 +1,41 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { ReviewsForProductFive } from '../dummyData.js';
 import ReviewsList from './components/ReviewsList.jsx';
-import StarRating from '../Utilities/StarRating.jsx';
+import ProductBreakdown from './components/ProductBreakdown.jsx';
+import WriteNewReview from './components/WriteNewReview.jsx';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
-class RatingsAndReviews extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reviews: [],
-      numberRating: 0,
-    };
-    this.ratingChange = this.ratingChange.bind(this);
-  }
+const RatingsAndReviews = (props) => {
 
-  componentDidMount() {
-    // Move axios request outside of componentDidMount for readibility
-    axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
-      .then(data => { // Going from data to reviewsList to be more descriptive about what we are getting back from the get request
-        this.setState({reviews: data.data.results});
-      })
-      .catch(console.log());
-  }
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <p>Ratings & Reviews</p>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={4}>
+          <ProductBreakdown reviewMetaData={props.reviewMetaData} />
+        </Col>
+        <Col md={8}>
+          <ReviewsList reviews={props.reviews} />
+          <Row style={{ paddingTop: '10px'}}>
+            <Col>
+              <Col>
+                {props.reviews.length > 0 ? (
+                  <Button variant='outline-dark' >MORE REVIEWS</Button>
+                ) : null}{' '}
+                <WriteNewReview selectedProduct={props.selectedProduct} characteristics={props.reviewMetaData.characteristics}/>
+              </Col>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.productId !== this.props.productId ) {
-      axios.get(`http://3.21.164.220/reviews/?product_id=${this.props.productId}`)
-        .then(data =>
-          this.setState({reviews: data.data.results})
-        )
-        .catch(console.log());
-    }
-  }
-
-  ratingChange(rating) {
-    this.setState({rating: rating});
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h6 className="text-secondary">Ratings & Reviews</h6>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <StarRating productId={this.props.productId} />
-          </div>
-          <div className="col-8">
-            <ReviewsList reviews={this.state.reviews} />
-            <div className="row">
-              <div className="col">
-                {this.state.reviews.length > 0 ? (
-                  <button type="button" className="btn btn-outline-secondary">MORE REVIEWS</button>
-                ) : null}
-                <button type="button" className="btn btn-outline-secondary">ADD A REVIEW</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
 
 export default RatingsAndReviews;
+
