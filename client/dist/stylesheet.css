@@ -16,8 +16,36 @@
 
 
 /* ---------- RATINGS AND REVIEWS ----------*/
+svg {
+  vertical-align: unset;
+}
 
+.productBreakdownStars {
+  padding-top: 13px;
+}
 
+.charsSlider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.charsSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+	width: 0;
+	height: 0;
+	border-left: 6.25px solid transparent;
+	border-right: 6.25px solid transparent;
+	border-top: 12.5px solid rgb(250, 162, 0);
+  cursor: default;
+}
 
 
 /* ------ RELATED ITEMS AND COMPARISON -----*/

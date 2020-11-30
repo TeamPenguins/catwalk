@@ -33,16 +33,3 @@ class SpecialStar extends Component {
 }
 
 export default SpecialStar;
-
-{ /* <svg width='23' height='25'>
-<defs>
-  <linearGradient id={`progress${this.props.keyLimePie}`} x1='0' x2='1' y1='0' y2='0'>
-    <stop offset={this.props.fill} stopColor='#FBBD3B'></stop>
-    <stop offset='0' stopColor='#d3d3d3'></stop>
-  </linearGradient>
-</defs>
-<path
-  fill={`url(#progress${this.props.keyLimePie})`}
-  d='M9.9 1.1L3.3 21.78 19.8 8.58 0 8.58 16.5 21.78z'
-></path>
-</svg> */ }

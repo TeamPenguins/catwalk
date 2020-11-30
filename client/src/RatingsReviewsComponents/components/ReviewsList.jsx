@@ -6,7 +6,6 @@ const ReviewsList = ({ reviews }) => (
   reviews.map(review => (
     <div key={review.review_id}>
       {<ReviewTile review={review} />}
-      <br />
     </div>
   ))
 );

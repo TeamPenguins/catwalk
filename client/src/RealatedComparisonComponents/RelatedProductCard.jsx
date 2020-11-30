@@ -5,14 +5,15 @@ import StarRating from '../Utilities/StarRating.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import ActionButton from './ActionButton.jsx';
 import Price from './Price.jsx';
-
+import { GetReviewMetaData } from '../Utilities/axiosHelpers';
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productInfo: {},
-      styleInfo: {}
+      styleInfo: {},
+      ratings: {}
     };
     this.fetchProductInfo = this.fetchProductInfo.bind(this);
     this.fetchStyleInfo = this.fetchStyleInfo.bind(this);
@@ -38,6 +39,11 @@ class RelatedProductCard extends React.Component {
   fetchAllInfo(id) {
     this.fetchStyleInfo(id);
     this.fetchProductInfo(id);
+    GetReviewMetaData(id)
+      .then(data => {
+        this.setState({
+          ratings: data.data.ratings});
+      });
   }
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
@@ -67,7 +73,7 @@ class RelatedProductCard extends React.Component {
             <Card.Text >{this.state.productInfo.category}</Card.Text>
             <Card.Text>{this.state.productInfo.name}</Card.Text>
             <Price styleInfo={this.state.styleInfo} />
-            <StarRating productId={this.state.productInfo.id}/>
+            <StarRating ratings={this.state.ratings}/>
           </Card.Body>
         </Card>
       </Container>
