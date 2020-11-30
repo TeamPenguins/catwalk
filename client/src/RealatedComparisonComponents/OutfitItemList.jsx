@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import RelatedProductCard from './RelatedProductCard.jsx';
 import axios from 'axios';
 import {Container, Card, CardDeck, Row} from 'react-bootstrap';
-import {PlusCircle} from 'react-bootstrap-icons';
+import {Plus} from 'react-bootstrap-icons';
 import unique from '../Utilities/unique.js';
 
 //onslide if index is at max, turn off the button.
@@ -22,7 +22,6 @@ class OutfitItemList extends React.Component {
   }
   checkForExistingOutfitList() {
     var existingOutfitlist = localStorage.getItem('OutfitListIds');
-    console.log(existingOutfitlist);
     return existingOutfitlist ? existingOutfitlist.split(',') : [];
   }
   updateOutFitList(newOutfitList) {
@@ -61,14 +60,17 @@ class OutfitItemList extends React.Component {
   render() {
     return (
       <Container>
-        <h6>YOUR OUTFIT</h6>
+        <h3>YOUR OUTFIT</h3>
         <Row >
           <CardDeck className="outfit productsList">
-            <Container>
+            <Container className="card-container">
               <Card className="productCard">
-                <Card.Body>
-                  <PlusCircle className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}/>
-                </Card.Body>
+
+                <button aria-label="click to add current item to your outfit" className='addButton' onClick={()=> this.addToOutfitList(this.state.selectedProduct.id)}>
+                  <p className="add-to-outfit">Add to Outfit</p>
+                  <Plus color={'grey'} size={100}/>
+                </button>
+
               </Card>
             </Container>
             {
@@ -76,9 +78,11 @@ class OutfitItemList extends React.Component {
               this.state.outfitListIds.map(id => {
                 return (
                   <RelatedProductCard
+
+                    listType={'outfit'}
                     productId={id}
                     key={`${id}`}
-                    productChangeMethod={()=> null}
+                    productChangeMethod={this.props.productChangeMethod}
                     actionButtonMethod={this.removeFromOutfitList}/>
                 );
               })

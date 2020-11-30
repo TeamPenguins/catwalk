@@ -97,7 +97,7 @@ class App extends Component {
         <NavBar />
         <ProductOverview selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} ratings={this.state.reviewMetaData.ratings}/>
         <div><RelatedItemsComparisonList selectedProduct={this.state.selectedProduct} styles={this.state.selectedPoductStyles} productChangeMethod={this.handleProductChange} /></div>
-        <div><OutfitItemList selectedProduct={this.state.selectedProduct}/> </div>
+        <div><OutfitItemList selectedProduct={this.state.selectedProduct} productChangeMethod={this.handleProductChange}/> </div>
         <div><QuestionsAnswersComponents selectedProduct = {this.state.selectedProduct}/></div>
         <div><RatingsAndReviews selectedProduct={this.state.selectedProduct} reviews={this.state.reviews} reviewMetaData={this.state.reviewMetaData}/></div>
       </div>

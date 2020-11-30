@@ -2,17 +2,56 @@
 
 
 /* ------------ PRODUCT OVERVIEW -----------*/
+.activeThumb {
+  color: black !important;
+}
 
-/* selector questionList Component / limits overflow with a scroll bar*/
-#app > div > div:nth-child(5) > div > div > div{
-  max-height: 600px;
-  overflow: auto;
-  overflow-x: hidden;
+.thumbBorder {
+  border: 3px solid white;
+  border-radius: 5px;
+}
+
+.btn-link {
+  color:#1800ff !important;
+}
+
+.card-link {
+  color:#1800ff !important;
 }
 
 /* --------- QUESTIONS AND ANSWERS ---------*/
 
 
+.questionsAnswersCard.card{
+  border-style: hidden;
+}
+/* selector for the fade modal show class which auto sets overflow to hidden*/
+body > div.fade.modal.show {
+  overflow: visible;
+}
+.questionAnswerListBody{
+  border-style: hidden;
+  max-height: 550px;
+  overflow: scroll;
+  overflow-x: hidden
+}
+
+.questionsAnswersContainer.container{
+  padding-bottom: 20px;
+}
+
+.singleQuestion{
+  padding-bottom: 10px;
+  padding-top: 5px
+}
+
+.singleAnswerBody{
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+.userQuestion.form-group{
+  position: relative,
+}
 
 
 /* ---------- RATINGS AND REVIEWS ----------*/
@@ -50,49 +89,111 @@ svg {
 
 /* ------ RELATED ITEMS AND COMPARISON -----*/
 
+
 .productCard {
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 250px;
+  min-width: 250px;
   max-height: 400px;
   min-height: 400px;
-
 }
-
+.productCard:hover {
+  cursor: pointer;
+}
 .productsList {
+  position: relative;
   display: inline-flex;
   flex-wrap: nowrap;
   max-width: 100%;
   max-height: 430px;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-top: 25px;
   margin-bottom: 25px;
 }
 .action {
-  position: relative;
-  top: 30px;
-  right: -250px;
+  position: absolute;
+  right: 15px;
+  top: 0;
   z-index: 10
 }
 .addButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-.align-right {
-  text-align: right
-}
-.align-left {
-  text-align: left
-}
-.align-center {
-  text-align: center;
+  display: block;
+  position: relative;
+  height: 400px;
 }
 
+
 .card-img {
-height: 200px;
-object-fit: cover;
+  height: 200px;
+  object-fit: cover;
 }
 .price-cut {
   display: inline-flex;
   margin: 20px;
+}
+.scroll {
+  position: absolute;
+  height: 50%;
+  z-index: 10;
+}
+#RelatedItemsCarousel {
+  overflow: hidden;
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+#right-nav {
+  position: static;
+  height: 100%;
+  right: 100px;
+}
+
+.card-container {
+  position: relative;
+  width: 280;
+  margin: 0;
+  padding: 0;
+}
+button {
+  border: none;
+  background-color: transparent;
+}
+/* comparison modal */
+.feature {
+  padding-bottom: 20px;
+}
+.spacer {
+  display: block;
+  height: 50px;
+}
+.align-right {
+  text-align: right;
+  white-space: nowrap
+}
+.align-left {
+  text-align: left;
+  white-space: nowrap
+}
+.align-center {
+  text-align: center;
+}
+/* .productNames {
+  display: inline-flex;
+  flex-wrap: nowrap;
+} */
+.modal {
+  min-width: 700px;
+  max-height: 200px;
+
+}
+.sticky {
+  z-index: 20;
+  background-color: white;
+  position: sticky;
+  top: 20px;
+
+}
+.comparing {
+  z-index: 20;
+  background-color: white;
+  position: sticky;
+  top: 0;
 }
