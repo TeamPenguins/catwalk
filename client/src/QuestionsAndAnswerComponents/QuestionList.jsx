@@ -13,11 +13,14 @@ class QuestionList extends Component {
       questions: [],
       numOfQuestions: 2,
       fetchCount: 30,
+      userSearch: this.props.userSearch
     };
+
     this.fetchQuestionList = this.fetchQuestionList.bind(this);
     this.moreQuestionsClickHandler = this.moreQuestionsClickHandler.bind(this);
     this.moreQuestionsToggle = this.moreQuestionsToggle.bind(this);
     this.fetchMoreQuestionsIfAvailable = this.fetchMoreQuestionsIfAvailable.bind(this);
+    this.sorter = this.sorter.bind(this);
   }
 
   fetchQuestionList(prodId, count, numOfQuestions) {
@@ -81,15 +84,28 @@ class QuestionList extends Component {
     }
   }
 
+  sorter(arr) {
+    if (this.props.userSearch.length < 3) {
+      return arr;
+    }
+    const userFilteredList = arr.filter((questions) => {
+      if (questions) {
+        return questions.question_body.includes(this.props.userSearch);
+      }
+    });
+    return userFilteredList;
+  }
+
   componentDidMount() {
     this.fetchQuestionList(this.props.productId, this.state.fetchCount);
   }
+
 
   render() {
 
     return (
       <div>
-        <div className='questionAnswerListBody'>{this.state.questions.slice(0, this.state.numOfQuestions).map((singleQuestion) => {
+        <div className='questionAnswerListBody'>{this.sorter(this.state.questions).slice(0, this.state.numOfQuestions).map((singleQuestion) => {
           return (
             <SingleQuestion singleQuestion ={singleQuestion}/>
           );
@@ -97,12 +113,11 @@ class QuestionList extends Component {
         </div>
         <Button type ='button' variant="outline-secondary" onClick={this.moreQuestionsClickHandler} hidden={this.moreQuestionsToggle()}><strong> MORE ANSWERED QUESTIONS </strong></Button> {' '}
         <AddQuestionModal selectedProduct ={this.props.selectedProduct}/>
+        {console.log(this.state)}
       </div>
 
     );
   }
 }
-
-
 
 export default QuestionList;
