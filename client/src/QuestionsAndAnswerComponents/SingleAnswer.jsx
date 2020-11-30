@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import FormatDate from '../Utilities/FormatDate.js';
 
 
 class SingleAnswer extends Component {
@@ -29,7 +30,7 @@ class SingleAnswer extends Component {
         </Row>
         <div>
           <small>
-            by User{this.props.singleAnswer.answer_id} - {this.props.singleAnswer.answerer_name}, {this.props.singleAnswer.date.slice(0, 10)} |
+            by User{this.props.singleAnswer.answer_id} - {this.props.singleAnswer.answerer_name}, {FormatDate(this.props.singleAnswer.date)} |
             Helpful? <Card.Link>Yes({this.props.singleAnswer.helpfulness})</Card.Link>
           </small>
         </div>
