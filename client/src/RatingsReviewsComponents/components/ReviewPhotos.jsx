@@ -1,14 +1,15 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
+import IndividualPhoto from './IndividualPhoto.jsx';
 
 const ReviewPhotos = ({ photos }) => {
 
   return (
     <Container>
-      <Row>
+      <Row xs={2} md={4} lg={6}>
         {photos.map(photo => (
           <Col xs={6} md={4}>
-            <Image style={{height: '50px', width: '50px'}}src={photo.url} thumbnail key={photo.id}/>
+            <IndividualPhoto photo={photo}/>
           </Col>
         ))}
       </Row>

@@ -7,7 +7,7 @@ const ReviewResponse = ({ response }) => (
     <Card.Body>
       <Card.Text>
         <b>
-        Resposne:
+        Response from seller:
         </b>
       </Card.Text>
       <Card.Text>

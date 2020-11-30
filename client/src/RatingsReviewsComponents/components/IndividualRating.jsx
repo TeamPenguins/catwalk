@@ -7,7 +7,7 @@ const IndividualRating = (props) => {
   const percentOfTotal = PercentOfTotal(props.ratings, props.starNumber);
   return (
     <Row>
-      {props.starNumber} stars
+      <u style={{ fontSize: 'smaller' }}>{props.starNumber} stars</u>
       <Col>
         <ProgressBar variant="success" now={percentOfTotal} />
       </Col>
